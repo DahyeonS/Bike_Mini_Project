@@ -10,17 +10,17 @@
 
 - 변수명은 팀원전원이 통일하여 사용할 것을 원칙으로 하며, 변수명은 README.md에 기재하시면 됩니다.
 
-## [database](database/데이터베이스.md)
+## [database](database)
 데이터베이스 관리
 
 *관리자: 서다현*
 
-## [login](login/README.md)
+## [login](login)
 로그인 시스템
 
 *관리자: 서다현*
 
-## [home](https://github.com/DahyeonS/Bike_Mini_Project/blob/main/home/README.md)
+## [home](https://github.com/DahyeonS/Bike_Mini_Project/blob/main/home)
 홈 화면
 
 ## [presentation](https://github.com/DahyeonS/Bike_Mini_Project/tree/main/presentation)
