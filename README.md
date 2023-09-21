@@ -20,5 +20,8 @@
 
 *관리자: 서다현*
 
+## [home](https://github.com/DahyeonS/Bike_Mini_Project/blob/main/home/README.md)
+홈 화면
+
 ## [presentation](https://github.com/DahyeonS/Bike_Mini_Project/tree/main/presentation)
 발표 자료 및 계획표
