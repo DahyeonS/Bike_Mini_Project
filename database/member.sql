@@ -9,6 +9,7 @@ CREATE TABLE member (
 
 -- 관리자 계정 생성
 INSERT INTO member VALUES (1, 'admin', '1234', '관리자', 'MANAGER');
+ALTER TABLE member MODIFY grade DEFAULT 'GENERAL';
 COMMIT;
 
 -- 확인
