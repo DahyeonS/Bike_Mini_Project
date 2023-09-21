@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.w_name {
+    padding: 0 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+input {
+    outline: none;
+}
+#wTitle {
+    width: 400px;
+    height: 20px;
+}
+#wContext {
+    width: 400px;
+    height: 200px;
+}
+.w_btn {
+    text-align: center;
+}
