@@ -5,3 +5,6 @@
 데이터베이스 관리
 
 *관리자: 서다현*
+
+## [presentation](https://github.com/DahyeonS/Bike_Mini_Project/tree/main/presentation)
+발표 자료 및 계획표
