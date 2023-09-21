@@ -7,8 +7,16 @@ CREATE TABLE member (
   grade VARCHAR2(10) CHECK (grade IN ('MANAGER', 'ASSOCIATE', 'STAFF', 'GENERAL'))
 );
 
+-- 시퀀스 생성
+CREATE SEQUENCE member_idx
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 9999
+NOCACHE
+NOORDER;
+
 -- 관리자 계정 생성
-INSERT INTO member VALUES (1, 'admin', '1234', '관리자', 'MANAGER');
+INSERT INTO member VALUES (member_idx.NEXTVAL, 'admin', '1234', '관리자', 'MANAGER');
 ALTER TABLE member MODIFY grade DEFAULT 'GENERAL';
 COMMIT;
 

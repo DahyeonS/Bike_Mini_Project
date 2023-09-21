@@ -1,0 +1,30 @@
+-- 테이블 생성
+CREATE TABLE post (
+    id VARCHAR2(10) REFERENCES member(id) NOT NULL UNIQUE,
+    num NUMBER PRIMARY KEY NOT NULL,
+    nickname VARCHAR2(10) REFERENCES member(nickname) NOT NULL UNIQUE,
+    title VARCHAR2(50) NOT NULL,
+    category VARCHAR2(10) CHECK (category IN ('일반', '질문', '답변')) NOT NULL,
+    file_id NUMBER NOT NULL,
+    file_name VARCHAR2(100) NOT NULL,
+    postdate DATE DEFAULT SYSDATE NOT NULL,
+    visit_count NUMBER DEFAULT 0
+);
+
+-- 시퀀스 생성
+CREATE SEQUENCE post_idx
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 9999
+NOCACHE
+NOORDER;
+
+CREATE SEQUENCE file_idx
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 9999
+NOCACHE
+NOORDER;
+
+-- 확인
+SELECT * FROM post;
