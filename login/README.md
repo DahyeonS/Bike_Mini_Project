@@ -18,3 +18,12 @@ MemberService의 자식클래스
 
 ### *MemberDAOImpl*
 MemberDAO의 자식클래스
+
+## **JDBCUtil**
+**데이터베이스를 연결하는 스태틱 메소드 모음**
+
+## *DispathcherController*
+**do 작업을 실행하는 곳**
+
+## *JsonAPI*
+**Json 작업을 실행하는 곳**
