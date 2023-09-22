@@ -26,4 +26,5 @@
 ## [presentation](https://github.com/DahyeonS/Bike_Mini_Project/tree/main/presentation)
 발표 자료 및 계획표
 
-## [board]
+## [board](board)
+게시판
