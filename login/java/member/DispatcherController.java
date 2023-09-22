@@ -40,25 +40,7 @@ public class DispatcherController extends HttpServlet {
 		else if (action.equals("/join.do")) response.sendRedirect("join.jsp");
 		else if (action.equals("/update.do")) response.sendRedirect("update.jsp");
 		else if (action.equals("/delete.do")) response.sendRedirect("delete.jsp");
-		else if (action.equals("/deleteProc.do")) {
-			HttpSession session = request.getSession();
-			String id = (String)session.getAttribute("id");
-			String pw = request.getParameter("pw");
-			
-			MemberDTO dto = new MemberDTO();
-			dto.setId(id);
-			//MemberDAO dao = new MemberDAO();
-			//dto = dao.getMember(dto);
-			
-			if (dto.getPw().equals(pw)) {
-				//dao.delete(dto);
-				session.invalidate();
-				response.sendRedirect("index.jsp");
-			} else response.sendRedirect("delete.jsp");
-		} else if (action.equals("/deleteJson.do")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("deleteJson.jsp");
-			dispatcher.forward(request, response);
-		} else if (action.equals("/memberListJson.do")) response.sendRedirect("memberListJson.jsp");
+		else if (action.equals("/memberListJson.do")) response.sendRedirect("memberListJson.jsp");
 		else if (action.equals("/memberListData.do")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("memberListData.jsp");
 			dispatcher.forward(request, response);

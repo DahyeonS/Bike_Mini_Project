@@ -106,6 +106,25 @@ public class JsonAPI extends HttpServlet {
 			jsonObject.addProperty("rs", rs);
 			
 			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/delete.json")) {
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("id");
+			String pw = request.getParameter("pw");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setId(id);
+			dto = service.getMember(dto);
+			int rs = 0;
+			
+			if (pw.equals(dto.getPw())) {
+				session.invalidate();
+				rs = service.delete(dto);
+			}
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			
+			response.getWriter().write(jsonObject.toString());
 		} else if (action.equals("/writeJson.json")) {
 			String id = request.getParameter("id");
 			

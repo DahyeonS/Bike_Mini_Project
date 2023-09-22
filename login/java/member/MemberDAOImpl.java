@@ -83,5 +83,23 @@ public class MemberDAOImpl implements MemberDAO {
 		return rs;
 	}
 
-	
+	@Override
+	public int delete(MemberDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "DELETE FROM member WHERE id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
 }

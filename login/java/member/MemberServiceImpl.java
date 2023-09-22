@@ -22,4 +22,9 @@ public class MemberServiceImpl implements MemberService {
 		return dao.update(dto);
 	}
 
+	@Override
+	public int delete(MemberDTO dto) {
+		return dao.delete(dto);
+	}
+
 }
