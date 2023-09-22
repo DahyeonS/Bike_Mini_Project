@@ -36,8 +36,29 @@ public class MemberDAOImpl implements MemberDAO {
 		} finally {
 			JDBCUtil.close(rs, pstmt, conn);
 		}
-		
 		return retDto;
+	}
+
+	@Override
+	public int insert(MemberDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "INSERT INTO member(idx, id, pw, nickname) VALUES (member_idx.NEXTVAL, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPw());
+			pstmt.setString(3, dto.getNickname());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
 	}
 
 	

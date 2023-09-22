@@ -23,6 +23,12 @@ public class MemberDTO {
 		this.nickname = nickname;
 		this.grade = grade;
 	}
+	
+	public MemberDTO(String id, String pw, String nickname) {
+		this.id = id;
+		this.pw = pw;
+		this.nickname = nickname;
+	}
 
 	public int getIdx() {
 		return idx;

@@ -37,27 +37,7 @@ public class DispatcherController extends HttpServlet {
 		} else if (action.equals("/login.do")) response.sendRedirect("login.jsp");
 		else if (action.equals("/logout.do")) response.sendRedirect("logout.jsp");
 		else if (action.equals("/join.do")) response.sendRedirect("join.jsp");
-		else if (action.equals("/joinProc.do")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			int age = Integer.parseInt(request.getParameter("age"));
-			//MemberDTO dto = new MemberDTO(id, pw, name, age);
-			
-			//MemberDAO dao = new MemberDAO();
-			//int rs = dao.insert(dto);
-			
-			//request.setAttribute("rs", rs);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-			dispatcher.forward(request, response);
-		} else if (action.equals("/joinJson.do")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("joinJson.jsp");
-			dispatcher.forward(request, response);
-		}
-		else if (action.equals("/getMemberJson.do")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("getMemberJson.jsp");
-			dispatcher.forward(request, response);
-		} else if (action.equals("/update.do")) response.sendRedirect("update.jsp");
+		else if (action.equals("/update.do")) response.sendRedirect("update.jsp");
 		else if (action.equals("/updateProc.do")) {
 			HttpSession session = request.getSession();
 			String id = (String)session.getAttribute("id");

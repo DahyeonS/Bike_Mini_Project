@@ -13,7 +13,7 @@
 		const param = {id, pw};
 		$.ajax({
 	        type: 'POST',
-	        url: 'loginJson.json',
+	        url: 'login.json',
 	        dataType: 'json',
 	        data: param,
 	        success: function(data) {

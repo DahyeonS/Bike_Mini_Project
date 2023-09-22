@@ -8,8 +8,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO login(MemberDTO dto) {
+	public MemberDTO getMember(MemberDTO dto) {
 		return dao.getMember(dto);
+	}
+
+	@Override
+	public int insert(MemberDTO dto) {
+		return dao.insert(dto);
 	}
 
 }

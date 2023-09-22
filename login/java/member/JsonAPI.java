@@ -31,7 +31,7 @@ public class JsonAPI extends HttpServlet {
 		System.out.println(uri);
 		String action = uri.substring(uri.lastIndexOf("/"));
 		
-		if (action.equals("/loginJson.json")) {
+		if (action.equals("/login.json")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			
@@ -63,6 +63,19 @@ public class JsonAPI extends HttpServlet {
 			if(dto != null) jsonObject.addProperty("rs", 1);
 			else jsonObject.addProperty("rs", 0);
 			
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/join.json")) {
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			String nickname = request.getParameter("nickname");
+			
+			MemberDTO dto = new MemberDTO(id, pw, nickname);
+			
+			int rs = 0;
+			rs = service.insert(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
 			response.getWriter().write(jsonObject.toString());
 		} else if (action.equals("/writeJson.json")) {
 			String id = request.getParameter("id");

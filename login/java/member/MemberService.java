@@ -1,5 +1,6 @@
 package member;
 
 public interface MemberService {
-	MemberDTO login(MemberDTO dto);
+	MemberDTO getMember(MemberDTO dto);
+	int insert(MemberDTO dto);
 }
