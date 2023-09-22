@@ -24,7 +24,7 @@ public class MemberDAOImpl implements MemberDAO {
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				String id = dto.getId();
+				String id = rs.getString("id");
 				String pw = rs.getString("pw");
 				String nickname = rs.getString("nickname");
 				String grade = rs.getString("grade");

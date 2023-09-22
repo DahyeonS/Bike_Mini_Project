@@ -28,37 +28,13 @@ public class DispatcherController extends HttpServlet {
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberService service = new MemberServiceImpl();
-		
 		String uri = request.getRequestURI();
 		System.out.println(uri); // /myweb/memberList.do
 		String action = uri.substring(uri.lastIndexOf("/"));
+		
 		if (action.equals("/index.do")) {
 			response.sendRedirect("index.jsp");
 		} else if (action.equals("/login.do")) response.sendRedirect("login.jsp");
-		else if (action.equals("/loginProc.do")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			
-			MemberDTO dto = new MemberDTO();
-			dto.setId(id);
-			
-			dto = service.login(dto);
-			
-			if (dto != null) {
-				if (dto.getPw().equals(pw)) {
-					HttpSession session = request.getSession();
-					session.setAttribute("id", id);
-					session.setAttribute("nickname", dto.getNickname());
-					response.sendRedirect("index.do");
-				} else response.sendRedirect("login.do");
-			} else {
-				response.sendRedirect("login.do");
-			}
-		} else if (action.equals("/loginJson.do")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("loginJson.jsp");
-			dispatcher.forward(request, response);
-		}
 		else if (action.equals("/logout.do")) response.sendRedirect("logout.jsp");
 		else if (action.equals("/join.do")) response.sendRedirect("join.jsp");
 		else if (action.equals("/joinProc.do")) {

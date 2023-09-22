@@ -36,6 +36,7 @@
 </script>
 </head>
 <body>
+<%@include file="loginmenu.jsp" %>
 <%--<%@include file="topmenu.jsp" %>--%>
 <h2>로그인</h2>
 <hr>
