@@ -21,7 +21,7 @@
 	        		alert('환영합니다!');
 	        		location.href = 'index.jsp';
 	        	}
-				else alert('ID 또는 PW가 다릅니다');
+				else alert('아이디나 비밀번호가 다릅니다');
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);
 	        }
@@ -42,8 +42,8 @@
 <hr>
 <form action="loginProc" method="post">
 	<table border="1">
-		<tr><th>ID</th><td><input type="text" name="id" id="id"></td></tr>
-		<tr><th>PW</th><td><input type="password" name="pw" id="pw"></td></tr>
+		<tr><th>아이디</th><td><input type="text" name="id" id="id"></td></tr>
+		<tr><th>비밀번호</th><td><input type="password" name="pw" id="pw"></td></tr>
 		<tr><td colspan="2"><input type="button" value="로그인" id="submit"></td></tr>
 	</table>
 </form>
