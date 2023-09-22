@@ -61,5 +61,27 @@ public class MemberDAOImpl implements MemberDAO {
 		return rs;
 	}
 
+	@Override
+	public int update(MemberDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "UPDATE member SET pw = ?, nickname = ? WHERE id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(3, dto.getId());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
+
 	
 }

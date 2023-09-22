@@ -27,6 +27,7 @@ public class JsonAPI extends HttpServlet {
 	}
 	
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		String uri = request.getRequestURI();
 		System.out.println(uri);
 		String action = uri.substring(uri.lastIndexOf("/"));
@@ -76,6 +77,34 @@ public class JsonAPI extends HttpServlet {
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/pwShow.json")) {
+			String id = request.getParameter("id");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setId(id);
+			dto = service.getMember(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("pw", dto.getPw());
+			
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/update.json")) {
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			String nickname = request.getParameter("nickname");
+			
+			MemberDTO dto = new MemberDTO(id, pw, nickname);
+			int rs = 0;
+			rs = service.update(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			if (rs == 1) {
+				HttpSession session = request.getSession();
+				session.setAttribute("nickname", dto.getNickname());
+			}
+			jsonObject.addProperty("rs", rs);
+			
 			response.getWriter().write(jsonObject.toString());
 		} else if (action.equals("/writeJson.json")) {
 			String id = request.getParameter("id");

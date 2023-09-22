@@ -114,7 +114,7 @@
 		<tr id="fail"><td colspan="2">사용불가능한 아이디입니다.</td></tr>
 		<tr><th>비밀번호</th><td><input type="password" name="pw" id="pw"></td></tr>
 		<tr><th>비밀번호 확인</th><td><input type="password" name="pw2" id="pw2"></td></tr>
-		<tr><th>닉네임</th><td><input type="text" name="name" id="nickname"></td></tr>
+		<tr><th>닉네임</th><td><input type="text" name="nickname" id="nickname"></td></tr>
 		<tr><td colspan="2"><input id="submit" type="button" value="가입하기"></td></tr>
 	</table>
 </form>

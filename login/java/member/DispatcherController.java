@@ -28,6 +28,7 @@ public class DispatcherController extends HttpServlet {
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String uri = request.getRequestURI();
 		System.out.println(uri); // /myweb/memberList.do
 		String action = uri.substring(uri.lastIndexOf("/"));
@@ -38,25 +39,7 @@ public class DispatcherController extends HttpServlet {
 		else if (action.equals("/logout.do")) response.sendRedirect("logout.jsp");
 		else if (action.equals("/join.do")) response.sendRedirect("join.jsp");
 		else if (action.equals("/update.do")) response.sendRedirect("update.jsp");
-		else if (action.equals("/updateProc.do")) {
-			HttpSession session = request.getSession();
-			String id = (String)session.getAttribute("id");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			int age = Integer.parseInt(request.getParameter("age"));
-			//MemberDTO dto = new MemberDTO(id, pw, name, age);
-			
-			//MemberDAO dao = new MemberDAO();
-			//int rs = dao.update(dto);
-			
-			session.setAttribute("name", name);
-			//request.setAttribute("rs", rs);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
-			dispatcher.forward(request, response);
-		} else if (action.equals("/updateJson.do")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("updateJson.jsp");
-			dispatcher.forward(request, response);
-		} else if (action.equals("/delete.do")) response.sendRedirect("delete.jsp");
+		else if (action.equals("/delete.do")) response.sendRedirect("delete.jsp");
 		else if (action.equals("/deleteProc.do")) {
 			HttpSession session = request.getSession();
 			String id = (String)session.getAttribute("id");
