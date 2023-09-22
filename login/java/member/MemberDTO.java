@@ -1,37 +1,29 @@
 package member;
 
 public class MemberDTO {
-	private String idx, id, pw, name, regdate;
-	private int age;
+	private int idx;
+	private String id, pw, nickname, grade;
 	
 	public MemberDTO() {
 	}
-	
-	public MemberDTO(String idx, String id, String pw, String name, int age, String regdate) {
+
+	public MemberDTO(int idx, String id, String pw, String nickname, String grade) {
 		super();
 		this.idx = idx;
 		this.id = id;
 		this.pw = pw;
-		this.name = name;
-		this.age = age;
-		this.regdate = regdate;
-	}
-	
-	public MemberDTO(String id, String pw, String name, int age) {
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.age = age;
+		this.nickname = nickname;
+		this.grade = grade;
 	}
 
-	public String getIdx() {
+	public int getIdx() {
 		return idx;
 	}
 
-	public void setIdx(String idx) {
+	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -48,32 +40,26 @@ public class MemberDTO {
 		this.pw = pw;
 	}
 
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public int getAge() {
-		return age;
+	public String getGrade() {
+		return grade;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
-	}
-	
-	public String getRegdate() {
-		return regdate;
-	}
-
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 
 	@Override
 	public String toString() {
-		return "회원번호: " + idx + ", ID: " + id + ", 비밀번호: " + pw + ", 이름: " + name + ", 나이: " + age + ", 가입날짜: " + regdate;
+		return "일련번호: " + idx + ", 아이디: " + id + ", 비밀번호: " + pw +
+				", 닉네임: " + nickname + ", 등급: " + grade;
 	}
+	
 }
