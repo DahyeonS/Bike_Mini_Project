@@ -12,18 +12,18 @@
 	};
 </script>
 <h2 id="service">
-<a href="index.do">Home</a> |
+<a href="index.do">Home</a>
 
 <% if (session.getAttribute("id") == null) { %>
-	<a href="join.do" class ="menu">회원가입</a> |
-	<a href="login.do">로그인</a> |
+	 | <a href="join.do" class ="menu">회원가입</a> |
+	<a href="login.do">로그인</a>
 <% } else { %>
-	<a href="update.do">정보수정</a> |
+	 | <a href="update.do">정보수정</a> |
 	<a href="#" onclick="deleteConfirm();">회원탈퇴</a> |
-	<a href="logout.do">로그아웃</a> |
+	<a href="logout.do">로그아웃</a>
 <% 		String seGrade = (String)session.getAttribute("grade");
 		if (!(seGrade.equals("GENERAL"))) { %>
-	<a href="memberList.do">회원목록</a> <br>
+	 | <a href="memberList.do">회원목록</a> <br>
 <% 		} %>
 <%		String grade = "";
 		if (seGrade.equals("MANAGER")) grade = "매니저";
