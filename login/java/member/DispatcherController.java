@@ -1,4 +1,4 @@
-package member;
+package mini_project;
 
 import java.io.IOException;
 import java.util.List;
@@ -114,6 +114,8 @@ public class DispatcherController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(viewName);
 			rd.forward(request, response);
 		}
+		// 영선 -- board 일반게시판
+		else if (action.equals("/board.do")) response.sendRedirect("board.jsp");
 	}
 
 }
