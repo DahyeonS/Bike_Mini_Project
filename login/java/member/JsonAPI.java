@@ -1,4 +1,4 @@
-package mini_project;
+package member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -37,7 +37,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			dto = service.login(dto);
+			dto = service.getMember(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			
@@ -52,14 +52,24 @@ public class JsonAPI extends HttpServlet {
 			}
 			else jsonObject.addProperty("rs", 0);
 			response.getWriter().write(jsonObject.toString());
-		}
-		// 영선 -- 게시판 (일반) - 게시글 작성하기 눌렀을때
-		else if (action.equals("/writeJson.json")) {
+		} else if (action.equals("/idCheck.json")) {
 			String id = request.getParameter("id");
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			dto = service.login(dto);
+			dto = service.getMember(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			if(dto != null) jsonObject.addProperty("rs", 1);
+			else jsonObject.addProperty("rs", 0);
+			
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/writeJson.json")) {
+			String id = request.getParameter("id");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setId(id);
+			dto = service.getMember(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			
