@@ -4,7 +4,8 @@ CREATE TABLE member (
   id VARCHAR2(10) NOT NULL UNIQUE,
   pw VARCHAR2(20) NOT NULL,
   nickname VARCHAR2(10) NOT NULL UNIQUE,
-  grade VARCHAR2(10) CHECK (grade IN ('MANAGER', 'ASSOCIATE', 'STAFF', 'GENERAL'))
+  grade VARCHAR2(10) CHECK (grade IN ('MANAGER', 'ASSOCIATE', 'STAFF', 'GENERAL')),
+  regdate DATE DEFAULT SYSDATE NOT NULL
 );
 
 -- 시퀀스 생성
@@ -16,7 +17,7 @@ NOCACHE
 NOORDER;
 
 -- 관리자 계정 생성
-INSERT INTO member VALUES (member_idx.NEXTVAL, 'admin', '1234', '관리자', 'MANAGER');
+INSERT INTO member VALUES (member_idx.NEXTVAL, 'admin', '1234', '관리자', 'MANAGER', SYSDATE);
 ALTER TABLE member MODIFY grade DEFAULT 'GENERAL';
 COMMIT;
 
