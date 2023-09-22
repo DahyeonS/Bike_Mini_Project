@@ -2,14 +2,22 @@ package member;
 
 public class MemberDTO {
 	private int idx;
-	private String id, pw, nickname, grade;
+	private String id, pw, nickname, grade, regdate;
 	
 	public MemberDTO() {
 	}
 
-	public MemberDTO(int idx, String id, String pw, String nickname, String grade) {
+	public MemberDTO(int idx, String id, String pw, String nickname, String grade, String regdate) {
 		super();
 		this.idx = idx;
+		this.id = id;
+		this.pw = pw;
+		this.nickname = nickname;
+		this.grade = grade;
+		this.regdate = regdate;
+	}
+	
+	public MemberDTO(String id, String pw, String nickname, String grade) {
 		this.id = id;
 		this.pw = pw;
 		this.nickname = nickname;
@@ -59,7 +67,7 @@ public class MemberDTO {
 	@Override
 	public String toString() {
 		return "일련번호: " + idx + ", 아이디: " + id + ", 비밀번호: " + pw +
-				", 닉네임: " + nickname + ", 등급: " + grade;
+				", 닉네임: " + nickname + ", 등급: " + grade + ", 가입일자: " + regdate;
 	}
 	
 }

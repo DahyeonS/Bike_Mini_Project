@@ -8,16 +8,16 @@ import java.sql.SQLException;
 
 public class JDBCUtil {
 	public static Connection getConnection() {
-		String driver = "com.mysql.cj.jdbc.Driver";
+		String driver = "oracle.jdbc.driver.OracleDriver";
 		Connection conn = null;
 		
 		try {
 //		1. 드라이버 로딩
 			Class.forName(driver);
 //		2. DB 연결
-			String url = "jdbc:mysql://localhost:3306/kdigital2307?ServerTimezone=UTC";
-			String user = "root";
-			String password = "rpass";
+			String url = "jdbc:oracle:thin:@192.168.0.23:1521:xe";
+			String user = "scott";
+			String password = "tiger";
 			conn = DriverManager.getConnection(url, user, password);
 		} catch (Exception e) {
 			e.printStackTrace();

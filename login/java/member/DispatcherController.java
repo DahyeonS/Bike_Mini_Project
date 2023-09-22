@@ -49,7 +49,7 @@ public class DispatcherController extends HttpServlet {
 				if (dto.getPw().equals(pw)) {
 					HttpSession session = request.getSession();
 					session.setAttribute("id", id);
-					//session.setAttribute("name", dto.getName());
+					session.setAttribute("nickname", dto.getNickname());
 					response.sendRedirect("index.do");
 				} else response.sendRedirect("login.do");
 			} else {
