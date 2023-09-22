@@ -23,7 +23,7 @@
 	<a href="logout.do">로그아웃</a>
 <% 		String seGrade = (String)session.getAttribute("grade");
 		if (!(seGrade.equals("GENERAL"))) { %>
-	 | <a href="memberList.do">회원목록</a> <br>
+	 | <a href="memberList.do">회원목록</a>
 <% 		} %>
 <%		String grade = "";
 		if (seGrade.equals("MANAGER")) grade = "매니저";
@@ -31,7 +31,7 @@
 		else if (seGrade.equals("STAFF")) grade = "스태프";
 		else grade = "일반회원";
 %>
-	<%=grade%> <%=session.getAttribute("nickname") %>(<%=session.getAttribute("id") %>)님 로그인 중 <br>
+	<br><%=grade%> <%=session.getAttribute("nickname") %>(<%=session.getAttribute("id") %>)님 로그인 중 <br>
 <% } %>
 </h2>
 <hr>
