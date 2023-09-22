@@ -34,6 +34,17 @@ public class DispatcherController extends HttpServlet {
 		String action = uri.substring(uri.lastIndexOf("/"));
 		if (action.equals("/index.do")) {
 			response.sendRedirect("index.jsp");
+		} else if (action.equals("/memberList.do")) {
+			System.out.println(action); // /memberList.do
+//			데이터 생성
+			MemberDAO dao = new MemberDAO();
+			List<MemberDTO> list = dao.getMemberList();
+			
+//			데이터 전송
+			request.setAttribute("list", list);
+			String viewName = "memberList.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(viewName);
+			rd.forward(request, response);
 		} else if (action.equals("/login.do")) response.sendRedirect("login.jsp");
 		else if (action.equals("/loginProc.do")) {
 			String id = request.getParameter("id");
@@ -42,20 +53,21 @@ public class DispatcherController extends HttpServlet {
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
 			
-			//MemberDAO dao = new MemberDAO();
-			//dto = dao.getMember(dto);
+			MemberDAO dao = new MemberDAO();
+			dto = dao.getMember(dto);
 			
 			if (dto != null) {
 				if (dto.getPw().equals(pw)) {
 					HttpSession session = request.getSession();
 					session.setAttribute("id", id);
-					//session.setAttribute("name", dto.getName());
+					session.setAttribute("name", dto.getName());
 					response.sendRedirect("index.do");
 				} else response.sendRedirect("login.do");
 			} else {
 				response.sendRedirect("login.do");
 			}
-		} else if (action.equals("/loginJson.do")) {
+		} else if (action.equals("/loginAjax.do")) response.sendRedirect("loginAjax.jsp");
+		else if (action.equals("/loginJson.do")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("loginJson.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -66,15 +78,16 @@ public class DispatcherController extends HttpServlet {
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
 			int age = Integer.parseInt(request.getParameter("age"));
-			//MemberDTO dto = new MemberDTO(id, pw, name, age);
+			MemberDTO dto = new MemberDTO(id, pw, name, age);
 			
-			//MemberDAO dao = new MemberDAO();
-			//int rs = dao.insert(dto);
+			MemberDAO dao = new MemberDAO();
+			int rs = dao.insert(dto);
 			
-			//request.setAttribute("rs", rs);
+			request.setAttribute("rs", rs);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request, response);
-		} else if (action.equals("/joinJson.do")) {
+		} else if (action.equals("/joinAjax.do")) response.sendRedirect("joinAjax.jsp");
+		else if (action.equals("/joinJson.do")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("joinJson.jsp");
 			dispatcher.forward(request, response);
 		}
@@ -88,16 +101,17 @@ public class DispatcherController extends HttpServlet {
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
 			int age = Integer.parseInt(request.getParameter("age"));
-			//MemberDTO dto = new MemberDTO(id, pw, name, age);
+			MemberDTO dto = new MemberDTO(id, pw, name, age);
 			
-			//MemberDAO dao = new MemberDAO();
-			//int rs = dao.update(dto);
+			MemberDAO dao = new MemberDAO();
+			int rs = dao.update(dto);
 			
 			session.setAttribute("name", name);
-			//request.setAttribute("rs", rs);
+			request.setAttribute("rs", rs);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
 			dispatcher.forward(request, response);
-		} else if (action.equals("/updateJson.do")) {
+		} else if (action.equals("/updateAjax.do")) response.sendRedirect("updateAjax.jsp");
+		else if (action.equals("/updateJson.do")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("updateJson.jsp");
 			dispatcher.forward(request, response);
 		} else if (action.equals("/delete.do")) response.sendRedirect("delete.jsp");
@@ -108,15 +122,16 @@ public class DispatcherController extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			//MemberDAO dao = new MemberDAO();
-			//dto = dao.getMember(dto);
+			MemberDAO dao = new MemberDAO();
+			dto = dao.getMember(dto);
 			
 			if (dto.getPw().equals(pw)) {
-				//dao.delete(dto);
+				dao.delete(dto);
 				session.invalidate();
 				response.sendRedirect("index.jsp");
 			} else response.sendRedirect("delete.jsp");
-		} else if (action.equals("/deleteJson.do")) {
+		} else if (action.equals("/deleteAjax.do")) response.sendRedirect("deleteAjax.jsp");
+		else if (action.equals("/deleteJson.do")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("deleteJson.jsp");
 			dispatcher.forward(request, response);
 		} else if (action.equals("/memberListJson.do")) response.sendRedirect("memberListJson.jsp");
@@ -129,11 +144,11 @@ public class DispatcherController extends HttpServlet {
 		} else if (action.equals("/memberListJstl.do")) {
 			System.out.println(action); // /memberList.do
 //			데이터 생성
-			//MemberDAO dao = new MemberDAO();
-			//List<MemberDTO> list = dao.getMemberList();
+			MemberDAO dao = new MemberDAO();
+			List<MemberDTO> list = dao.getMemberList();
 			
 //			데이터 전송
-			//request.setAttribute("list", list);
+			request.setAttribute("list", list);
 			String viewName = "memberListJstl.jsp";
 			RequestDispatcher rd = request.getRequestDispatcher(viewName);
 			rd.forward(request, response);
