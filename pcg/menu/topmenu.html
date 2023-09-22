@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>topmenu.html</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+
+
+    <script>
+
+<!-- json jquery -->
+window.onload=function(){
+    // 탑메뉴 - 로그인버튼 or 세션값에서  아이디  닉네임출력
+  //실행할 내용
+  function joinjson() {
+      const jid = $("#id").val();
+       	console.log(jid);
+$.ajax({
+        contentType: 'application/json', 
+        type: 'post', 
+        url: 'getmember.do', //id를 data에 넣어서  회원 정보 가져오고
+        dataType: 'json',
+        data: { id: jid },
+        success: function (data) {
+        	console.log(data);
+        	const {id:id , nickname:nicknamem, grade : grade} = data;
+            if (nickname === null) {
+            let div = ''; 
+            div += '<input type="button" value="로그인 버튼 위치">';    	
+                  console.log(tr);
+                 $('loginbutton').html(div);
+
+                } else if (nickname !== null) {
+                let div = ''; 
+                div += '<h2>'+ grade +'('+id+'님)로그인 중</h2>';    	
+                console.log(div);
+                 $('loginbutton').html(div);
+                 
+
+
+                }
+                
+            },
+            error: function (xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+}
+}
+// end
+
+//탑 메뉴 숨기기
+$(document).ready(function() {
+    $('.outer-menu-item').hover(function() {
+            $(this).find('.inner-menu').show();
+        }, function() {
+            $(this).find('.inner-menu').hide();
+        });
+    });// end
+    
+    </script>
+
+
+<!-- 스타일-->
+<style>
+    .outer-menu-item {
+        float: left;
+    }
+    .loginbutton{
+        float: right;
+    }
+    </style>
+    
+
+</head>
+
+<body>
+    <div class="outer-menu-item">
+
+        <a href="index.do">Home</a>
+    </div>
+    <div class="loginbutton">
+   
+        <a href="index.do">로그인 내정보 위치</a>
+    </div>
+    <br>
+  <hr>
+
+
+
+        <div class="outer-menu-item">
+            <ul>
+        <!-- 외부 메뉴 항목의 콘텐츠 -->
+            <li>팀장</li>
+            <div class="inner-menu">
+                <!-- 내부 메뉴 항목의 콘텐츠 -->
+                <li> <a href="login.do">로그인</a></li>
+                <li> <a href="update.do">정보수정</a></li>
+                <li> <a href="join.do" class="menu">회원가입</a></li>
+                <li> <a href="#" onclick="deleteConfirm();">회원탈퇴</a></li>
+                <li> <a href="logout.do">로그아웃</a></li>
+            
+            </div>
+        </ul>
+    </div>
+
+    <div class="outer-menu-item">
+        <ul>
+            <!-- 외부 메뉴 항목의 콘텐츠 -->
+            <li>팀원</li>
+            <div class="inner-menu">
+                <!-- 내부 메뉴 항목의 콘텐츠 -->
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+            </div>
+        </ul>
+    </div>
+    <div class="outer-menu-item">
+        <ul>
+            <!-- 외부 메뉴 항목의 콘텐츠 -->
+            <li>팀원</li>
+            <div class="inner-menu">
+                <!-- 내부 메뉴 항목의 콘텐츠 -->
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+            </div>
+        </ul>
+    </div>
+    <div class="outer-menu-item">
+        <ul>
+            <!-- 외부 메뉴 항목의 콘텐츠 -->
+            <li>팀원</li>
+            <div class="inner-menu">
+                <!-- 내부 메뉴 항목의 콘텐츠 -->
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+            </div>
+        </ul>
+    </div>    <div class="outer-menu-item">
+        <ul>
+            <!-- 외부 메뉴 항목의 콘텐츠 -->
+            <li>팀원</li>
+            <div class="inner-menu">
+                <!-- 내부 메뉴 항목의 콘텐츠 -->
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+            </div>
+        </ul>
+    </div>    <div class="outer-menu-item">
+        <ul>
+            <!-- 외부 메뉴 항목의 콘텐츠 -->
+            <li>팀원</li>
+            <div class="inner-menu">
+                <!-- 내부 메뉴 항목의 콘텐츠 -->
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+                <li> <a href="">데이터</a></li>
+            </div>
+        </ul>
+    </div>
+
+</body>
+
+</html>

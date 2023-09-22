@@ -4,16 +4,21 @@
     box-sizing: border-box;
     text-align: center;
 }
+table {width: 100%}
 input {
     outline: none;
 }
 #wTitle {
-    width: 400px;
+    width: 100%;
     height: 20px;
+    box-sizing: border-box;
+    border:none;
 }
 #wContext {
-    width: 400px;
+    width: 100%;
     height: 200px;
+    box-sizing: border-box;
+    border:none;
 }
 .w_btn {
     text-align: center;
