@@ -5,11 +5,14 @@
 </style>
 <script>
 	function deleteConfirm() {
-		const input = confirm("회원을 탈퇴할까요?");
-		alert(input);
-		if (input) location.href = "delete.do";
-		else return;
-	};
+	    <% if (session.getAttribute("id") != null && session.getAttribute("id").equals("admin")) { %>
+	       alert("관리자는 탈퇴할 수 없습니다.");
+	    <% } else { %>
+	       const input = confirm("회원을 탈퇴할까요?");
+	       if (input) location.href = "delete.do";
+	       else return;
+	    <% } %>
+	 };
 </script>
 <h2 id="service">
 <a href="index.do">Home</a>
