@@ -1,6 +1,8 @@
 package member;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 @WebServlet("*.json")
@@ -27,7 +30,6 @@ public class JsonAPI extends HttpServlet {
 	}
 	
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		request.setCharacterEncoding("UTF-8");
 		String uri = request.getRequestURI();
 		System.out.println(uri);
 		String action = uri.substring(uri.lastIndexOf("/"));
@@ -125,6 +127,12 @@ public class JsonAPI extends HttpServlet {
 			jsonObject.addProperty("rs", rs);
 			
 			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/memberList.json")) {
+			List<MemberDTO> list = service.getMemberList();
+			
+			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
 		} else if (action.equals("/writeJson.json")) {
 			String id = request.getParameter("id");
 			

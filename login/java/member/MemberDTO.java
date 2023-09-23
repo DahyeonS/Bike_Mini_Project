@@ -16,7 +16,7 @@ public class MemberDTO {
 		this.grade = grade;
 		this.regdate = regdate;
 	}
-	
+
 	public MemberDTO(String id, String pw, String nickname, String grade) {
 		this.id = id;
 		this.pw = pw;
@@ -70,10 +70,17 @@ public class MemberDTO {
 		this.grade = grade;
 	}
 
+	public String getRegdate() {
+		return regdate;
+	}
+	
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	
 	@Override
 	public String toString() {
 		return "일련번호: " + idx + ", 아이디: " + id + ", 비밀번호: " + pw +
 				", 닉네임: " + nickname + ", 등급: " + grade + ", 가입일자: " + regdate;
 	}
-	
 }

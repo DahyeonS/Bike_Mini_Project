@@ -16,7 +16,8 @@ public class JDBCUtil {
 			Class.forName(driver);
 //		2. DB 연결
 //			String url = "jdbc:oracle:thin:@192.168.0.23:1521:xe";
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 			String user = "scott";
 			String password = "tiger";
 			conn = DriverManager.getConnection(url, user, password);

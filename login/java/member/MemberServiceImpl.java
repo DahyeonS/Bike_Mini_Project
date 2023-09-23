@@ -1,5 +1,7 @@
 package member;
 
+import java.util.List;
+
 public class MemberServiceImpl implements MemberService {
 	private MemberDAO dao;
 	
@@ -25,6 +27,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int delete(MemberDTO dto) {
 		return dao.delete(dto);
+	}
+
+	@Override
+	public List<MemberDTO> getMemberList() {
+		return dao.getMemberList();
 	}
 
 }

@@ -4,12 +4,43 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDAOImpl implements MemberDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	String sql = "";
+	
+	@Override
+	public List<MemberDTO> getMemberList() {
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT idx, id, pw, nickname, grade, regdate FROM member";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int idx = rs.getInt("idx");
+				String id = rs.getString("id");
+				String pw = rs.getString("pw");
+				String nickname = rs.getString("nickname");
+				String grade = rs.getString("grade");
+				String regdate = rs.getString("regdate");
+				MemberDTO dto = new MemberDTO(idx, id, pw, nickname, grade, regdate);
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return list;
+	}
 	
 	@Override
 	public MemberDTO getMember(MemberDTO dto) {
