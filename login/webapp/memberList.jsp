@@ -84,14 +84,7 @@
 </tbody>
 
 </table>
-<!--
-<form>
-	<table border="1">
-	<tr><th>이름으로 회원검색</th>
-	<td><input type="text" name="name" id="name"></td>
-	<td><input type="button" value="검색" id="search"></tr>
-	</table>
-</form>
- -->
+<br>
+<a href="updateAdmin.do">회원관리</a>
 </body>
 </html>

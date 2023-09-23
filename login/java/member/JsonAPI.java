@@ -133,6 +133,21 @@ public class JsonAPI extends HttpServlet {
 			String gson = new Gson().toJson(list);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
+		} else if (action.equals("/memberShow.json")) {
+			String context = request.getParameter("context");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setId(context);
+			dto.setNickname(context);
+			dto = service.memberSearch(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("id", dto.getId());
+			jsonObject.addProperty("pw", dto.getPw());
+			jsonObject.addProperty("nickname", dto.getNickname());
+			
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(jsonObject.toString());
 		} else if (action.equals("/writeJson.json")) {
 			String id = request.getParameter("id");
 			

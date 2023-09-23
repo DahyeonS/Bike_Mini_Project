@@ -51,7 +51,11 @@
 	$(function() {
 		pwShow();
 		$('#submit').click(function() {
-			updateJson();
+			const input = confirm("회원정보를 수정하겠습니까?");
+		    if (input) {
+				updateJson();
+		   	}
+		    else return;
 		});
 	});
 </script>

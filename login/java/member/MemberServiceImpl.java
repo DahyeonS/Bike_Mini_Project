@@ -10,10 +10,20 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public List<MemberDTO> getMemberList() {
+		return dao.getMemberList();
+	}
+	
+	@Override
 	public MemberDTO getMember(MemberDTO dto) {
 		return dao.getMember(dto);
 	}
 
+	@Override
+	public MemberDTO memberSearch(MemberDTO dto) {
+		return dao.memberSearch(dto);
+	}
+	
 	@Override
 	public int insert(MemberDTO dto) {
 		return dao.insert(dto);
@@ -28,10 +38,4 @@ public class MemberServiceImpl implements MemberService {
 	public int delete(MemberDTO dto) {
 		return dao.delete(dto);
 	}
-
-	@Override
-	public List<MemberDTO> getMemberList() {
-		return dao.getMemberList();
-	}
-
 }

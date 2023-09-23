@@ -71,6 +71,32 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public MemberDTO memberSearch(MemberDTO dto) {
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT id, pw, nickname FROM member WHERE id = ? OR nickname = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getNickname());
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String id = rs.getString("id");
+				String pw = rs.getString("pw");
+				String nickname = rs.getString("nickname");
+				
+				dto = new MemberDTO(id, pw, nickname);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return dto;
+	}
+	
+	@Override
 	public int insert(MemberDTO dto) {
 		int rs = 0;
 		

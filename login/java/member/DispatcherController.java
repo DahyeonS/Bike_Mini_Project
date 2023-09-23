@@ -41,6 +41,7 @@ public class DispatcherController extends HttpServlet {
 		else if (action.equals("/update.do")) response.sendRedirect("update.jsp");
 		else if (action.equals("/delete.do")) response.sendRedirect("delete.jsp");
 		else if (action.equals("/memberList.do")) response.sendRedirect("memberList.jsp");
+		else if (action.equals("/updateAdmin.do")) response.sendRedirect("updateAdmin.jsp");
 		
 		else if (action.equals("/board.do")) response.sendRedirect("board.jsp");
 	}
