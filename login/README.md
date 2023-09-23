@@ -5,7 +5,7 @@
 **회원 정보를 담은 곳**
 
 > ### 변수명
-> [참고](https://github.com/DahyeonS/Bike_Mini_Project/tree/main/database#%EC%B9%BC%EB%9F%BC%EB%AA%85)
+> [참고](database)
 
 ## *MemberService*
 **회원 시스템을 전달하는 곳**
