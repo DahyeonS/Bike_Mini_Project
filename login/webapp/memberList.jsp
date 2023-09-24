@@ -17,7 +17,6 @@
 	        url: 'memberList.json',
 	        dataType: 'json',
 	        success: function(data) {
-	            // for (item of data) console.log(item);
 		        let tr = '';
 	            for (item of data) {
 		            const {idx, id, pw, nickname, grade, regdate} = item;
@@ -56,7 +55,6 @@
 	
 	$(function() {
     	getJson();
-    	
     	$('#search').click(function() {
     		memberSearch();
     	});
@@ -67,6 +65,8 @@
 <%@include file="loginmenu.jsp" %>
 <h2>회원목록</h2>
 <hr>
+<a href="updateAdmin.do">회원관리</a>
+<br><br>
 <table border="1">
 
 <thead>
@@ -84,7 +84,5 @@
 </tbody>
 
 </table>
-<br>
-<a href="updateAdmin.do">회원관리</a>
 </body>
 </html>

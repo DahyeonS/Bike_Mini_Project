@@ -40,9 +40,7 @@
 	        	if(data['rs'] === 1) {
 	        		alert('회원가입을 축하드립니다!');
 	        		location.href = 'login.jsp';
-	        	} else {
-	        		alert('다시 시도해주세요.');
-	        	}
+	        	} else alert('다시 시도해주세요.');
 	        }, error: function(xhr, status, error) {
 	            console.log(xhr, status, error);
 	        }

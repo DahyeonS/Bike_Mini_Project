@@ -30,12 +30,11 @@ public class DispatcherController extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String uri = request.getRequestURI();
-		System.out.println(uri); // /myweb/memberList.do
 		String action = uri.substring(uri.lastIndexOf("/"));
 		
-		if (action.equals("/index.do")) {
-			response.sendRedirect("index.jsp");
-		} else if (action.equals("/login.do")) response.sendRedirect("login.jsp");
+//		로그인
+		if (action.equals("/index.do")) response.sendRedirect("index.jsp");
+		else if (action.equals("/login.do")) response.sendRedirect("login.jsp");
 		else if (action.equals("/logout.do")) response.sendRedirect("logout.jsp");
 		else if (action.equals("/join.do")) response.sendRedirect("join.jsp");
 		else if (action.equals("/update.do")) response.sendRedirect("update.jsp");
@@ -43,6 +42,7 @@ public class DispatcherController extends HttpServlet {
 		else if (action.equals("/memberList.do")) response.sendRedirect("memberList.jsp");
 		else if (action.equals("/updateAdmin.do")) response.sendRedirect("updateAdmin.jsp");
 		
+//		게시판
 		else if (action.equals("/board.do")) response.sendRedirect("board.jsp");
 	}
 

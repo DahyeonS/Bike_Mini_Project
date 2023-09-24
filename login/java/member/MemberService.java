@@ -9,4 +9,5 @@ public interface MemberService {
 	int insert(MemberDTO dto);
 	int update(MemberDTO dto);
 	int delete(MemberDTO dto);
+	int updateAdmin(MemberDTO dto);
 }

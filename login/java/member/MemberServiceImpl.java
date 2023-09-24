@@ -38,4 +38,9 @@ public class MemberServiceImpl implements MemberService {
 	public int delete(MemberDTO dto) {
 		return dao.delete(dto);
 	}
+
+	@Override
+	public int updateAdmin(MemberDTO dto) {
+		return dao.updateAdmin(dto);
+	}
 }

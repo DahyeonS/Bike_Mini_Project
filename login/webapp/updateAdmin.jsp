@@ -45,9 +45,25 @@
 	        	if(data['rs'] === 1) {
 	        		alert('회원정보가 수정되었습니다.');
 	        		location.href = "updateAdmin.do";
-	        	} else {
-	        		alert('죄송합니다. 다시 시도해주세요.');
-	        	}
+	        	} else alert('죄송합니다. 다시 시도해주세요.');
+	        }, error: function(xhr, status, error) {
+	        	console.log(xhr, status, error);
+	        }
+		});
+	};
+	
+	function deleteAdminJson() {
+		const id = $('#id').val();
+		const param = {id};
+		$.ajax({
+	        type: 'POST',
+	        url: 'deleteAdmin.json',
+	        dataType: 'json',
+	        data: param,
+	        success: function(data) {
+	        	if(data['rs'] === 1) {
+	        		location.href = 'updateAdmin.do';
+	        	} else alert('죄송합니다. 다시 시도해주세요.');
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);
 	        }
@@ -58,6 +74,7 @@
 	       const input = confirm("해당회원을 탈퇴시킬까요?");
 	       if (input) {
 	    	   alert("회원을 탈퇴시켰습니다.");
+	    	   deleteAdminJson();
 	       }
 	       else return;
 	 };

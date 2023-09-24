@@ -39,9 +39,7 @@
 	        	if(data['rs'] === 1) {
 	        		alert('회원정보가 수정되었습니다.');
 	        		location.href = "update.do";
-	        	} else {
-	        		alert('죄송합니다. 다시 시도해주세요.');
-	        	}
+	        	} else alert('죄송합니다. 다시 시도해주세요.');
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);
 	        }

@@ -31,7 +31,6 @@ public class JsonAPI extends HttpServlet {
 	
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String uri = request.getRequestURI();
-		System.out.println(uri);
 		String action = uri.substring(uri.lastIndexOf("/"));
 		
 		if (action.equals("/login.json")) {
@@ -147,6 +146,31 @@ public class JsonAPI extends HttpServlet {
 			jsonObject.addProperty("nickname", dto.getNickname());
 			
 			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/updateAdmin.json")) {
+			String id = request.getParameter("id");
+			String nickname = request.getParameter("nickname");
+			String grade = request.getParameter("grade");
+			
+			MemberDTO dto = new MemberDTO(id, null, nickname, grade);
+			int rs = 0;
+			rs = service.updateAdmin(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/deleteAdmin.json")) {
+			String id = request.getParameter("id");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setId(id);
+			int rs = 0;
+			rs = service.delete(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			
 			response.getWriter().write(jsonObject.toString());
 		} else if (action.equals("/writeJson.json")) {
 			String id = request.getParameter("id");
