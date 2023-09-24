@@ -10,7 +10,7 @@
 </style>
 </head>
 <body>
-<%@include file="topmenu.jsp" %>
+<%@include file="loginmenu.jsp" %>
 <h2 id="home">Home</h2>
 </body>
 </html>

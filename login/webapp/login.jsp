@@ -6,34 +6,7 @@
 <meta charset="UTF-8">
 <title>login.jsp</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script>
-	function loginJson() {
-		const id = $('#id').val();
-		const pw = $('#pw').val();
-		const param = {id, pw};
-		$.ajax({
-	        type: 'POST',
-	        url: 'login.json',
-	        dataType: 'json',
-	        data: param,
-	        success: function(data) {
-	        	if (data['rs'] === 1) {
-	        		alert('환영합니다!');
-	        		location.href = 'index.jsp';
-	        	}
-				else alert('아이디나 비밀번호가 다릅니다');
-	        }, error: function(xhr, status, error) {
-	        	console.log(xhr, status, error);
-	        }
-		});
-	};
-	
-	$(function() {
-		$('#submit').click(function() {
-			loginJson();
-		});
-	});
-</script>
+<script src="./script/login.js"></script>
 </head>
 <body>
 <%@include file="loginmenu.jsp" %>

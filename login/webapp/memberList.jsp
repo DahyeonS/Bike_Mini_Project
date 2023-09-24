@@ -10,56 +10,7 @@
 <meta charset="UTF-8">
 <title>memberListJson.jsp</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script>
-	function getJson(param) {
-	    $.ajax({
-	        type: 'POST',
-	        url: 'memberList.json',
-	        dataType: 'json',
-	        success: function(data) {
-		        let tr = '';
-	            for (item of data) {
-		            const {idx, id, pw, nickname, grade, regdate} = item;
-		            tr += '<tr style="text-align: center;"><td>' + idx + '</td><td>' + id + '</td><td>' + pw
-		            + '</td><td>' + nickname + '</td><td>' + grade + '</td><td>' + regdate + '</td></tr>';
-	            }
-	            $('#tbody').html(tr);
-	        },
-	        error: function(xhr, status, error) {
-	            console.log(xhr, status, error);
-	        }
-	    });
-	};
-	
-	function memberSearch() {
-		const name = $('#name').val();
-		const param = {name};
-		console.log(param);
-		$.ajax({
-	        type: 'Post',
-	        url: 'getMemberNameJson.do',
-	        dataType: 'json',
-	        data: param,
-	        success: function(data) {
-	        	let tr = '';
-	        	for (item of data) {
-		            const {idx, id, pw, name, age, regdate} = item;
-		            tr += '<tr style="text-align: center;"><td>' + idx + '</td><td>' + id + '</td><td>' + pw + '</td><td>' + name + '</td><td>' + age + '</td><td>' + regdate + '</td></tr>';
-	            }
-	            $('#tbody').html(tr);
-	        }, error: function(xhr, status, error) {
-	        	console.log(xhr, status, error);
-	        }
-		});
-	};
-	
-	$(function() {
-    	getJson();
-    	$('#search').click(function() {
-    		memberSearch();
-    	});
-    });
-</script>
+<script src="./script/memberlist.js"></script>
 </head>
 <body>
 <%@include file="loginmenu.jsp" %>
