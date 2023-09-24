@@ -66,6 +66,18 @@ public class JsonAPI extends HttpServlet {
 			else jsonObject.addProperty("rs", 0);
 			
 			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/nicknameCheck.json")) {
+			String nickname = request.getParameter("nickname");
+			
+			MemberDTO dto = new MemberDTO();
+			dto.setNickname(nickname);
+			dto = service.getMemberNickname(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			if(dto != null) jsonObject.addProperty("rs", 1);
+			else jsonObject.addProperty("rs", 0);
+			
+			response.getWriter().write(jsonObject.toString());
 		} else if (action.equals("/join.json")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");

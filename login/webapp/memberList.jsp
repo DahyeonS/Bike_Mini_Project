@@ -8,7 +8,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>memberListJson.jsp</title>
+<title>회원목록</title>
+<style>
+	h2 {text-align: center;}
+	table, th, td, input, #manage {
+		margin: 0 auto;
+		border-collapse: collapse;
+		font-size: 14pt;
+	}
+</style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 <script src="./script/memberlist.js"></script>
 </head>
@@ -16,7 +24,7 @@
 <%@include file="loginmenu.jsp" %>
 <h2>회원목록</h2>
 <hr>
-<a href="updateAdmin.do">회원관리</a>
+<a href="updateAdmin.do" id="manage">회원관리</a>
 <br><br>
 <table border="1">
 

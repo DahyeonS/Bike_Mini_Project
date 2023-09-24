@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login.jsp</title>
+<title>로그인</title>
 <style>
 	h2 {text-align: center;}
 	table, th, td, input {
@@ -24,8 +24,8 @@
 <hr>
 <form action="loginProc" method="post">
 	<table>
-		<tr><th>아이디</th><td><input type="text" name="id" id="id"></td></tr>
-		<tr><th>비밀번호</th><td><input type="password" name="pw" id="pw"></td></tr>
+		<tr><th>아이디&nbsp</th><td><input type="text" name="id" id="id"></td></tr>
+		<tr><th>비밀번호&nbsp</th><td><input type="password" name="pw" id="pw"></td></tr>
 		<tr><td colspan="2" id="login">&nbsp<input type="button" value="로그인" id="submit"></td></tr>
 	</table>
 </form>

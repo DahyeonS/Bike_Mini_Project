@@ -74,6 +74,10 @@ $(document).ready(function() {
             alert('아이디를 입력해주세요.');
             $('#id').focus();
             return;
+        } else if (/^[ㄱ-ㅎ|가-힣]+$/.test(id)) {
+        	alert('아이디는 한글을 사용할 수 없습니다.');
+            $('#id').focus();
+        	return;
         }
         idCheck(param);
     });
@@ -92,6 +96,10 @@ $(document).ready(function() {
         const id = $('#id').val();
         if(id === '') {
             alert('아이디를 입력해주세요.');
+            $('#id').focus();
+            return;
+        } else if (/^[ㄱ-ㅎ|가-힣]+$/.test(id)) {
+            alert('아이디는 한글을 사용할 수 없습니다.');
             $('#id').focus();
             return;
         }

@@ -20,6 +20,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberDTO getMemberNickname(MemberDTO dto) {
+		return dao.getMemberNickname(dto);
+	}
+	
+	@Override
 	public MemberDTO memberSearch(MemberDTO dto) {
 		return dao.memberSearch(dto);
 	}

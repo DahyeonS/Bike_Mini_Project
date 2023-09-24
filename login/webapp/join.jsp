@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>join.jsp</title>
+<title>회원가입</title>
 <style>
 	h2 {text-align: center;}
 	table, th, td, input {
@@ -13,7 +13,7 @@
 		font-size: 14pt;
 	}
 	#success, #fail {margin-left: 10%;}
-	#final {text-align: right;}
+	#join {text-align: right;}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 <script src="./script/join.js"></script>
@@ -44,7 +44,7 @@
 		<tr id="nickfail"><th></th><td>사용불가능한 닉네임입니다.</td></tr>
 		
 		<tr><th colspan="2">&nbsp</th></tr>
-		<tr><td colspan="2" id="final"><input id="submit" type="button" value="가입하기"></td></tr>
+		<tr><td colspan="2" id="join"><input id="submit" type="button" value="가입하기"></td></tr>
 	</table>
 </form>
 </body>

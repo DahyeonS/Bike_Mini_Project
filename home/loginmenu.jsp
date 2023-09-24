@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	#service {text-align: center;}
+	#service {text-align: center; font-size: 18pt;}
 </style>
 <%@include file="./script/deleteConfrim.jsp" %>
 <h2 id="service">
