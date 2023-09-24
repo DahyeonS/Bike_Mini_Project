@@ -21,6 +21,29 @@ function idCheck(param) {
     });
 };
 
+function nicknameCheck(param) {
+    $.ajax({
+        type: 'POST',
+        url: 'nicknameCheck.json',
+        data: param,
+        dataType: 'json',
+        success: function(data) {
+            if(data['rs'] === 1) {
+                $('#nicksuccess').hide();
+                $('#nickfail').show();
+                $('#submit').attr('disabled', 'disabled');
+            } else {
+                $('#nickfail').hide();
+                $('#nicksuccess').show();
+                $('#submit').removeAttr("disabled");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+};
+
 function join(params) {
     $.ajax({
         type: 'POST',
@@ -40,7 +63,10 @@ function join(params) {
 
 $(document).ready(function() {
     $('#success').hide();
+    $('#nicksuccess').hide();
     $('#fail').hide();
+    $('#nickfail').hide();
+
     $('#check').click(function() {
         const id = $('#id').val();
         const param = {id};
@@ -50,6 +76,16 @@ $(document).ready(function() {
             return;
         }
         idCheck(param);
+    });
+    $('#nickcheck').click(function() {
+        const nickname = $('#nickname').val();
+        const param = {nickname};
+        if(nickname === '') {
+            alert('닉네임을 입력해주세요.');
+            $('#nickname').focus();
+            return;
+        }
+        nicknameCheck(param);
     });
     
     $('#submit').click(function() {
