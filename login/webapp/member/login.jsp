@@ -15,10 +15,10 @@
 	#login {text-align: right;}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script src="./script/login.js"></script>
+<script src="../script/login.js"></script>
 </head>
 <body>
-<%@include file="loginmenu.jsp" %>
+<%@include file="../loginmenu.jsp" %>
 <%--<%@include file="topmenu.jsp" %>--%>
 <h2>로그인</h2>
 <hr>

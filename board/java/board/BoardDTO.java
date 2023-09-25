@@ -2,13 +2,13 @@ package board;
 
 public class BoardDTO {
 	int num, fileID, visitCount;
-	String id, nickname, title, category, fileName, postdate;
+	String id, nickname, title, context, category, fileName, postdate;
 	
 	public BoardDTO() {
 	}
 	
-	public BoardDTO(int num, int fileID, int visitCount, String id, String nickname, String title, String category,
-			String fileName, String postdate) {
+	public BoardDTO(int num, int fileID, int visitCount, String id, String nickname, String title,
+			String context, String category, String fileName, String postdate) {
 		super();
 		this.num = num;
 		this.fileID = fileID;
@@ -16,6 +16,7 @@ public class BoardDTO {
 		this.id = id;
 		this.nickname = nickname;
 		this.title = title;
+		this.context = context;
 		this.category = category;
 		this.fileName = fileName;
 		this.postdate = postdate;
@@ -67,6 +68,14 @@ public class BoardDTO {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getContext() {
+		return context;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
 	}
 
 	public String getCategory() {

@@ -16,10 +16,10 @@
 	#delete {text-align: right;}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script src="./script/delete.js"></script>
+<script src="../script/delete.js"></script>
 </head>
 <body>
-<%@include file="loginmenu.jsp" %>
+<%@include file="../loginmenu.jsp" %>
 <h2>회원탈퇴</h2>
 <hr>
 <form action="deleteProc" method="post">
