@@ -6,8 +6,8 @@ CREATE TABLE post (
     title VARCHAR2(50) NOT NULL,
     context VARCHAR2(4000) NOT NULL,
     category VARCHAR2(10) CHECK (category IN ('일반', '질문', '답변')) NOT NULL,
-    file_id NUMBER NOT NULL,
-    file_name VARCHAR2(100) NOT NULL,
+    file_id NUMBER,
+    file_name VARCHAR2(100),
     postdate DATE DEFAULT SYSDATE NOT NULL,
     visit_count NUMBER DEFAULT 0
 );
