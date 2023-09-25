@@ -1,29 +1,29 @@
 # 개요
 **로그인 관리를 위한 시스템을 구축한 곳입니다.**
 
-## *MemberDTO*
+### *MemberDTO*
 **회원 정보를 담은 곳**
 
-> ### 변수명
+> #### 변수명
 > [참고](database)
 
-## *MemberService*
+### *MemberService*
 **회원 시스템을 전달하는 곳**
 
-### *MemberServiceImpl*
+#### *MemberServiceImpl*
 MemberService의 자식클래스
 
-## *MemberDAO*
+### *MemberDAO*
 **회원 시스템을 처리하는 곳**
 
-### *MemberDAOImpl*
+#### *MemberDAOImpl*
 MemberDAO의 자식클래스
 
-## **JDBCUtil**
+### **JDBCUtil**
 **데이터베이스를 연결하는 스태틱 메소드 모음**
 
-## *DispathcherController*
+### *DispathcherController*
 **do 작업을 실행하는 곳**
 
-## *JsonAPI*
+### *JsonAPI*
 **Json 작업을 실행하는 곳**
