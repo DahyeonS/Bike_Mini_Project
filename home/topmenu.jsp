@@ -6,7 +6,6 @@
 <script>
 //탑 메뉴 숨기기
 $(document).ready(function() {
-    $(this).find('.inner-menu').hide();
     $('.outer-menu-item').hover(function() {
             $(this).find('.inner-menu').show();
     }, function() {
@@ -27,6 +26,11 @@ $(document).ready(function() {
 }
 .loginbutton, #logout-btn{
     float: right;
+}
+.inner-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
 }
 </style>
 
@@ -136,4 +140,5 @@ $(document).ready(function() {
         </div>
     </ul>
 </div>
-<br><br><br><br><br><br><br><br><hr>
+<br><br><br>
+<hr style="position: relative;">
