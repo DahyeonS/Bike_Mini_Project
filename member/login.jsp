@@ -18,7 +18,7 @@
 <script src="./script/login.js"></script>
 </head>
 <body>
-<%@include file="../topmenu.jsp" %>
+<%@include file="../home/topmenu.jsp" %>
 <h2>로그인</h2>
 <form action="loginProc" method="post">
 	<table>

@@ -19,7 +19,7 @@
 <script src="./script/join.js"></script>
 </head>
 <body>
-<%@include file="../topmenu.jsp" %>
+<%@include file="../home/topmenu.jsp" %>
 <h2>회원가입</h2>
 <hr>
 <form name="joinForm" method="post">

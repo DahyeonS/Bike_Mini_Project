@@ -13,9 +13,8 @@ public class MemberController {
 		
 		String action = uri.substring(uri.lastIndexOf("/"));
 		System.out.println(uri.split("/",4)[2]);
-		if (uri.split("/",4)[2].equals("member")) {
-//			로그인
-			if (action.equals("/index.do")) response.sendRedirect("../index.jsp");
+		if (uri.split("/",4)[2].lastIndexOf(".") == -1) {
+			if (action.equals("/index.do")) response.sendRedirect("../home/index.jsp");
 			else if (action.equals("/login.do")) response.sendRedirect("../member/login.jsp");
 			else if (action.equals("/logout.do")) response.sendRedirect("../member/logout.jsp");
 			else if (action.equals("/join.do")) response.sendRedirect("../member/join.jsp");
@@ -23,16 +22,6 @@ public class MemberController {
 			else if (action.equals("/delete.do")) response.sendRedirect("../member/delete.jsp");
 			else if (action.equals("/memberList.do")) response.sendRedirect("../member/memberList.jsp");
 			else if (action.equals("/updateAdmin.do")) response.sendRedirect("../member/updateAdmin.jsp");
-		} else {
-//			로그인
-			if (action.equals("/index.do")) response.sendRedirect("index.jsp");
-			else if (action.equals("/login.do")) response.sendRedirect("member/login.jsp");
-			else if (action.equals("/logout.do")) response.sendRedirect("member/logout.jsp");
-			else if (action.equals("/join.do")) response.sendRedirect("member/join.jsp");
-			else if (action.equals("/update.do")) response.sendRedirect("member/update.jsp");
-			else if (action.equals("/delete.do")) response.sendRedirect("member/delete.jsp");
-			else if (action.equals("/memberList.do")) response.sendRedirect("member/memberList.jsp");
-			else if (action.equals("/updateAdmin.do")) response.sendRedirect("member/updateAdmin.jsp");
-		}
+		} 
 	}
 }

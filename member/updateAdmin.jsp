@@ -18,7 +18,7 @@
 <%@include file="./script/updateAdminScript.jsp"%>
 </head>
 <body>
-<%@include file="../topmenu.jsp" %>
+<%@include file="../home/topmenu.jsp" %>
 <h2>회원정보 수정</h2>
 <hr>
 <form>

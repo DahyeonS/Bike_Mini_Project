@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<%@include file="./member/script/deleteConfrim.jsp" %>
+<%@include file="../member/script/deleteConfrim.jsp" %>
 <script>
 //탑 메뉴 숨기기
 $(document).ready(function() {
@@ -24,13 +24,19 @@ $(document).ready(function() {
 .outer-menu-item, #info {
     float: left;
 }
+.outer-menu-item:hover {
+    background: white;
+    color: black;
+}
 .loginbutton, #logout-btn{
     float: right;
 }
-.inner-menu {
+.inner-menu{
     display: none;
     position: absolute;
-    background-color: white;
+    background: white;
+    z-index: 1000;
+    text-align: center;
 }
 </style>
 
@@ -73,10 +79,10 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>서다현</li>
+        <li>서다현(Q&A)</li>
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
+            <li> <a href="../board/test.jsp">목록보기</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
