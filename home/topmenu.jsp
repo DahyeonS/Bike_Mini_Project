@@ -73,7 +73,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>팀원</li>
+        <li>서다현</li>
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -87,7 +87,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>팀원</li>
+        <li>박철규</li>
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -101,7 +101,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>팀원</li>
+        <li>고훈</li>
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -115,7 +115,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>팀원</li>
+        <li>권지현</li>
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -129,7 +129,21 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>팀원</li>
+        <li>정민석</li>
+        <div class="inner-menu">
+            <!-- 내부 메뉴 항목의 콘텐츠 -->
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+        </div>
+    </ul>
+</div>
+<div class="outer-menu-item">
+    <ul>
+        <!-- 외부 메뉴 항목의 콘텐츠 -->
+        <li>황영선</li>
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
