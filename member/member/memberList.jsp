@@ -18,7 +18,7 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script src="../script/memberlist.js"></script>
+<script src="./script/memberlist.js"></script>
 </head>
 <body>
 <%@include file="../loginmenu.jsp" %>

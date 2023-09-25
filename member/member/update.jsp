@@ -16,7 +16,7 @@
 	#update {text-align: right;}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<%@include file="../script/updateScript.jsp"%>
+<%@include file="./script/updateScript.jsp"%>
 </head>
 <body>
 <%@include file="../loginmenu.jsp"%>

@@ -15,7 +15,7 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script src="../script/updateadmin.js"></script>
+<%@include file="./script/updateAdminScript.jsp"%>
 </head>
 <body>
 <%@include file="../loginmenu.jsp"%>

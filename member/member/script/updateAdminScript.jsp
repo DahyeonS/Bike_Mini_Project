@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<script>
 function memberShow() {
     const context = $('#context').val();
     const param = {context};
@@ -9,6 +12,8 @@ function memberShow() {
         success: function(data) {
             if (data['pw'] === null) alert('회원이 존재하지 않습니다.');
             else if (data['id'] === 'admin') alert('관리자는 수정할 수 없습니다.');
+            else if (data['id'] === '<%=session.getAttribute("id")%>') alert('자기 자신은 수정할 수 없습니다.');
+            else if (data['nickname'] === '<%=session.getAttribute("nickname")%>') alert('자기 자신은 수정할 수 없습니다.');
             else {
                 $('#id').attr('value', data['id']);
                 $('#nickname').attr('value', data['nickname']);
@@ -78,3 +83,4 @@ $(function() {
         updateAdminJson();
     });
 });
+</script>
