@@ -1,5 +1,7 @@
 package board;
 
-public interface BoardDAO {
+import java.util.List;
 
+public interface BoardDAO {
+	List<BoardDTO> getBoardList();
 }

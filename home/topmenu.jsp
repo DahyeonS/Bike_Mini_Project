@@ -23,6 +23,7 @@ $(document).ready(function() {
 <style>
 .outer-menu-item, #info {
     float: left;
+    text-align: center;
 }
 .outer-menu-item:hover {
     background: white;
@@ -37,6 +38,7 @@ $(document).ready(function() {
     background: white;
     z-index: 1000;
     text-align: center;
+    list-style: none;
 }
 </style>
 
@@ -79,11 +81,11 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>서다현(Q&A)</li>
+        서다현(Q&A)
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="QBoardList.do">목록보기</a></li>
-            <li> <a href="">데이터</a></li>
+            <li> <a href="qBoardList.do">목록보기</a></li>
+            <li> <a href="">글쓰기</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
@@ -93,21 +95,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>박철규</li>
-        <div class="inner-menu">
-            <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-        </div>
-    </ul>
-</div>
-<div class="outer-menu-item">
-    <ul>
-        <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>고훈</li>
+        박철규
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -121,7 +109,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>권지현</li>
+        고훈
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -135,7 +123,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>정민석</li>
+        권지현
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -149,7 +137,21 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>황영선</li>
+        정민석
+        <div class="inner-menu">
+            <!-- 내부 메뉴 항목의 콘텐츠 -->
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+            <li> <a href="">데이터</a></li>
+        </div>
+    </ul>
+</div>
+<div class="outer-menu-item">
+    <ul>
+        <!-- 외부 메뉴 항목의 콘텐츠 -->
+        황영선
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>

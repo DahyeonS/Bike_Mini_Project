@@ -17,7 +17,40 @@ function memberShow() {
             else {
                 $('#id').attr('value', data['id']);
                 $('#nickname').attr('value', data['nickname']);
+                nickCheck = data['nickname'];
                 $('#member').show();
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+};
+
+function nicknameCheck(param) {
+    $.ajax({
+        type: 'POST',
+        url: 'nicknameCheck.json',
+        data: param,
+        dataType: 'json',
+        success: function(data) {
+            if(data['rs'] === 1) {
+            	console.log(param['nickname'])
+            	if(param['nickname'] === nickCheck) {
+                	$('#nicksuccess').hide();
+                	$('#nickfail').hide();
+                	$('#nickequal').show();
+            	} else {
+	                $('#nicksuccess').hide();
+	                $('#nickequal').hide();
+	                $('#nickfail').show();
+	                $('#submit').attr('disabled', 'disabled');
+            	}
+            } else {
+                $('#nickfail').hide();
+                $('#nickequal').hide();
+                $('#nicksuccess').show();
+                $('#submit').removeAttr("disabled");
             }
         },
         error: function(xhr, status, error) {
@@ -75,12 +108,26 @@ function memberDeleteConfirm() {
  };
 
 $(function() {
+	let nickCheck = '';
+	$('#nicksuccess').hide();
+    $('#nickfail').hide();
+    $('#nickequal').hide();
     $('#member').hide();
     $('#search').click(function() {
         memberShow();
     });
     $('#submit').click(function() {
         updateAdminJson();
+    });
+    $('#nickcheck').click(function() {
+        const nickname = $('#nickname').val();
+        const param = {nickname};
+        if(nickname === '') {
+            alert('닉네임을 입력해주세요.');
+            $('#nickname').focus();
+            return;
+        }
+        nicknameCheck(param);
     });
 });
 </script>

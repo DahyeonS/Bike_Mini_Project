@@ -39,7 +39,42 @@
 		});
 	};
 	
+	function nicknameCheck(param) {
+	    $.ajax({
+	        type: 'POST',
+	        url: 'nicknameCheck.json',
+	        data: param,
+	        dataType: 'json',
+	        success: function(data) {
+	            if(data['rs'] === 1) {
+	            	console.log(param['nickname'])
+	            	if(param['nickname'] === '<%=(String)session.getAttribute("nickname")%>') {
+	                	$('#nicksuccess').hide();
+	                	$('#nickfail').hide();
+	                	$('#nickequal').show();
+	            	} else {
+		                $('#nicksuccess').hide();
+		                $('#nickequal').hide();
+		                $('#nickfail').show();
+		                $('#submit').attr('disabled', 'disabled');
+	            	}
+	            } else {
+	                $('#nickfail').hide();
+	                $('#nickequal').hide();
+	                $('#nicksuccess').show();
+	                $('#submit').removeAttr("disabled");
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.log(xhr, status, error);
+	        }
+	    });
+	};
+	
 	$(function() {
+	    $('#nicksuccess').hide();
+	    $('#nickfail').hide();
+	    $('#nickequal').hide();
 		pwShow();
 		$('#submit').click(function() {
 			const input = confirm("회원정보를 수정하겠습니까?");
@@ -48,5 +83,15 @@
 		   	}
 		    else return;
 		});
+		$('#nickcheck').click(function() {
+	        const nickname = $('#nickname').val();
+	        const param = {nickname};
+	        if(nickname === '') {
+	            alert('닉네임을 입력해주세요.');
+	            $('#nickname').focus();
+	            return;
+	        }
+	        nicknameCheck(param);
+	    });
 	});
 </script>

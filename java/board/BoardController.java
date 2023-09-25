@@ -13,11 +13,9 @@ public class BoardController {
 		
 		String action = uri.substring(uri.lastIndexOf("/"));
 		System.out.println(uri.split("/",4)[2]);
-		if (uri.split("/",4)[2].equals("board")) {
-			if (action.equals("/board.do")) response.sendRedirect("../board.jsp");
-		} else {
-//			게시판
-			if (action.equals("/board.do")) response.sendRedirect("board.jsp");
+		if (uri.split("/",4)[2].lastIndexOf(".") == -1) {
+			if (action.equals("/qBoardList.do")) response.sendRedirect("../board/qBoardList.jsp");
+			if (action.equals("/boardView.do")) response.sendRedirect("../board/boardView.jsp");
 		}
 	}
 }

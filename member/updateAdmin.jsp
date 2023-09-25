@@ -32,7 +32,12 @@
 <form id="member">
 	<table>
 		<tr><th>아이디</th><td><input type="text" name="id" id="id" readonly="readonly"></td></tr>
-		<tr><th>닉네임</th><td><input type="text" name="nickname" id="nickname"></td></tr>
+		<tr><th>닉네임</th><td><input type="text" name="nickname" id="nickname">&nbsp&nbsp
+		<input id="nickcheck" type="button" value="중복확인">
+		</td></tr>
+		<tr id="nicksuccess"><th></th><td>사용가능한 닉네임입니다.</td></tr>
+		<tr id="nickfail"><th></th><td>사용불가능한 닉네임입니다.</td></tr>
+		<tr id="nickequal"><th></th><td>이전 닉네임과 동일합니다.</td></tr>
 <% 		String seGrade = (String)session.getAttribute("grade");
 		if (seGrade.equals("MANAGER")) { %>
 		<tr><td colspan="2"><select name="grade" id="grade">

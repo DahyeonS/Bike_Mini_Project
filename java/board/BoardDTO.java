@@ -21,6 +21,17 @@ public class BoardDTO {
 		this.fileName = fileName;
 		this.postdate = postdate;
 	}
+	
+	public BoardDTO(int num, String title, String nickname, String context,
+			String category, int visitCount, String postdate) {
+		this.num = num;
+		this.title = title;
+		this.nickname = nickname;
+		this.context = context;
+		this.category = category;
+		this.visitCount = visitCount;
+		this.postdate = postdate;
+	}
 
 	public int getNum() {
 		return num;
