@@ -3,7 +3,7 @@
 <style>
 	#service {text-align: center; font-size: 18pt;}
 </style>
-<%@include file="./script/deleteConfrim.jsp" %>
+<%@include file="./member/script/deleteConfrim.jsp" %>
 <h2 id="service">
 <a href="index.do">Home</a>
 
