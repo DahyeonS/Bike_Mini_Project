@@ -18,10 +18,8 @@
 <script src="./script/login.js"></script>
 </head>
 <body>
-<%@include file="../loginmenu.jsp" %>
-<%--<%@include file="topmenu.jsp" %>--%>
+<%@include file="../topmenu.jsp" %>
 <h2>로그인</h2>
-<hr>
 <form action="loginProc" method="post">
 	<table>
 		<tr><th>아이디&nbsp</th><td><input type="text" name="id" id="id"></td></tr>
