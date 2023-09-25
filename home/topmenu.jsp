@@ -16,7 +16,7 @@ $(document).ready(function() {
     }, function() {
             $(this).find('.inner-menu').hide();
     });
-});// end
+}); // end
 </script>
 
 <!-- 스타일-->
@@ -82,7 +82,7 @@ $(document).ready(function() {
         <li>서다현(Q&A)</li>
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="../board/test.jsp">목록보기</a></li>
+            <li> <a href="QBoardList.do">목록보기</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
