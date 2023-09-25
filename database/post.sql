@@ -27,5 +27,15 @@ MAXVALUE 9999
 NOCACHE
 NOORDER;
 
+-- 트리거 생성(해당 쿼리만 선택해서 실행하세요.)
+CREATE TRIGGER post_trigger
+BEFORE UPDATE OF nickname ON member
+FOR EACH ROW
+BEGIN
+    UPDATE post
+    SET nickname = :NEW.nickname
+    WHERE nickname = :OLD.nickname;
+END;
+
 -- 확인
 SELECT * FROM post;
