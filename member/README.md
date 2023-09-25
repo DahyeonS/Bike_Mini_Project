@@ -1,4 +1,17 @@
 # 개요
-**로그인 관리를 위한 시스템을 구축한 곳입니다.**
+**로그인 페이지를 모아놓은 곳입니다.**
 
-## *MemberDTO*
+## *join.jsp*
+회원가입
+
+## *login.jsp*
+
+## *loginCheck.jsp*
+
+## *update.jsp*
+
+## *delete.jsp*
+
+## *memberList.jsp*
+
+## *updateAdmin.jsp*
