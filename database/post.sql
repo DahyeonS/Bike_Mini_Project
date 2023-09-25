@@ -4,7 +4,7 @@ CREATE TABLE post (
     num NUMBER PRIMARY KEY NOT NULL,
     nickname VARCHAR2(10) REFERENCES member(nickname) NOT NULL UNIQUE,
     title VARCHAR2(50) NOT NULL,
-    context VARCHAR2(5000) NOT NULL,
+    context VARCHAR2(4000) NOT NULL,
     category VARCHAR2(10) CHECK (category IN ('일반', '질문', '답변')) NOT NULL,
     file_id NUMBER NOT NULL,
     file_name VARCHAR2(100) NOT NULL,
