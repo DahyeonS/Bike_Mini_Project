@@ -9,5 +9,7 @@
 <body>
 <%@include file="../home/topmenu.jsp" %>
 
+<h1>테스트 링크 페이지 입니다.</h1>
+
 </body>
 </html>
