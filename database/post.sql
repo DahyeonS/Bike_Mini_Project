@@ -1,8 +1,8 @@
 -- 테이블 생성
 CREATE TABLE post (
-    id VARCHAR2(10) REFERENCES member(id) ON DELETE CASCADE NOT NULL UNIQUE,
+    id VARCHAR2(10) REFERENCES member(id) ON DELETE CASCADE NOT NULL,
     num NUMBER PRIMARY KEY NOT NULL,
-    nickname VARCHAR2(10) REFERENCES member(nickname) NOT NULL UNIQUE,
+    nickname VARCHAR2(10) REFERENCES member(nickname) NOT NULL,
     title VARCHAR2(50) NOT NULL,
     context VARCHAR2(4000) NOT NULL,
     category VARCHAR2(10) CHECK (category IN ('일반', '질문', '답변')) NOT NULL,
