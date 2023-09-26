@@ -35,7 +35,7 @@ function getQnaBoard() {
                 const {num, title, nickname, visitCount, postdate} = item;
                 tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
                 + title + '</a></td><td>' + nickname + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
-                if (grade !== 'GENERAL') tr += '<td id="delete"><a href="deleteBoard.do?num=' + num + '" onclick="deleteBoard();">삭제</td></tr>';
+                if (grade !== 'GENERAL') tr += '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
 	            else tr += '</tr>';
             }
             $('#tbody').html(tr);
@@ -130,6 +130,24 @@ function getQnaBoardNickname(param) {
     });
 };
 
+function deleteBoardAdmin(param) {
+    $.ajax({
+        type: 'POST',
+        url: 'qnaDeleteBoard.json',
+        dataType: 'json',
+        data: param,
+        success: function(data) {
+        	console.log(data);
+            if(data['rs'] === 1) {
+                alert('게시글이 삭제되었습니다.');
+                location.href = 'qnaBoardList.do';
+            } else alert('죄송합니다. 다시 시도해주세요.');
+        }, error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+};
+
 function loginCheck() {
 	if (<%=session.getAttribute("id")%> === null) {
 		alert('회원만 볼 수 있는 게시글입니다.')
@@ -137,9 +155,12 @@ function loginCheck() {
 	}
 };
 
-function deleteBoard() {
-	const input = confirm('해당 게시물을 삭제합니까?');
-	if (!(input)) location.replace('qnaBoardList.do');
+function deleteBoard(num) {
+	const input = confirm('해당 게시글을 삭제합니까?');
+	if (input) {
+		const param = {num};
+		deleteBoardAdmin(param);
+	} else return;
 };
 
 $(function() {

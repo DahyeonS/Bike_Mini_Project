@@ -53,5 +53,6 @@ $(function() {
 <form>
 <input type="button" value="답변하기">
 </form>
+<a href="qnaBoardList.do">목록보기</a>
 </body>
 </html>

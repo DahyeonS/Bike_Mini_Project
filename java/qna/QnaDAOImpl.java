@@ -148,4 +148,24 @@ public class QnaDAOImpl implements QnaDAO {
 		} JDBCUtil.close(rs, pstmt, conn);
 		return dto;
 	}
+
+	@Override
+	public int deleteBoard(QnaDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "DELETE FROM post WHERE num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
 }

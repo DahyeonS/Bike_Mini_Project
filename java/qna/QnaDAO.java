@@ -9,4 +9,6 @@ public interface QnaDAO {
 	List<QnaDTO> getBoardListTitle(QnaDTO dto);
 	List<QnaDTO> getBoardListContext(QnaDTO dto);
 	List<QnaDTO> getBoardListNickname(QnaDTO dto);
+	
+	int deleteBoard(QnaDTO dto);
 }
