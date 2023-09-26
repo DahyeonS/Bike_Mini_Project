@@ -1,4 +1,4 @@
-package member;
+package jmsboard;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,17 +16,24 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.oreilly.servlet.MultipartRequest;
 
-@WebServlet("*.json")
-public class JsonAPI extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import board.BoardDAO;
+import board.BoardDAOimpl;
+import board.BoardDTO;
+import member.MemberDTO;
+import member.MemberService;
+import member.MemberServiceImpl;
+
+
+public class JmsApi {
 	MemberService service = new MemberServiceImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet");
 		process(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doPost");
 		// 한글 처리
 		request.setCharacterEncoding("UTF-8");
@@ -204,8 +212,7 @@ public class JsonAPI extends HttpServlet {
 				response.getWriter().write(jsonObject.toString());
 			}
 		}else if(action.equals("/serch.json")) {
-			ServletContext application = getServletContext();
-			BoardDAO dao = new BoardDAO();
+			BoardDAO dao = new BoardDAOimpl();
 			Map<String, Object> param = new HashMap<String, Object>();
 			String serchField = request.getParameter("serchField");
 			String serchWord = request.getParameter("serchWord");
@@ -214,8 +221,8 @@ public class JsonAPI extends HttpServlet {
 				param.put("serchWord", serchWord);
 			}
 			int totalCount = dao.selectCount(param);
-			int pageSize=Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
-			int blockPage=Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
+			int pageSize=10;
+			int blockPage=5;
 			int totalPage=(int)Math.ceil((double)totalCount/pageSize);
 			
 			int pageNum=1;
@@ -249,7 +256,8 @@ public class JsonAPI extends HttpServlet {
 			String context = request.getParameter("wContext");
 			String category=request.getParameter("cateHidden");
 			BoardDTO dto=new BoardDTO();
-			BoardDAO dao =new BoardDAO();
+			BoardDAO dao =new BoardDAOimpl();
+			
 			dto.setId(id);
 			dto.setTitle(title);
 			dto.setContext(context);

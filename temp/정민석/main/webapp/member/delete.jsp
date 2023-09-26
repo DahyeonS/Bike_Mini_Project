@@ -19,7 +19,7 @@
 <script src="./script/delete.js"></script>
 </head>
 <body>
-<%@include file="loginmenu.jsp" %>
+<%@include file="../home/topmenu.jsp" %>
 <h2>회원탈퇴</h2>
 <hr>
 <form action="deleteProc" method="post">

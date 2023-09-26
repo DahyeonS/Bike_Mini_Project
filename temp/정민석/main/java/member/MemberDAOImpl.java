@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import control.JDBCUtil;
+
 public class MemberDAOImpl implements MemberDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;

@@ -21,7 +21,7 @@
 <script src="./script/memberlist.js"></script>
 </head>
 <body>
-<%@include file="loginmenu.jsp" %>
+<%@include file="../home/topmenu.jsp" %>
 <h2>회원목록</h2>
 <hr>
 <a href="updateAdmin.do" id="manage">회원관리</a>

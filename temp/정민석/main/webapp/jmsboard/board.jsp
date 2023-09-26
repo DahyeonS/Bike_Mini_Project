@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="./css/board_css.css">
+ <link rel="stylesheet" type="text/css" href="../css/board_css.css">
  <!-- <link rel="stylesheet" type="text/css" href="../css/reset.css"> -->
 <title>board</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -112,7 +112,7 @@ function serch(serchWord,serchField) {
 	
 </script>
 </head>
-<%@include file="loginmenu.jsp" %>
+<%@include file="../home/topmenu.jsp" %>
 <body>
 	<h1>OO 게시판</h1>
 	<form action="write">

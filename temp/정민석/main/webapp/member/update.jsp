@@ -19,7 +19,7 @@
 <%@include file="./script/updateScript.jsp"%>
 </head>
 <body>
-<%@include file="loginmenu.jsp"%>
+<%@include file="../home/topmenu.jsp" %>
 <h2>회원정보 수정</h2>
 <hr>
 <form action="updateProc" method="post">
