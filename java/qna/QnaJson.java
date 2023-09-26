@@ -22,6 +22,17 @@ public class QnaJson {
 			String gson = new Gson().toJson(list);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
+		} else if (action.equals("/qBoardListTitle.json")) {
+			String title = request.getParameter("title");
+			
+			QnaDTO dto = new QnaDTO();
+			dto.setTitle(title);
+			
+			List<QnaDTO> list = dao.getBoardListTitle(dto);
+			
+			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
 		}
 	}
 }
