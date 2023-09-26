@@ -1,4 +1,4 @@
-package member;
+package board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class BoardDAO {
+import control.JDBCUtil;
+
+public class BoardDAOimpl implements BoardDAO{
 	
 	
 	public int selectCount(Map<String, Object> map) {
@@ -79,8 +81,8 @@ public class BoardDAO {
 		Connection conn=JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="insert into post(";
-		sql+="num,title,context,id,nickname,category)";
-		sql+="values ( post_idx.nextval,?,?,?,?,?)";
+		sql+="num,title,context,id,nickname,category,file_id,file_name)";
+		sql+="values ( post_idx.nextval,?,?,?,?,?,file_idx.nextval,?)";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
@@ -88,6 +90,7 @@ public class BoardDAO {
 			pstmt.setString(3, dto.getId());
 			pstmt.setString(4, dto.getNickname());
 			pstmt.setString(5, dto.getCategory());
+			pstmt.setString(6, dto.getFileName());
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,6 +120,8 @@ public class BoardDAO {
 				dto.setId(rs.getString("id"));
 				dto.setVisitCount(rs.getInt("visit_count"));
 				dto.setNickname(rs.getString("nickname"));
+				dto.setFileName(rs.getString("file_name"));
+				dto.setFileID(rs.getInt("file_id"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

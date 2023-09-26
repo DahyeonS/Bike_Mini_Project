@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index.jsp</title>
-<style>
-    #home {text-align: center;}
-</style>
+<title>Insert title here</title>
 </head>
 <body>
-<%@include file="loginmenu.jsp" %>
-<h2 id="home">Home</h2>
+<%@include file="../home/topmenu.jsp" %>
+
+<h1>테스트 링크 페이지 입니다.</h1>
+
 </body>
 </html>

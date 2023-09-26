@@ -10,7 +10,7 @@ function loginJson() {
         success: function(data) {
             if (data['rs'] === 1) {
                 alert('환영합니다!');
-                location.href = 'index.jsp';
+                location.href = 'index.do';
             }
             else alert('아이디나 비밀번호가 다릅니다');
         }, error: function(xhr, status, error) {

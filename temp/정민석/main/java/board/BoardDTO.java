@@ -1,16 +1,14 @@
-package member;
+package board;
 
 public class BoardDTO {
 	int num, fileID, visitCount;
-	String id, nickname, title, context ,category, fileName, postdate;
+	String id, nickname, title, context, category, fileName, postdate;
 	
 	public BoardDTO() {
 	}
 	
-
-
-	public BoardDTO(int num, int fileID, int visitCount, String id, String nickname, String title, String context,
-			String category, String fileName, String postdate) {
+	public BoardDTO(int num, int fileID, int visitCount, String id, String nickname, String title,
+			String context, String category, String fileName, String postdate) {
 		super();
 		this.num = num;
 		this.fileID = fileID;
@@ -24,129 +22,85 @@ public class BoardDTO {
 		this.postdate = postdate;
 	}
 
-
-
-
-
 	public int getNum() {
 		return num;
 	}
-
-
 
 	public void setNum(int num) {
 		this.num = num;
 	}
 
-
-
 	public int getFileID() {
 		return fileID;
 	}
-
-
 
 	public void setFileID(int fileID) {
 		this.fileID = fileID;
 	}
 
-
-
 	public int getVisitCount() {
 		return visitCount;
 	}
-
-
 
 	public void setVisitCount(int visitCount) {
 		this.visitCount = visitCount;
 	}
 
-
-
 	public String getId() {
 		return id;
 	}
-
-
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-
-
 	public String getNickname() {
 		return nickname;
 	}
-
-
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
-
-
 	public String getTitle() {
 		return title;
 	}
-
-
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-
-
 	public String getContext() {
 		return context;
 	}
-
-
 
 	public void setContext(String context) {
 		this.context = context;
 	}
 
-
-
 	public String getCategory() {
 		return category;
 	}
-
-
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
-
-
 	public String getFileName() {
 		return fileName;
 	}
-
-
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
 
-
-
 	public String getPostdate() {
 		return postdate;
 	}
 
-
-
 	public void setPostdate(String postdate) {
 		this.postdate = postdate;
 	}
-
-
 
 	@Override
 	public String toString() {
