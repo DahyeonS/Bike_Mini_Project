@@ -33,6 +33,18 @@ public class QnaDTO {
 		this.postdate = postdate;
 	}
 
+	public QnaDTO(int num, int fileID, int visitCount, String nickname, String title,
+			String context, String fileName, String postdate) {
+		this.num = num;
+		this.nickname = nickname;
+		this.title = title;
+		this.context = context;
+		this.fileID = fileID;
+		this.fileName = fileName;
+		this.postdate = postdate;
+		this.visitCount = visitCount;
+	}
+	
 	public int getNum() {
 		return num;
 	}

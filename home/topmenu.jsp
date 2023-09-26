@@ -84,7 +84,7 @@ $(document).ready(function() {
         서다현(Q&A)
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="qBoardList.do">목록보기</a></li>
+            <li> <a href="qnaBoardList.do">목록보기</a></li>
             <li> <a href="">글쓰기</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>

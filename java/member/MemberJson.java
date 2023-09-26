@@ -55,7 +55,7 @@ public class MemberJson {
 		} else if (action.equals("/nicknameCheck.json")) {
 			String nickname = request.getParameter("nickname");
 			
-			MemberDTO dto = new member.MemberDTO();
+			MemberDTO dto = new MemberDTO();
 			dto.setNickname(nickname);
 			dto = dao.getMemberNickname(dto);
 			
@@ -166,7 +166,6 @@ public class MemberJson {
 			jsonObject.addProperty("rs", rs);
 			
 			response.getWriter().write(jsonObject.toString());
-
 		}
 	}
 }

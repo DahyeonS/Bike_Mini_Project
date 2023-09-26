@@ -29,13 +29,51 @@ public class DispatcherController extends HttpServlet {
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberController memberControl = new MemberController();
-		memberControl.memberProcess(request, response);
+		String uri = request.getRequestURI();
+		System.out.println(uri);
 		
-		BoardController boardControl = new BoardController();
-		boardControl.boardProcess(request, response);
+		String action = uri.substring(uri.lastIndexOf("/"));
 		
-		QnaController qnaControl = new QnaController();
-		qnaControl.qnaProcess(request, response);
+		if (uri.split("/", 4)[2].equals("home")) {
+			if (action.equals("/index.do")) {
+				response.sendRedirect("../index.jsp");
+			}
+			MemberController memberControl = new MemberController();
+			memberControl.memberProcess(request, response);
+			
+			QnaController qnaControl = new QnaController();
+			qnaControl.qnaProcess(request, response);
+		} else if (uri.split("/", 4)[2].equals("jmsboard")) {
+			MemberController memberControl = new MemberController();
+			memberControl.memberProcess(request, response);
+			
+			QnaController qnaControl = new QnaController();
+			qnaControl.qnaProcess(request, response);
+			//JmsController jc = new JmsController();
+			//jc.process(request, response);
+		} else if (uri.split("/", 4)[2].equals("member")) {
+			MemberController memberControl = new MemberController();
+			memberControl.memberProcess(request, response);
+			
+			QnaController qnaControl = new QnaController();
+			qnaControl.qnaProcess(request, response);
+		} else if (uri.split("/", 4)[2].equals("qna")) {
+			QnaController qnaControl = new QnaController();
+			qnaControl.qnaProcess(request, response);
+			
+			MemberController memberControl = new MemberController();
+			memberControl.memberProcess(request, response);
+		} else if (uri.split("/", 4)[2].equals("board")) {
+			BoardController boardControl = new BoardController();
+			boardControl.boardProcess(request, response);
+			
+			MemberController memberControl = new MemberController();
+			memberControl.memberProcess(request, response);
+			
+			QnaController qnaControl = new QnaController();
+			qnaControl.qnaProcess(request, response);
+		} else {
+			if (action.equals("/index.do")) response.sendRedirect("./home/index.jsp");
+		}
 	}
 }
