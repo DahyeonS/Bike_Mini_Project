@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>질문 게시판</title>
+<title>Q&A 게시판</title>
 <style>
 	form, h2 {text-align: center;}
 	table, th, td, input, select {
@@ -39,27 +39,56 @@ function getQBoard() {
     });
 };
 
+function getQBoardTitle(param) {
+    $.ajax({
+        type: 'POST',
+        url: 'qBoardListTitle.json',
+        dataType: 'json',
+        success: function(data) {
+            let tr = '';
+            for (item of data) {
+                const {num, title, nickname, visitCount, postdate} = item;
+                tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="boardView.do">' + title + '</a></td><td>' + nickname
+                + '</td><td>' + visitCount + '</td><td>' + postdate + '</td></tr>';
+                
+            }
+            $('#tbody').html(tr);
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+};
+
 $(function() {
 	getQBoard();
+	$('#search').click(function() {
+		const context = $('#context').val();
+		if (context === '') alert('검색어를 입력해주세요.');
+		else if ($('#select').val() === 'title') {
+			const param = {title : context};
+			getQBoardTitle(param);
+		}
+	});
 });
 </script>
 <%-- <script src="./script/memberlist.js"></script> --%>
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>
-<h2>질문 게시판</h2>
+<h2>Q&A 게시판</h2>
 <hr>
 	<form>
 		<div>
 			<div>
 				<div>
-					<select>
-						<option>제목</option>
-						<option>내용</option>
-						<option>작성자</option>
+					<select id="select">
+						<option value="title">제목</option>
+						<option value="context">내용</option>
+						<option value="nickname">작성자</option>
 					</select>
-					<input type="text">
-					<input type="button" value="검색하기">
+					<input type="text" id="context">
+					<input type="button" value="검색하기" id="search">
 				</div>
 			</div>
 			<table border="1">
@@ -76,7 +105,7 @@ $(function() {
 				</tbody>
 			</table>
 		</div>
-	<div><input type="button" value="글쓰기"></div>
+	<div><input type="button" value="글쓰기" id="write"></div>
 	</form>
 </body>
 </html>

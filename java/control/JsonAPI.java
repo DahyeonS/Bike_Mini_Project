@@ -13,18 +13,18 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import board.BoardDAO;
+import board.BoardDAOImpl;
 import board.BoardDTO;
-import board.BoardService;
-import board.BoardServiceImpl;
+import member.MemberDAO;
+import member.MemberDAOImpl;
 import member.MemberDTO;
-import member.MemberService;
-import member.MemberServiceImpl;
 
 @WebServlet("*.json")
 public class JsonAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	MemberService mService = new MemberServiceImpl();
-	BoardService bService = new BoardServiceImpl();
+	MemberDAO mDao = new MemberDAOImpl();
+	BoardDAO bDao = new BoardDAOImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet");
@@ -48,7 +48,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			dto = mService.getMember(dto);
+			dto = mDao.getMember(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			
@@ -68,7 +68,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			dto = mService.getMember(dto);
+			dto = mDao.getMember(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			if(dto != null) jsonObject.addProperty("rs", 1);
@@ -80,7 +80,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new member.MemberDTO();
 			dto.setNickname(nickname);
-			dto = mService.getMemberNickname(dto);
+			dto = mDao.getMemberNickname(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			if(dto != null) jsonObject.addProperty("rs", 1);
@@ -94,7 +94,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO(id, pw, nickname);
 			
-			int rs = mService.insert(dto);
+			int rs = mDao.insert(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);
@@ -104,7 +104,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			dto = mService.getMember(dto);
+			dto = mDao.getMember(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("pw", dto.getPw());
@@ -116,7 +116,7 @@ public class JsonAPI extends HttpServlet {
 			String nickname = request.getParameter("nickname");
 			
 			MemberDTO dto = new MemberDTO(id, pw, nickname);
-			int rs = mService.update(dto);
+			int rs = mDao.update(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			if (rs == 1) {
@@ -133,12 +133,12 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			dto = mService.getMember(dto);
+			dto = mDao.getMember(dto);
 			int rs = 0;
 			
 			if (pw.equals(dto.getPw())) {
 				session.invalidate();
-				rs = mService.delete(dto);
+				rs = mDao.delete(dto);
 			}
 			
 			JsonObject jsonObject = new JsonObject();
@@ -146,7 +146,7 @@ public class JsonAPI extends HttpServlet {
 			
 			response.getWriter().write(jsonObject.toString());
 		} else if (action.equals("/memberList.json")) {
-			List<MemberDTO> list = mService.getMemberList();
+			List<MemberDTO> list = mDao.getMemberList();
 			
 			String gson = new Gson().toJson(list);
 			response.setContentType("text/html; charset=UTF-8");
@@ -157,7 +157,7 @@ public class JsonAPI extends HttpServlet {
 			MemberDTO dto = new MemberDTO();
 			dto.setId(context);
 			dto.setNickname(context);
-			dto = mService.memberSearch(dto);
+			dto = mDao.memberSearch(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("id", dto.getId());
@@ -172,7 +172,7 @@ public class JsonAPI extends HttpServlet {
 			String grade = request.getParameter("grade");
 			
 			MemberDTO dto = new MemberDTO(id, null, nickname, grade);
-			int rs = mService.updateAdmin(dto);
+			int rs = mDao.updateAdmin(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);
@@ -183,7 +183,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			int rs = mService.delete(dto);
+			int rs = mDao.delete(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);
@@ -192,7 +192,7 @@ public class JsonAPI extends HttpServlet {
 
 //			게시판
 		} else if (action.equals("/qBoardList.json")) {
-			List<BoardDTO> list = bService.getBoardList();
+			List<BoardDTO> list = bDao.getBoardList();
 			
 			String gson = new Gson().toJson(list);
 			response.setContentType("text/html; charset=UTF-8");
@@ -202,7 +202,7 @@ public class JsonAPI extends HttpServlet {
 			
 			MemberDTO dto = new MemberDTO();
 			dto.setId(id);
-			dto = mService.getMember(dto);
+			dto = mDao.getMember(dto);
 			
 			JsonObject jsonObject = new JsonObject();
 			

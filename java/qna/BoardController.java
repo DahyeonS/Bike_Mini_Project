@@ -1,4 +1,4 @@
-package board;
+package qna;
 
 import java.io.IOException;
 
@@ -14,7 +14,8 @@ public class BoardController {
 		String action = uri.substring(uri.lastIndexOf("/"));
 		System.out.println(uri.split("/",4)[2]);
 		if (uri.split("/",4)[2].lastIndexOf(".") == -1) {
-			if (action.equals("/board.do")) response.sendRedirect("../board/board.jsp");
+			if (action.equals("/qBoardList.do")) response.sendRedirect("../board/qBoardList.jsp");
+			if (action.equals("/boardView.do")) response.sendRedirect("../board/boardView.jsp");
 		}
 	}
 }
