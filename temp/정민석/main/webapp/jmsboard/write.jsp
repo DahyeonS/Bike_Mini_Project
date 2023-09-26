@@ -47,16 +47,16 @@
         <form name="writeFrm" method="post" enctype="multipart/form-data"
         action="upload.do">
             <div class="main">
-                <table border="1">
-                    <tbody>
-        				<tr>
-               <td class="w_name">제목</td>
-               <td><input type="text" name="wTitle"></td>
-            </tr>
-            <tr>
-               <td class="w_name">내용</td>
-               <td><input type="text" name="wContext" ></td>
-            </tr>
+               <table border="1">
+                <tbody>
+        		<tr>
+              	 <td class="w_name">제목</td>
+              	 <td><input type="text" name="wTitle" id="wTitle"></td>
+            	</tr>
+           		<tr>
+              	 <td class="w_name">내용</td>
+              	 <td><input type="text" name="wContext" id="wContext"></td>
+            	</tr>
             <tr><td colspan="2" class="upload"><input type="file" value="파일 업로드" name="fileUp"></td></tr>
             <tr>
                <td colspan="2" class="w_btn">

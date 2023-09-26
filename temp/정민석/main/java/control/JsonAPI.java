@@ -32,6 +32,7 @@ public class JsonAPI extends HttpServlet {
 		System.out.println("doPost");
 		// 한글 처리
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		process(request, response);
 	}
 	

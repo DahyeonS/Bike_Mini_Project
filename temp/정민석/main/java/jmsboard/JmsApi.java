@@ -37,6 +37,7 @@ public class JmsApi {
 		System.out.println("doPost");
 		// 한글 처리
 		request.setCharacterEncoding("UTF-8");
+		
 		process(request, response);
 	}
 	
@@ -231,9 +232,7 @@ public class JmsApi {
 				pageNum=Integer.parseInt(pageTemp);
 			}
 			int start = (pageNum -1)*pageSize +1;
-			System.out.println(start);
 			int end=pageNum*pageSize;
-			System.out.println(end);
 			param.put("start",start);
 			param.put("end",end);
 			List<BoardDTO> boardLists = dao.selectListPage(param);
@@ -244,7 +243,6 @@ public class JmsApi {
 			map.put("pageNum", pageNum);
 			map.put("totalPage", totalPage);
 			map.put("blockPage", blockPage);
-			map.put("uri", uri);
 			String gson = new Gson().toJson(map);
 			response.getWriter().write(gson);
 		}else if (action.equals("/write.json")) {
@@ -271,12 +269,27 @@ public class JmsApi {
 			String gson = new Gson().toJson(map);
 			response.getWriter().write(gson);
 		}else if (action.equals("/page.json")) {
+			BoardDAO dao = new BoardDAOimpl();
+			Map<String, Object> param = new HashMap<String, Object>();
 			String pagingStr="";
-			int totalCount=Integer.parseInt(request.getParameter("totalCount"));
-			int pageNum=Integer.parseInt(request.getParameter("pageNum"));
-			int blockPage=Integer.parseInt(request.getParameter("blockPage"));
-			int pageSize=Integer.parseInt(request.getParameter("pageSize"));
-			String reqUrl=request.getParameter("uri");
+			String reqUrl="board.jsp";
+			String serchField = request.getParameter("serchField");
+			String serchWord = request.getParameter("serchWord");
+			if(serchWord!=null){
+				param.put("serchField", serchField);
+				param.put("serchWord", serchWord);
+			}
+			int totalCount = dao.selectCount(param);
+			int pageSize=10;
+			int blockPage=5;
+			int totalPage=(int)Math.ceil((double)totalCount/pageSize);
+			
+			int pageNum=1;
+			String pageNumTemp=request.getParameter("pageNum");
+			System.out.println(pageNumTemp);
+			if(pageNumTemp!=null && !pageNumTemp.equals("")){
+				pageNum=Integer.parseInt(pageNumTemp);
+			}
 			int totalPages=(int)(Math.ceil((double)totalCount/pageSize));
 			
 			int pageTemp=(((pageNum-1)/blockPage)*blockPage)+1;

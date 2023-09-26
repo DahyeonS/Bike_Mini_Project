@@ -9,14 +9,18 @@
 <title>board</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- 이건 write 작성할때 로그인 되어있는지 확인 -->
-
+<%
+	String pageNum=request.getParameter("pageNum");
+%>
 <script>
 
 function serch(serchWord,serchField) {
+	const pageNum=<%=pageNum%>;
+	console.log(pageNum);
     $.ajax({
         type: 'POST',
         url: 'serch.json',
-        data:{serchWord:serchWord,serchField:serchField},
+        data:{serchWord:serchWord,serchField:serchField,pageNum:pageNum},
         dataType: 'json',
         success: function(data) {
         	console.log(data);
@@ -26,7 +30,6 @@ function serch(serchWord,serchField) {
         	let totalCount=data['totalCount'];
         	let totalPage=data['totalPage'];
         	let blockPage=data['blockPage'];
-        	let uri=data['uri'];
         	let td="목록 보기(List) - 현재 페이지 : "+pageNum+" (전체 : "+totalPage+")";
         	$('#h2').html(td);
         	let tr="";
@@ -47,7 +50,6 @@ function serch(serchWord,serchField) {
         	 		
          	}
 	       $('#boardLists').html(tr);
-        	page(totalCount,pageSize,blockPage,pageNum,uri);
 		},
         	error: function(xhr, status, error) {
             	console.log(xhr, status, error);
@@ -75,20 +77,20 @@ function serch(serchWord,serchField) {
 	        }
 		});
 	};
-	function page(totalCount, pageSize, blockPage, pageNum,uri) {
-		const param={totalCount:totalCount,pageSize:pageSize,blockPage:blockPage
-				,pageNum:pageNum,uri:uri};
+	function page(serchWord,serchField) {
+		const pageNum=<%=pageNum%>;
+		const param={serchWord:serchWord,serchField:serchField,pageNum:pageNum};
 		$.ajax({
 		      type: 'POST',
 		      url: 'page.json',
 		      dataType: 'json',
 		      data: param,
 		      success: function(data) {
+		      		console.log(data['pagingStr']);
 		      		let tr="";
 		      		if(data['pagingStr']===""){
 		      			tr="";
 		      		}else{		      			
-		      		    console.log(data['pagingStr']);
 		      			tr+=data['pagingStr'];
 		      		}
 		      		$('#bp').html(tr);
@@ -99,11 +101,13 @@ function serch(serchWord,serchField) {
 		};
 	$(function() {
 		serch();
+		page();
 		$('#serch').on("click",function() {		
 		const serchWord=$('#serchWord').val();
 		const serchField =$('#serchField').val();
 		console.log(serchField);
 		serch(serchWord,serchField);
+		page(serchWord,serchField);
 		});
 		$('#b_writeBtn').click(function() {
 			writeBtn();
