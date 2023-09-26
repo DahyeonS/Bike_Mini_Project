@@ -25,19 +25,7 @@ import member.MemberDTO;
 
 public class JmsController {
 
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet");
-		process(request, response);
-	}
-	
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost");
-//		한글 처리
-		request.setCharacterEncoding("UTF-8");
-		process(request, response);
-	}
-
+     
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
