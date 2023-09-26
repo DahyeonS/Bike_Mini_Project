@@ -18,13 +18,33 @@
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
 <script>
+function deleteProcess() {
+	const num=<%=num%>
+	$.ajax({
+        type: 'POST',
+        url: 'DeleteProcess.do',
+        dataType: 'json',
+        data: {num:num},
+        success: function(data) {
+        	if(data['idCorrect']===0){
+        		alert("본인만 삭제할 수 있습니다.");
+        		location.href="board.jsp";
+        	}else if(data['delResult']===0){
+        		alert("삭제에 실패했습니다");
+        		location.href="board.jsp";
+        	}else{
+        		alert("삭제되었습니다");
+        		location.href="board.jsp";
+        	}
+        }, error: function(xhr, status, error) {
+        	console.log(xhr, status, error);
+        }
+	});
+};
 function deletePost(){
 	const confirmed=confirm("정말로 삭제하겠습니까?");
 	if(confirmed){
-		const form=document.writeFrm;
-		form.method="post";
-		form.action="DeleteProcess.do";
-		form.submit();
+		deleteProcess();
 	}
 }
 
@@ -70,7 +90,7 @@ function deletePost(){
 		</tr>
 		<tr>
 				<%
-					if(session.getAttribute("id")!=null && session.getAttribute("id").toString().equals(dto.getId())){
+					if(session.getAttribute("id")!=null){
 				%>
 			<td colspan="4" align="center">
 					<button type="button" onclick="location.href='Edit.jsp?num=<%=dto.getNum()%>';">
@@ -83,8 +103,17 @@ function deletePost(){
 						목록보기
 					</button>
 			</td>
-					<%}%>
+					<%}else{%>
+					<td colspan="4" align="center"><button type="button" onclick="location.href='board.do';">
+						목록보기
+					</button></td>
+					<%} %>
 		</tr>
+		            <tr>
+		        
+            <td> <input type="button" value="&lt;" id="prevBtn"></td>
+               	<td><input type="button" value="&gt;" id="nextBtn"></td>
+           </tr	> 
 	</table>
 </form>
 </body>

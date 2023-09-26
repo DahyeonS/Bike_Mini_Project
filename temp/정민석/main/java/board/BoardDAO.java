@@ -11,5 +11,5 @@ public interface BoardDAO {
 	public void updateVisitCount(String num);
 	public int updateEdit(BoardDTO dto);
 	public int deletePost(BoardDTO dto);
-	public BoardDTO getNum();
+
 }

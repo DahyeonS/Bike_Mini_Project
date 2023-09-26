@@ -245,29 +245,6 @@ public class JmsApi {
 			map.put("blockPage", blockPage);
 			String gson = new Gson().toJson(map);
 			response.getWriter().write(gson);
-		}else if (action.equals("/write.json")) {
-			HttpSession session = request.getSession();
-			Map<String, Object> map=new HashMap<String, Object>();
-			String id=(String) session.getAttribute("id");
-			String nickname=(String) session.getAttribute("nickname");
-			String title=request.getParameter("wTitle");
-			String context = request.getParameter("wContext");
-			String category=request.getParameter("cateHidden");
-			BoardDTO dto=new BoardDTO();
-			BoardDAO dao =new BoardDAOimpl();
-			
-			dto.setId(id);
-			dto.setTitle(title);
-			dto.setContext(context);
-			dto.setNickname(nickname);
-			dto.setCategory(category);
-			int iResult=dao.insertWrite(dto);
-			dto=dao.getNum();
-			int num=dto.getNum();
-			map.put("rs", iResult);
-			map.put("num", num);
-			String gson = new Gson().toJson(map);
-			response.getWriter().write(gson);
 		}else if (action.equals("/page.json")) {
 			BoardDAO dao = new BoardDAOimpl();
 			Map<String, Object> param = new HashMap<String, Object>();

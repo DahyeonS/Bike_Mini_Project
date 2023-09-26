@@ -66,10 +66,7 @@
                                <input type="button" value="목록 보기" id="listBtn">
                </td>
             </tr>
-            <tr>
-            	<td> <input type="button" value="&lt;" id="prevBtn"></td>
-               	<td><input type="button" value="&gt;" id="nextBtn"></td>
-           </tr>                
+               
                     </tbody>
                 </table>
             </div>

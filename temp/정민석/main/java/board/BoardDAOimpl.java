@@ -183,22 +183,5 @@ public class BoardDAOimpl implements BoardDAO{
 		}
 		return result;
 	}
-	public BoardDTO getNum() {
-		BoardDTO dto=new BoardDTO();
-		Connection conn=JDBCUtil.getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql="select max(num) from post";
-		try {
-			pstmt=conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			rs.next();
-			dto.setNum(rs.getInt("max(num)"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			JDBCUtil.close(pstmt, conn);
-		}
-		return dto;
-	}
+	
 }

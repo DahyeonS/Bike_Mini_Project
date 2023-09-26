@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 
 import board.BoardDAO;
@@ -37,17 +39,42 @@ public class JmsController {
 	}
 
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
 		
 //		로그인
 		
-		if (action.equals("/write.do")) response.sendRedirect("write.jsp");
+		if (action.equals("/write.do")) {
+			HttpSession session = request.getSession();
+			if(session.getAttribute("id")==null) {
+				response.sendRedirect("../member/login.jsp");
+			}else {
+				response.sendRedirect("write.jsp");
+			}
+		}
 //		게시판
 		else if (action.equals("/board.do")) response.sendRedirect("board.jsp");
 		else if (action.equals("/DeleteProcess.do")) {
-			response.sendRedirect("DeleteProcess.jsp");
+			HttpSession session = request.getSession();
+			String sNum=request.getParameter("num");
+			int num=Integer.parseInt(sNum);
+			BoardDTO dto=new BoardDTO();
+			
+			BoardDAO dao =new BoardDAOimpl();
+			dto=dao.selectView(sNum);
+			String sessionId=session.getAttribute("id").toString();
+			int idCorrect=0;
+			int delResult=0;
+			if(sessionId.equals(dto.getId())){
+				dto.setNum(num);
+				delResult=dao.deletePost(dto);
+				idCorrect=1;
+			}
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("delResult",delResult);
+			map.put("idCorrect",idCorrect);
+			String gson = new Gson().toJson(map);
+			response.getWriter().write(gson);
 		}else if (action.equals("/upload.do")) {
 			//webapp에 uploads 폴더생성 그안에 업로드폴더라는 빈파일 생성
 			String saveDirectory=request.getServletContext().getRealPath("/uploads");
@@ -60,7 +87,6 @@ public class JmsController {
 			}
 			HttpSession session = request.getSession();
 			String id=(String)session.getAttribute("id");
-			System.out.println(id);
 			MemberDTO dto=new MemberDTO();
 			MemberDAO dao=new MemberDAOImpl();
 			dto.setId(id);
@@ -94,6 +120,22 @@ public class JmsController {
 				response.sendRedirect("write.do");
 			}
 			
+		}else if (action.equals("/EditProcess.do")) {
+			String title=request.getParameter("title");
+			String context=request.getParameter("context");
+			String sNum=request.getParameter("num");
+			System.out.println(sNum);
+			int num=Integer.parseInt(sNum);
+			BoardDTO dto=new BoardDTO();
+			BoardDAO dao =new BoardDAOimpl();
+			dto.setNum(num);
+			dto.setTitle(title);
+			dto.setContext(context);
+			int rs=dao.updateEdit(dto);
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("rs",rs);
+			String gson = new Gson().toJson(map);
+			response.getWriter().write(gson);
 		}
 	}
 
