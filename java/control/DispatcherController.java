@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.BoardController;
 import member.MemberController;
+import qna.QnaController;
 
 @WebServlet("*.do")
 public class DispatcherController extends HttpServlet {
@@ -33,5 +34,8 @@ public class DispatcherController extends HttpServlet {
 		
 		BoardController boardControl = new BoardController();
 		boardControl.boardProcess(request, response);
+		
+		QnaController qnaControl = new QnaController();
+		qnaControl.qnaProcess(request, response);
 	}
 }

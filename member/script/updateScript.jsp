@@ -52,6 +52,7 @@
 	                	$('#nicksuccess').hide();
 	                	$('#nickfail').hide();
 	                	$('#nickequal').show();
+	                	$('#submit').removeAttr("disabled");
 	            	} else {
 		                $('#nicksuccess').hide();
 		                $('#nickequal').hide();
