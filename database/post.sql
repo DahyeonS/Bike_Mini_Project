@@ -36,6 +36,7 @@ BEGIN
     SET nickname = :NEW.nickname
     WHERE nickname = :OLD.nickname;
 END;
+/
 
 -- 확인
 SELECT * FROM post;
