@@ -14,4 +14,5 @@ public interface QnaDAO {
 	int visitCnt(QnaDTO dto);
 	int deleteBoard(QnaDTO dto);
 	int writeQuestion(QnaDTO dto);
+	int writeAnswer(QnaDTO dto);
 }

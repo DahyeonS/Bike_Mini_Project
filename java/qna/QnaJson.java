@@ -113,6 +113,11 @@ public class QnaJson {
 			if (num == 0) {
 				rs = dao.writeQuestion(dto);
 				if (rs == 1) rs = dao.getPostNum(dto);
+			} else {
+				rs = dao.writeAnswer(dto);
+				if (rs == 1) {
+					rs = dao.getPostNum(dto);
+				}
 			}
 			
 			JsonObject jsonObject = new JsonObject();

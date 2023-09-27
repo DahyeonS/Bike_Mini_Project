@@ -209,6 +209,28 @@ public class QnaDAOImpl implements QnaDAO {
 		return rs;
 	}
 	
+//	여기서부터 수정
+	@Override
+	public int writeAnswer(QnaDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "INSERT INTO post (id, num, nickname, title, context, category, ) VALUES (?, post_idx.NEXTVAL, ?, ?, ?, '답변')";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(3, dto.getTitle());
+			pstmt.setString(4, dto.getContext());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} JDBCUtil.close(pstmt, conn);
+		return rs;
+	}
+	
 	@Override
 	public int deleteBoard(QnaDTO dto) {
 		int rs = 0;

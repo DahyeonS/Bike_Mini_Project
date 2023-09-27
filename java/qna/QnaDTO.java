@@ -1,18 +1,19 @@
 package qna;
 
 public class QnaDTO {
-	int num, fileID, visitCount;
+	int num, fileID, visitCount, questNum;
 	String id, nickname, title, context, category, fileName, postdate;
 	
 	public QnaDTO() {
 	}
 	
-	public QnaDTO(int num, int fileID, int visitCount, String id, String nickname, String title,
+	public QnaDTO(int num, int fileID, int visitCount, int questNum, String id, String nickname, String title,
 			String context, String category, String fileName, String postdate) {
 		super();
 		this.num = num;
 		this.fileID = fileID;
 		this.visitCount = visitCount;
+		this.questNum = questNum;
 		this.id = id;
 		this.nickname = nickname;
 		this.title = title;
@@ -52,6 +53,17 @@ public class QnaDTO {
 		this.title = title;
 		this.context = context;
 		this.fileName = fileName;
+	}
+	
+	public QnaDTO(int num, int questNum, String id, String nickname,
+			String title, String context, String fileName) {
+		this.id = id;
+		this.num = num;
+		this.nickname = nickname;
+		this.title = title;
+		this.context = context;
+		this.fileName = fileName;
+		this.questNum = questNum;
 	}
 	
 	public int getNum() {

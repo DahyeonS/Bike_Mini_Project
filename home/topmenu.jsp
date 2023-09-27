@@ -93,9 +93,6 @@ function QnaLoginCheck() {
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="../qna/qnaBoardList.do">목록보기</a></li>
             <li> <a href="../qna/qnaWrite.do" onclick="QnaLoginCheck();">질문하기</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
         </div>
     </ul>
 </div>
