@@ -187,8 +187,11 @@ public class JmsController {
 			MemberDAO ma=new MemberDAOImpl();
 			MemberDTO md=new MemberDTO();
 			md.setId(id);
-			md=ma.getMember(md);
-			String grade=md.getGrade();
+			String grade="";
+			if(id!=null) {
+				md=ma.getMember(md);
+				grade=md.getGrade();
+			}
 			BoardDAO dao=new BoardDAOimpl();
 			dao.updateVisitCount(num);
 			BoardDTO dto=dao.selectView(num);
