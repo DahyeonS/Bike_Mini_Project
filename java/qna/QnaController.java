@@ -20,6 +20,9 @@ public class QnaController {
 			else if (action.equals("/qnaBoardView.do")) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("../qna/boardView.jsp");
 				dispatcher.forward(request, response);
+			} else if (action.equals("/qnaWrite.do")) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("../qna/boardWrite.jsp");
+				dispatcher.forward(request, response);
 			}
 		}
 	}

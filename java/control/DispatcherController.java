@@ -38,49 +38,25 @@ public class DispatcherController extends HttpServlet {
 			if (action.equals("/index.do")) {
 				response.sendRedirect("../index.jsp");
 			}
-			MemberController memberControl = new MemberController();
-			memberControl.memberProcess(request, response);
-			
-			QnaController qnaControl = new QnaController();
-			qnaControl.qnaProcess(request, response);
 		} else if (uri.split("/", 4)[2].equals("jmsboard")) {
 			if (action.equals("/index.do")) {
 				response.sendRedirect("../index.jsp");
 			}
-			MemberController memberControl = new MemberController();
-			memberControl.memberProcess(request, response);
-			
-			QnaController qnaControl = new QnaController();
-			qnaControl.qnaProcess(request, response);
-			//JmsController jc = new JmsController();
-			//jc.process(request, response);
 		} else if (uri.split("/", 4)[2].equals("member")) {
 			if (action.equals("/index.do")) {
 				response.sendRedirect("../index.jsp");
 			}
 			MemberController memberControl = new MemberController();
 			memberControl.memberProcess(request, response);
-			
-			QnaController qnaControl = new QnaController();
-			qnaControl.qnaProcess(request, response);
 		} else if (uri.split("/", 4)[2].equals("qna")) {
 			if (action.equals("/index.do")) {
 				response.sendRedirect("../index.jsp");
 			}
 			QnaController qnaControl = new QnaController();
 			qnaControl.qnaProcess(request, response);
-			
-			MemberController memberControl = new MemberController();
-			memberControl.memberProcess(request, response);
 		} else if (uri.split("/", 4)[2].equals("board")) {
 			BoardController boardControl = new BoardController();
 			boardControl.boardProcess(request, response);
-			
-			MemberController memberControl = new MemberController();
-			memberControl.memberProcess(request, response);
-			
-			QnaController qnaControl = new QnaController();
-			qnaControl.qnaProcess(request, response);
 		} else {
 			if (action.equals("/index.do")) response.sendRedirect("./home/index.jsp");
 		}

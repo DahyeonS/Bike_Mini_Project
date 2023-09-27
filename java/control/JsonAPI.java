@@ -28,13 +28,18 @@ public class JsonAPI extends HttpServlet {
 	}
 	
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		MemberJson memberJson = new MemberJson();
-		memberJson.memberProcess(request, response);
+		String uri = request.getRequestURI();
+		System.out.println(uri);
 		
-		BoardJson boardJson = new BoardJson();
-		boardJson.boardProcess(request, response);
-		
-		QnaJson qnaJson = new QnaJson();
-		qnaJson.qnaProcess(request, response);
+		if (uri.split("/", 4)[2].equals("member")) {
+			MemberJson memberJson = new MemberJson();
+			memberJson.memberProcess(request, response);
+		} else if (uri.split("/", 4)[2].equals("board")) {
+			BoardJson boardJson = new BoardJson();
+			boardJson.boardProcess(request, response);
+		} else if (uri.split("/", 4)[2].equals("qna")) {
+			QnaJson qnaJson = new QnaJson();
+			qnaJson.qnaProcess(request, response);
+		}
 	}
 }

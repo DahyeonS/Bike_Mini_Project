@@ -17,6 +17,13 @@ $(document).ready(function() {
             $(this).find('.inner-menu').hide();
     });
 }); // end
+
+function QnaLoginCheck() {
+	if (<%=session.getAttribute("id")%> === null) {
+		alert('회원만 작성할 수 있습니다.')
+		$('a').attr('href', '../member/login.do');
+	}
+};
 </script>
 
 <!-- 스타일-->
@@ -56,8 +63,8 @@ $(document).ready(function() {
     </c:if>
     </div>
 	<c:if test="${id == null}">
-    <a href="join.do">회원가입</a>
-    <a href="login.do">로그인</a>
+    <a href="../member/join.do">회원가입</a>
+    <a href="../member/login.do">로그인</a>
     </c:if>
     <c:if test="${id != null}">
     <div class="outer-menu-item" style="text-align: center;">
@@ -66,14 +73,14 @@ $(document).ready(function() {
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <c:if test="${grade != 'GENERAL'}">
-            <a href="memberList.do">회원목록</a><br>
+            <a href="../member/memberList.do">회원목록</a><br>
             </c:if>
-            <a href="update.do">정보수정</a><br>
+            <a href="../member/update.do">정보수정</a><br>
             <a href="#" onclick="deleteConfirm();">회원탈퇴</a>
         </div>
 	</div>
 	&nbsp
-    <a href="logout.do" id="logout-btn">로그아웃</a>
+    <a href="../member/logout.do" id="logout-btn">로그아웃</a>
     </c:if>
 </div>
 <br>
@@ -84,8 +91,8 @@ $(document).ready(function() {
         서다현(Q&A)
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="qnaBoardList.do">목록보기</a></li>
-            <li> <a href="">글쓰기</a></li>
+            <li> <a href="../qna/qnaBoardList.do">목록보기</a></li>
+            <li> <a href="../qna/qnaWrite.do" onclick="QnaLoginCheck();">질문하기</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>

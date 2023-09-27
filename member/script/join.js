@@ -53,7 +53,7 @@ function join(params) {
         success: function(data) {
             if(data['rs'] === 1) {
                 alert('회원가입을 축하드립니다!');
-                location.href = 'login.do';
+                location.href = '../member/login.do';
             } else alert('다시 시도해주세요.');
         }, error: function(xhr, status, error) {
             console.log(xhr, status, error);

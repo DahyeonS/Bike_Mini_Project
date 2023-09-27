@@ -32,7 +32,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				QnaDTO dto = new QnaDTO(num, title, nickname, null, nickname, visitCount, postdate);
+				QnaDTO dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -59,7 +59,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				dto = new QnaDTO(num, title, nickname, null, nickname, visitCount, postdate);
+				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -86,7 +86,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				dto = new QnaDTO(num, title, nickname, null, nickname, visitCount, postdate);
+				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -113,7 +113,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				dto = new QnaDTO(num, title, nickname, null, nickname, visitCount, postdate);
+				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -149,6 +149,66 @@ public class QnaDAOImpl implements QnaDAO {
 		return dto;
 	}
 
+	@Override
+	public int getPostNum(QnaDTO dto) {
+		int result = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT num FROM(SELECT num FROM post WHERE category = '질문' AND id = ? ORDER BY num DESC) WHERE ROWNUM <= 1";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) result = rs.getInt("num");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int visitCnt(QnaDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "UPDATE post SET visit_count = (visit_count + 1) WHERE num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
+	
+	@Override
+	public int writeQuestion(QnaDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "INSERT INTO post (id, num, nickname, title, context, category) VALUES (?, post_idx.NEXTVAL, ?, ?, ?, '질문')";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(3, dto.getTitle());
+			pstmt.setString(4, dto.getContext());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} JDBCUtil.close(pstmt, conn);
+		return rs;
+	}
+	
 	@Override
 	public int deleteBoard(QnaDTO dto) {
 		int rs = 0;
