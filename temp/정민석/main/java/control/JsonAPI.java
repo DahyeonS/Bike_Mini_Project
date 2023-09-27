@@ -25,6 +25,8 @@ public class JsonAPI extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		System.out.println("doGet");
 		process(request, response);
 	}
@@ -41,7 +43,7 @@ public class JsonAPI extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		System.out.println(uri);
+		System.out.println(uri.split("/", 4)[2].equals("jmsboard"));
 		String action = uri.substring(uri.lastIndexOf("/"));
 		if (uri.split("/", 4)[2].equals("jmsboard")) {
 			JmsApi ja = new JmsApi();

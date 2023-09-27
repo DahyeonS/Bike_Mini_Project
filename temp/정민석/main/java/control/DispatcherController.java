@@ -43,17 +43,29 @@ public class DispatcherController extends HttpServlet {
 				response.sendRedirect("../board/QBoardList.jsp");
 		} else if (uri.split("/", 4)[2].equals("home")) {
 			if (action.equals("/board.do"))
-				response.sendRedirect("../jmsboard/board.jsp");
+				response.sendRedirect("../jmsboard/board.do");
 			else if (action.equals("/index.do")) {
 				response.sendRedirect("./index.jsp");
 			}
 		} else if (uri.split("/", 4)[2].equals("jmsboard")) {
-			JmsController jc = new JmsController();
-			jc.process(request, response);
+			if (action.equals("/index.do")) {
+				response.sendRedirect("../home/index.jsp");
+			}else {
+				JmsController jc = new JmsController();
+				jc.process(request, response);
+			}
+		}else if (uri.split("/", 4)[2].equals("member")) {
+			if (action.equals("/index.do")) {
+				response.sendRedirect("../home/index.jsp");				
+			}else if (action.equals("/board.do")) {
+				response.sendRedirect("../jmsboard/board.do");				
+			}
+		}else {
+			if (action.equals("/index.do")) {
+				response.sendRedirect("./home/index.jsp");
+			}
 		}
-		if (action.equals("/index.do"))
-			response.sendRedirect("../home/index.jsp");
-		else if (action.equals("/login.do"))
+		if (action.equals("/login.do"))
 			response.sendRedirect("../member/login.jsp");
 		else if (action.equals("/logout.do"))
 			response.sendRedirect("../member/logout.jsp");
