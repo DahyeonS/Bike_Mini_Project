@@ -22,6 +22,7 @@ public class BoardDAOimpl implements BoardDAO{
 			sql+=" where "+map.get("serchField")+" "
 			+ " like '%" + map.get("serchWord") + "%'";
 		}
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -62,6 +63,7 @@ public class BoardDAOimpl implements BoardDAO{
 				BoardDTO dto =new BoardDTO();
 				dto.setNum(rs.getInt("num"));
 				dto.setId(rs.getString("id"));
+				dto.setNickname(rs.getString("nickname"));
 				dto.setContext(rs.getString("context"));
 				dto.setPostdate(rs.getString("postdate"));
 				dto.setTitle(rs.getString("title"));

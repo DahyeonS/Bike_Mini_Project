@@ -26,9 +26,11 @@ public class JmsController {
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
-		
+		String serchField = request.getParameter("serchField");
+		String serchWord = request.getParameter("serchWord");
 //		로그인
-		
+		String saveDirectory=request.getServletContext().getRealPath("/uploads");
+		int maxPostSize=1024*1000;
 		if (action.equals("/write.do")) {
 			request.getRequestDispatcher("write.jsp").forward(request, response);
 		}
@@ -36,8 +38,7 @@ public class JmsController {
 		else if (action.equals("/board.do")) {
 			BoardDAO dao = new BoardDAOimpl();
 			Map<String, Object> param = new HashMap<String, Object>();
-			String serchField = request.getParameter("serchField");
-			String serchWord = request.getParameter("serchWord");
+			
 			String reqUrl="board.do";
 			if(serchWord!=null){
 				param.put("serchField", serchField);
@@ -91,11 +92,7 @@ public class JmsController {
 			request.setAttribute("map", map);
 			request.getRequestDispatcher("board.jsp").forward(request, response);
 		}else if (action.equals("/upload.do")) {
-			//webapp에 uploads 폴더생성 그안에 업로드폴더라는 빈파일 생성
-			String saveDirectory=request.getServletContext().getRealPath("/uploads");
-			System.out.println(saveDirectory);
-			//용량 제한
-			int maxPostSize= 1024*1000;
+			
 			MultipartRequest mr = FileUtil.uploadFile(request, saveDirectory, maxPostSize);
 			if(mr==null) {
 				return;
@@ -143,8 +140,7 @@ public class JmsController {
 			request.setAttribute("dto", dto);
 			request.getRequestDispatcher("Edit.jsp").forward(request, response);
 		}else if (action.equals("/EditProcess.do")) {
-			String saveDirectory=request.getServletContext().getRealPath("/uploads");
-			int maxPostSize=1024*1000;
+			
 			MultipartRequest mr = FileUtil.uploadFile(request, saveDirectory, maxPostSize);
 			if(mr==null) {
 				return;
