@@ -12,9 +12,6 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import board.BoardDAO;
-import board.BoardDAOimpl;
-import board.BoardDTO;
 import member.MemberService;
 import member.MemberServiceImpl;
 
