@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index.jsp</title>
+<title>HOME</title>
 <style>
     #home {text-align: center;}
 </style>
