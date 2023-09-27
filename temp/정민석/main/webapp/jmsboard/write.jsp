@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,16 +23,10 @@
 	}
 
 	$(function() {
-		$('#resetBtn').click(function() {
-			$('#wTitle').val('');
-			$('#wContext').val('');
-		});
-	});
-	$(function() {
 		$('#listBtn').click(function() {
 			const wCheck = confirm("게시글 작성 안하실건가요?");
 			if(!(wCheck == false)) {
-				location.href = 'board.jsp';				
+				location.href = 'board.do';				
 			}
 		});
 	});
@@ -45,7 +40,7 @@
         <h1>회원제 게시판 - 글쓰기</h1>
         <!-- jmsboard패키지에 jmscontroller쪽으로 가게됩니다 -->
         <form name="writeFrm" method="post" enctype="multipart/form-data"
-        action="upload.do">
+        action="upload.do" onsubmit="return validateForm(this);">
             <div class="main">
                <table border="1">
                 <tbody>
@@ -62,7 +57,7 @@
                <td colspan="2" class="w_btn">
                                <input type="hidden" name="category" value="일반">
                                <input type="submit" value="작성 완료" id="writeBtn">
-                               <input type="button" value="다시 입력" id="resetBtn">
+                               <input type="reset" value="다시 입력" >
                                <input type="button" value="목록 보기" id="listBtn">
                </td>
             </tr>

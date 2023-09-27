@@ -1,4 +1,4 @@
-package board;
+package jmsboard;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -152,12 +152,13 @@ public class BoardDAOimpl implements BoardDAO{
 		Connection conn=JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		String sql="update post set title";
-		sql+="=?, context=? where num=?";
+		sql+="=?, context=?, file_name=? where num=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContext());
-			pstmt.setInt(3, dto.getNum());
+			pstmt.setString(3, dto.getFileName());
+			pstmt.setInt(4, dto.getNum());
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-package board;
+package jmsboard;
 
 public class BoardDTO {
 	int num, fileID, visitCount;

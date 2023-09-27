@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,107 +9,29 @@
  <!-- <link rel="stylesheet" type="text/css" href="../css/reset.css"> -->
 <title>board</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!-- 이건 write 작성할때 로그인 되어있는지 확인 -->
-<%
-	String pageNum=request.getParameter("pageNum");
-%>
-<script>
 
-function serch(serchWord,serchField) {
-	const pageNum=<%=pageNum%>;
-	console.log(pageNum);
-    $.ajax({
-        type: 'POST',
-        url: 'serch.json',
-        data:{serchWord:serchWord,serchField:serchField,pageNum:pageNum},
-        dataType: 'json',
-        success: function(data) {
-        	console.log(data);
-        	let boardLists=data['boardLists'];
-        	let pageNum=data['pageNum'];
-        	let pageSize=data['pageSize'];
-        	let totalCount=data['totalCount'];
-        	let totalPage=data['totalPage'];
-        	let blockPage=data['blockPage'];
-        	let td="목록 보기(List) - 현재 페이지 : "+pageNum+" (전체 : "+totalPage+")";
-        	$('#h2').html(td);
-        	let tr="";
-        	if(boardLists.length===0){
-        		tr+="<td colspan=\"5\" align=\"center\">등록된 게시물이 없습니다.</td>";
-        	}else{
-        		console.log(boardLists);
-        		let virtualNum=0;
-        	 	let countNum =0;
-        	 	$.each(boardLists,function(index,dto){
-        	 		virtualNum = totalCount-(((pageNum-1)*pageSize)+countNum++);
-        	 		tr+="<tr><td>"+virtualNum +"</td><td align=\"left\">";
-        	 		tr+="<a href=\"View.jsp?num="+dto['num']+"\">"+dto['title']+"</a>";
-        	 		tr+="</td><td align=\"center\">"+dto['id']+ "</td>";
-        	 		tr+="</td><td align=\"center\">"+dto['visitCount']+ "</td>";
-        	 		tr+="</td><td align=\"center\">"+dto['postdate']+ "</td></tr>";
-        	 	})
-        	 		
-         	}
-	       $('#boardLists').html(tr);
-		},
-        	error: function(xhr, status, error) {
-            	console.log(xhr, status, error);
-      	 }
-    });
-};
+<script>
  function writeBtn() {
 		$.ajax({
 	        type: 'POST',
 	        url: 'writeJson.json',
 	        dataType: 'json',
 	        success: function(data) {
-	        	console.log("id : " + id);
-	        	console.log("data : " + data);
-	        	console.log("data['rs'] : " + data['rs']);
+	        	console.log(data);
 	        	if (data['rs'] === 1) {
-	        		location.href = 'write.jsp';
+	        		location.href = 'write.do';
 	        	}
 				else {
 					alert("게시글을 작성하려면 로그인을 먼저 하셔야됩니다");
-					location.href = 'login.jsp'
+					location.href = 'login.do'
 				};
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);
 	        }
 		});
 	};
-	function page(serchWord,serchField) {
-		const pageNum=<%=pageNum%>;
-		const param={serchWord:serchWord,serchField:serchField,pageNum:pageNum};
-		$.ajax({
-		      type: 'POST',
-		      url: 'page.json',
-		      dataType: 'json',
-		      data: param,
-		      success: function(data) {
-		      		console.log(data['pagingStr']);
-		      		let tr="";
-		      		if(data['pagingStr']===""){
-		      			tr="";
-		      		}else{		      			
-		      			tr+=data['pagingStr'];
-		      		}
-		      		$('#bp').html(tr);
-		        }, error: function(xhr, status, error) {
-		        	console.log(xhr, status, error);
-		        }
-			});
-		};
+
 	$(function() {
-		serch();
-		page();
-		$('#serch').on("click",function() {		
-		const serchWord=$('#serchWord').val();
-		const serchField =$('#serchField').val();
-		console.log(serchField);
-		serch(serchWord,serchField);
-		page(serchWord,serchField);
-		});
 		$('#b_writeBtn').click(function() {
 			writeBtn();
 		});
@@ -119,17 +42,17 @@ function serch(serchWord,serchField) {
 <%@include file="../home/topmenu.jsp" %>
 <body>
 	<h1>OO 게시판</h1>
-	<form action="write">
+	<form method="get">
 		<div class="board_box">
 			<div>
 				<div>
-					<select  id="serchField">
+					<select  name="serchField">
 						<option value="title">제목</option>
 						<option value="context">내용</option>
 						<option value="nickname">작성자</option>
 					</select>
-					<input type="text"  id="serchWord">
-					<input type="button" value="검색하기" id="serch">
+					<input type="text"  name="serchWord">
+					<input type="submit" value="검색하기">
 				</div>
 			</div>
 		
@@ -143,13 +66,34 @@ function serch(serchWord,serchField) {
 	                    <td class="th_span">작성일</td>
 	                </tr>
 	             </thead>
-	            <tbody id="boardLists"></tbody>
+	          <tbody>
+	           <c:choose>
+	           	<c:when test="${empty boardLists }">
+					<tr>
+						<td colspan="5" align="center">등록된 게시물이 없습니다.</td>
+					</tr>	           	
+	           	</c:when>
+	           	<c:otherwise>
+					<c:forEach items="${boardLists }" var="row" varStatus="loop">
+						<tr>
+							<td>${map.totalCount - (((map.pageNum-1)*map.pageSize)+loop.index)}</td>
+							<td align="left">
+								<a href="View.do?num=${row.num }">${row.title }</a>
+							</td>
+							<td align="center">${row.id }</td>
+							<td align="center">${row.visitCount }</td>
+							<td align="center">${row.postdate }</td>
+						</tr>
+					</c:forEach>	           	
+	           	</c:otherwise>
+	           </c:choose>
+	          </tbody>
 	        </table>
-		 <table>
+		 <table width="90%"  border='1'>
  	<tr align="center">
- 		<td id="bp"></td>
- 		<td>
- 			<button type="button" onclick="location.href='write.do'">글쓰기</button>
+ 		<td width="80%">${map.pagingImg }</td>
+ 		<td >
+ 			<button type="button" id="b_writeBtn">글쓰기</button>
  		</td>
  	</tr>
  </table>
