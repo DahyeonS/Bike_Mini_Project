@@ -1,6 +1,8 @@
+-- 테이블 생성
 CREATE TABLE qna (
     question NUMBER REFERENCES post(num) ON DELETE CASCADE NOT NULL,
     answer NUMBER REFERENCES post(num) ON DELETE CASCADE PRIMARY KEY NOT NULL
 );
 
+-- 확인
 SELECT * FROM qna;
