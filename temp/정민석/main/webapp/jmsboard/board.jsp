@@ -80,7 +80,7 @@
 							<td align="left">
 								<a href="View.do?num=${row.num }">${row.title }</a>
 							</td>
-							<td align="center">${row.id }</td>
+							<td align="center">${row.nickname }</td>
 							<td align="center">${row.visitCount }</td>
 							<td align="center">${row.postdate }</td>
 						</tr>
