@@ -188,6 +188,11 @@ public class JmsController {
 			String num=request.getParameter("num");
 			HttpSession session = request.getSession();
 			String id=(String)session.getAttribute("id");
+			MemberDAO ma=new MemberDAOImpl();
+			MemberDTO md=new MemberDTO();
+			md.setId(id);
+			md=ma.getMember(md);
+			String grade=md.getGrade();
 			BoardDAO dao=new BoardDAOimpl();
 			dao.updateVisitCount(num);
 			BoardDTO dto=dao.selectView(num);
@@ -196,10 +201,14 @@ public class JmsController {
 			
 			request.setAttribute("dto", dto);
 			request.setAttribute("id", id);
+			
 			if(id!=null) {
-				if(id.equals("admin")) {
-					request.setAttribute("admin", "admin");
-				}				
+				if(grade.equals("MANAGER")||grade.equals("ASSOCIATE")||grade.equals("STAFF")) {
+					request.setAttribute("admin", "OK");
+					request.setAttribute("OK", "OK");
+				}else {
+					request.setAttribute("admin", "Fail");
+				}
 			}
 			request.getRequestDispatcher("View.jsp").forward(request, response);
 		}else if (action.equals("/download.do")) {

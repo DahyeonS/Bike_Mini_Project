@@ -73,7 +73,7 @@ function deletePost(){
 		</tr>
 	</c:if>
 	<c:choose>
-		<c:when test="${id eq dto.id or id eq admin and not empty id}">	
+		<c:when test="${id eq dto.id or admin eq OK and not empty id}">	
 		
 			<tr>
 			<td colspan="4" align="center">
