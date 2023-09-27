@@ -26,3 +26,6 @@ BEGIN
     WHERE nickname = :OLD.nickname;
 END;
 /
+
+-- 확인
+SELECT * FROM reply;
