@@ -22,13 +22,12 @@ public class QnaDTO {
 		this.postdate = postdate;
 	}
 	
-	public QnaDTO(int num, String title, String nickname, String context,
-			String category, int visitCount, String postdate) {
+	public QnaDTO(int num, String title, String nickname,
+			String context, int visitCount, String postdate) {
 		this.num = num;
 		this.title = title;
 		this.nickname = nickname;
 		this.context = context;
-		this.category = category;
 		this.visitCount = visitCount;
 		this.postdate = postdate;
 	}
@@ -43,6 +42,16 @@ public class QnaDTO {
 		this.fileName = fileName;
 		this.postdate = postdate;
 		this.visitCount = visitCount;
+	}
+	
+	public QnaDTO(int num, String id, String nickname,
+			String title, String context, String fileName) {
+		this.id = id;
+		this.num = num;
+		this.nickname = nickname;
+		this.title = title;
+		this.context = context;
+		this.fileName = fileName;
 	}
 	
 	public int getNum() {

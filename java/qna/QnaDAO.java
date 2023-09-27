@@ -10,5 +10,8 @@ public interface QnaDAO {
 	List<QnaDTO> getBoardListContext(QnaDTO dto);
 	List<QnaDTO> getBoardListNickname(QnaDTO dto);
 	
+	int getPostNum(QnaDTO dto);
+	int visitCnt(QnaDTO dto);
 	int deleteBoard(QnaDTO dto);
+	int writeQuestion(QnaDTO dto);
 }

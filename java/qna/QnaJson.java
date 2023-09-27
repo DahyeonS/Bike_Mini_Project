@@ -67,7 +67,8 @@ public class QnaJson {
 			
 			QnaDTO dto = new QnaDTO();
 			dto.setNum(num);
-			dto = dao.getBoardNum(dto);
+			int rs = dao.visitCnt(dto);
+			if (rs == 1) dto = dao.getBoardNum(dto);
 			
 			String gson = new Gson().toJson(dto);
 			response.setContentType("text/html; charset=UTF-8");
@@ -80,6 +81,39 @@ public class QnaJson {
 			QnaDTO dto = new QnaDTO();
 			dto.setNum(num);
 			int rs = dao.deleteBoard(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/qnaWriteView.json")) {
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			
+			QnaDTO dto = new QnaDTO();
+			dto.setNum(num);
+			dto = dao.getBoardNum(dto);
+			
+			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
+		} else if (action.equals("/qnaWrite.json")) {
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			String id = request.getParameter("id");
+			String nickname = request.getParameter("nickname");
+			String title = request.getParameter("title");
+			String context = request.getParameter("context");
+			String fileName = request.getParameter("fileName");
+			int rs = 0;
+			
+			QnaDTO dto = new QnaDTO(num, id, nickname, title, context, fileName);
+			System.out.println(dto);
+			if (num == 0) {
+				rs = dao.writeQuestion(dto);
+				if (rs == 1) rs = dao.getPostNum(dto);
+			}
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);

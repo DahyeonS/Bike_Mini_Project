@@ -24,7 +24,7 @@
 <%@include file="../home/topmenu.jsp" %>
 <h2>회원목록</h2>
 <hr>
-<a href="updateAdmin.do" id="manage">회원관리</a>
+<a href="../member/updateAdmin.do" id="manage">회원관리</a>
 <br><br>
 <table border="1">
 
