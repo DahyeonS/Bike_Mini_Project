@@ -5,7 +5,7 @@ CREATE TABLE post (
     nickname VARCHAR2(10) REFERENCES member(nickname) NOT NULL,
     title VARCHAR2(50) NOT NULL,
     context VARCHAR2(4000) NOT NULL,
-    category VARCHAR2(10) CHECK (category IN ('일반', '질문', '답변' ,'소설')) NOT NULL,
+    category VARCHAR2(10) NOT NULL,
     file_id NUMBER,
     file_name VARCHAR2(100),
     postdate DATE DEFAULT SYSDATE NOT NULL,
