@@ -9,7 +9,8 @@ CREATE TABLE post (
     file_id NUMBER,
     file_name VARCHAR2(100),
     postdate DATE DEFAULT SYSDATE NOT NULL,
-    visit_count NUMBER DEFAULT 0
+    visit_count NUMBER DEFAULT 0,
+    quest_num NUMBER
 );
 
 -- 시퀀스 생성
