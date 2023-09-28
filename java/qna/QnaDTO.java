@@ -55,17 +55,6 @@ public class QnaDTO {
 		this.fileName = fileName;
 	}
 	
-	public QnaDTO(int num, int questNum, String id, String nickname,
-			String title, String context, String fileName) {
-		this.id = id;
-		this.num = num;
-		this.nickname = nickname;
-		this.title = title;
-		this.context = context;
-		this.fileName = fileName;
-		this.questNum = questNum;
-	}
-	
 	public int getNum() {
 		return num;
 	}

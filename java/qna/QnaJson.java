@@ -109,20 +109,31 @@ public class QnaJson {
 			int rs = 0;
 			
 			QnaDTO dto = new QnaDTO(num, id, nickname, title, context, fileName);
-			System.out.println(dto);
 			if (num == 0) {
 				rs = dao.writeQuestion(dto);
 				if (rs == 1) rs = dao.getPostNum(dto);
 			} else {
 				rs = dao.writeAnswer(dto);
-				if (rs == 1) {
-					rs = dao.getPostNum(dto);
-				}
+				if (rs == 1) rs = num;
 			}
 			
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);
 			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/qnaAnswerView.json")) {
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			
+			QnaDTO dto = new QnaDTO();
+			dto.setNum(num);
+			
+			List<QnaDTO> list = dao.getAnswerList(dto);
+			if (list.size() == 0) list.add(new QnaDTO());
+			
+			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
 		}
 	}
 }

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class QnaController {
 	public void qnaProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		QnaDAO dao = new QnaDAOImpl();
 		String uri = request.getRequestURI();
 		System.out.println(uri);
 		

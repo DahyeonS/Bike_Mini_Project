@@ -20,7 +20,7 @@ public class QnaDAOImpl implements QnaDAO {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, title, nickname, visit_count, postdate FROM post WHERE category = '질문'";
+		sql = "SELECT num, title, nickname, visit_count, postdate FROM post WHERE category = '질문' ORDER BY num DESC";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -37,7 +37,9 @@ public class QnaDAOImpl implements QnaDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} JDBCUtil.close(rs, pstmt, conn);
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
 		return list;
 	}
 
@@ -64,7 +66,9 @@ public class QnaDAOImpl implements QnaDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} JDBCUtil.close(rs, pstmt, conn);
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
 		return list;
 	}
 
@@ -91,7 +95,9 @@ public class QnaDAOImpl implements QnaDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} JDBCUtil.close(rs, pstmt, conn);
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
 		return list;
 	}
 
@@ -118,10 +124,39 @@ public class QnaDAOImpl implements QnaDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} JDBCUtil.close(rs, pstmt, conn);
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
 		return list;
 	}
 
+	@Override
+	public List<QnaDTO> getAnswerList(QnaDTO dto) {
+		List<QnaDTO> list = new ArrayList<QnaDTO>();
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT num, title, nickname, context, postdate FROM post WHERE quest_num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int num = rs.getInt("num");
+				String title = rs.getString("title");
+				String nickname = rs.getString("nickname");
+				String context = rs.getString("context");
+				String postdate = rs.getString("postdate");
+				dto = new QnaDTO(num, title, nickname, context, 0, postdate);
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	@Override
 	public QnaDTO getBoardNum(QnaDTO dto) {
 		conn = JDBCUtil.getConnection();
@@ -145,7 +180,9 @@ public class QnaDAOImpl implements QnaDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} JDBCUtil.close(rs, pstmt, conn);
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
 		return dto;
 	}
 
@@ -154,7 +191,7 @@ public class QnaDAOImpl implements QnaDAO {
 		int result = 0;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num FROM(SELECT num FROM post WHERE category = '질문' AND id = ? ORDER BY num DESC) WHERE ROWNUM <= 1";
+		sql = "SELECT num FROM (SELECT num FROM post WHERE category = '질문' AND id = ? ORDER BY num DESC) WHERE ROWNUM <= 1";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -164,6 +201,8 @@ public class QnaDAOImpl implements QnaDAO {
 			if (rs.next()) result = rs.getInt("num");
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
 		}
 		return result;
 	}
@@ -205,17 +244,18 @@ public class QnaDAOImpl implements QnaDAO {
 			rs = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} JDBCUtil.close(pstmt, conn);
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
 		return rs;
 	}
 	
-//	여기서부터 수정
 	@Override
 	public int writeAnswer(QnaDTO dto) {
 		int rs = 0;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "INSERT INTO post (id, num, nickname, title, context, category, ) VALUES (?, post_idx.NEXTVAL, ?, ?, ?, '답변')";
+		sql = "INSERT INTO post (id, num, nickname, title, context, category, quest_num) VALUES (?, post_idx.NEXTVAL, ?, ?, ?, '답변', ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -223,11 +263,14 @@ public class QnaDAOImpl implements QnaDAO {
 			pstmt.setString(2, dto.getNickname());
 			pstmt.setString(3, dto.getTitle());
 			pstmt.setString(4, dto.getContext());
+			pstmt.setInt(5, dto.getNum());
 			
 			rs = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} JDBCUtil.close(pstmt, conn);
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
 		return rs;
 	}
 	
@@ -236,11 +279,12 @@ public class QnaDAOImpl implements QnaDAO {
 		int rs = 0;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "DELETE FROM post WHERE num = ?";
+		sql = "DELETE FROM post WHERE num = ? OR quest_num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getNum());
+			pstmt.setInt(2, dto.getNum());
 			
 			rs = pstmt.executeUpdate();
 		} catch (SQLException e) {
