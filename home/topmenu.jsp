@@ -88,7 +88,7 @@ function QnaLoginCheck() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        서다현(Q&A)
+        Q&A 게시판
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="../qna/qnaBoardList.do">목록보기</a></li>

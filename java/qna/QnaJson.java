@@ -134,6 +134,69 @@ public class QnaJson {
 			String gson = new Gson().toJson(list);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
+		} else if (action.equals("/qnaUpdateView.json")) {
+			String sNum = request.getParameter("update");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			
+			QnaDTO dto = new QnaDTO();
+			dto.setNum(num);
+			dto = dao.getBoardNum(dto);
+			
+			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
+		} else if (action.equals("/qnaUpdate.json")) {
+			String sUpdate = request.getParameter("update");
+			int update = 0;
+			if (sUpdate != null) update = Integer.parseInt(sUpdate);
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			String title = request.getParameter("title");
+			String context = request.getParameter("context");
+			String fileName = request.getParameter("fileName");
+			int rs = 0;
+			
+			QnaDTO dto = new QnaDTO(update, null, null, title, context, fileName);
+			rs = dao.updateBoard(dto);
+			if (rs == 1) {
+				if (num != 0) rs = num;
+				else rs = update;
+			}
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/qnaWriteReply.json")) {
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			String id = request.getParameter("id");
+			String nickname = request.getParameter("nickname");
+			String context = request.getParameter("context");
+			int rs = 0;
+			
+			QnaDTO dto = new QnaDTO(num, 0, id, nickname, context);
+			rs = dao.writeReply(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/qnaReplyView.json")) {
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			
+			QnaDTO dto = new QnaDTO();
+			dto.setNum(num);
+			
+			List<QnaDTO> list = dao.getReplyList(dto);
+			if (list.size() == 0) list.add(new QnaDTO());
+			
+			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
 		}
 	}
 }

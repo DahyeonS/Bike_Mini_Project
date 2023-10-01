@@ -1,14 +1,14 @@
 package qna;
 
 public class QnaDTO {
-	int num, fileID, visitCount, questNum;
-	String id, nickname, title, context, category, fileName, postdate;
+	int num, fileID, visitCount, questNum, boardNum;
+	String id, nickname, title, context, category, fileName, postdate, updateDate;
 	
 	public QnaDTO() {
 	}
 	
-	public QnaDTO(int num, int fileID, int visitCount, int questNum, String id, String nickname, String title,
-			String context, String category, String fileName, String postdate) {
+	public QnaDTO(int num, int fileID, int visitCount, int questNum, int boardNum, String id, String nickname, String title,
+			String context, String category, String fileName, String postdate, String updateDate) {
 		super();
 		this.num = num;
 		this.fileID = fileID;
@@ -21,6 +21,8 @@ public class QnaDTO {
 		this.category = category;
 		this.fileName = fileName;
 		this.postdate = postdate;
+		this.boardNum = boardNum;
+		this.updateDate = updateDate;
 	}
 	
 	public QnaDTO(int num, String title, String nickname,
@@ -53,6 +55,23 @@ public class QnaDTO {
 		this.title = title;
 		this.context = context;
 		this.fileName = fileName;
+	}
+	
+	public QnaDTO(int num, int boardNum, String id, String nickname, String context) {
+		this.id = id;
+		this.num = num;
+		this.nickname = nickname;
+		this.context = context;
+		this.boardNum = boardNum;
+	}
+	
+	public QnaDTO(int num, int boardNum, String id, String nickname, String context, String postdate) {
+		this.id = id;
+		this.num = num;
+		this.nickname = nickname;
+		this.context = context;
+		this.boardNum = boardNum;
+		this.postdate = postdate;
 	}
 	
 	public int getNum() {

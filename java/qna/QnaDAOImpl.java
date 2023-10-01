@@ -158,9 +158,36 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 	
 	@Override
+	public List<QnaDTO> getReplyList(QnaDTO dto) {
+		List<QnaDTO> list = new ArrayList<QnaDTO>();
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT num, id, nickname, context, postdate FROM reply WHERE post_num = ? ORDER BY num";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int num = rs.getInt("num");
+				String id = rs.getString("id");
+				String nickname = rs.getString("nickname");
+				String context = rs.getString("context");
+				String postdate = rs.getString("postdate");
+				dto = new QnaDTO(num, 0, id, nickname, context, postdate);
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
 	public QnaDTO getBoardNum(QnaDTO dto) {
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, nickname, title, context, file_id, file_name, postdate, visit_count FROM post WHERE category = '질문' AND num = ?";
+		sql = "SELECT num, nickname, title, context, file_id, file_name, postdate, visit_count FROM post WHERE num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -292,6 +319,57 @@ public class QnaDAOImpl implements QnaDAO {
 		} finally {
 			JDBCUtil.close(pstmt, conn);
 		}
+		return rs;
+	}
+
+	@Override
+	public int updateBoard(QnaDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "UPDATE post SET title = ?, context = ? WHERE num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContext());
+			pstmt.setInt(3, dto.getNum());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
+
+	@Override
+	public int writeReply(QnaDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "INSERT INTO reply (id, num, post_num, nickname, context) VALUES (?, reply_idx.NEXTVAL, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setInt(2, dto.getNum());
+			pstmt.setString(3, dto.getNickname());
+			pstmt.setString(4, dto.getContext());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
+
+	@Override
+	public int deleteReply(QnaDTO dto) {
+		int rs = 0;
 		return rs;
 	}
 }

@@ -12,7 +12,10 @@ function loginJson() {
                 alert('환영합니다!');
                 location.href = 'index.do';
             }
-            else alert('아이디나 비밀번호가 다릅니다');
+            else {
+	            alert('아이디나 비밀번호가 다릅니다');
+	            return;
+            }
         }, error: function(xhr, status, error) {
             console.log(xhr, status, error);
         }
@@ -22,5 +25,22 @@ function loginJson() {
 $(function() {
     $('#submit').click(function() {
         loginJson();
+    });
+    $('#pw').keydown(function(event) {
+    	if (event.keyCode === 13) {
+    		const id = $('#id').val();
+    		const pw = $('#pw').val();
+    		if (id === '') alert('아이디를 입력해주세요.');
+    		else if (pw === '') alert('비밀번호를 입력해주세요.');
+	        else loginJson();
+    	}
+    });
+    $('#id').keydown(function(event) {
+    	if (event.keyCode === 13) {
+    		const id = $('#id').val();
+    		const pw = $('#pw').val();
+    		if (id === '') alert('아이디를 입력해주세요.');
+    		else if (pw === '') alert('비밀번호를 입력해주세요.');
+    	}
     });
 });

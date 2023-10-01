@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@include file="../member/loginCheck.jsp" %>
 <html>
@@ -23,70 +24,7 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script>
-function getQnaWriteView(param) {
-    $.ajax({
-        type: 'POST',
-        url: 'qnaWriteView.json',
-        dataType: 'json',
-        data: param,
-        success: function(data) {
-        	console.log(data);
-        	$('#qtitle').html(data['title']);
-        	$('#qcontext').html(data['context']);
-        	$('#nickname').html(data['nickname']);
-        	$('#postdate').html("작성일자: " + data['postdate']);
-        	$('.question').show();
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr, status, error);
-        }
-    });
-};
-
-function qnaWrite(num) {
-	const id = '<%=session.getAttribute("id")%>';
-	const nickname = '<%=session.getAttribute("nickname")%>';
-	const title = $('#title').val();
-	const context = $('#context').val();
-	const params = {num, id, nickname, title, context};
-	console.log(params);
-    $.ajax({
-        type: 'POST',
-        url: 'qnaWrite.json',
-        dataType: 'json',
-        data: params,
-        success: function(data) {
-        	console.log(data);
-        	if(data['rs'] !== 0) {
-                alert('게시글이 작성되었습니다.');
-                location.href = '../qna/qnaBoardView.do?num=' + data['rs'];
-            } else alert('다시 시도해주세요.');
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr, status, error);
-        }
-    });
-};
-
-$(function() {
-	$('.question').hide();
-	let num = <%=request.getParameter("num")%>
-	if (num !== null) {
-		const param = {num};
-		getQnaWriteView(param)
-	}
-	$('#cancel').click(function() {
-		const input = confirm('작성을 취소합니까?');
-		if (input) history.back();
-		else return;
-	});
-	$('#submit').click(function() {
-		if (num == null) num = 0;
-		qnaWrite(num);
-	});
-});
-</script>
+<%@include file="./script/boardWriteScript.jsp"%>
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>
@@ -108,7 +46,12 @@ $(function() {
 </form>
 <br>
 <form style="text-align: right;" id="write">
+<c:if test="${param.update == null}">
 <input type="button" value="작성하기" id="submit">
+</c:if>
+<c:if test="${param.update != null}">
+<input type="button" value="수정하기" id="update">
+</c:if>
 <input type="button" value="취소" id="cancel">
 </form>
 </body>
