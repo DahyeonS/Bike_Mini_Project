@@ -44,3 +44,19 @@
 > visit_count - 방문자 수
 >
 > quest_num - 게시글이 속한 질문 번호(답변 게시글 한정)
+
+## *reply.sql*
+**작성한 댓글을 저장하는 댓글 테이블**
+
+> ### 칼럼명
+> id - 회원 ID
+>
+> num - 댓글 일련번호
+>
+> post_num - 댓글이 속한 게시글 번호
+>
+> nickname - 회원 닉네임
+>
+> context - 댓글 내용
+>
+> postdate - 댓글 작성 날짜
