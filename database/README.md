@@ -29,6 +29,8 @@
 >
 > title - 게시글 제목
 >
+> context - 게시글 내
+> 
 > category - 게시글 분류(현재 일반, 질문, 답변 3가지로 나뉘어 있음)
 >
 > file_id - 파일 일련번호
@@ -37,4 +39,8 @@
 >
 > postdate - 게시 날짜
 >
+> update_date - 수정 날짜
+> 
 > visit_count - 방문자 수
+>
+> quest_num - 게시글이 속한 질문 번호(답변 게시글 한정)
