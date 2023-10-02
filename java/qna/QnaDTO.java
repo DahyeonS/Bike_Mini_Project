@@ -26,17 +26,18 @@ public class QnaDTO {
 	}
 	
 	public QnaDTO(int num, String title, String nickname,
-			String context, int visitCount, String postdate) {
+			String context, int visitCount, String postdate, String updateDate) {
 		this.num = num;
 		this.title = title;
 		this.nickname = nickname;
 		this.context = context;
 		this.visitCount = visitCount;
 		this.postdate = postdate;
+		this.updateDate = updateDate;
 	}
 
 	public QnaDTO(int num, int fileID, int visitCount, String nickname, String title,
-			String context, String fileName, String postdate) {
+			String context, String fileName, String updateDate, String postdate) {
 		this.num = num;
 		this.nickname = nickname;
 		this.title = title;
@@ -44,6 +45,7 @@ public class QnaDTO {
 		this.fileID = fileID;
 		this.fileName = fileName;
 		this.postdate = postdate;
+		this.updateDate = updateDate;
 		this.visitCount = visitCount;
 	}
 	

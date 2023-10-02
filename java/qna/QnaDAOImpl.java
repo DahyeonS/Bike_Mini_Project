@@ -32,7 +32,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				QnaDTO dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
+				QnaDTO dto = new QnaDTO(num, title, nickname, null, visitCount, postdate, null);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -61,7 +61,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
+				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate, null);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -90,7 +90,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
+				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate, null);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -119,7 +119,7 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				int visitCount = rs.getInt("visit_count");
 				String postdate = rs.getString("postdate");
-				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate);
+				dto = new QnaDTO(num, title, nickname, null, visitCount, postdate, null);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -135,7 +135,7 @@ public class QnaDAOImpl implements QnaDAO {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, title, nickname, context, postdate FROM post WHERE quest_num = ?";
+		sql = "SELECT num, title, nickname, context, postdate, update_date FROM post WHERE quest_num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -148,7 +148,10 @@ public class QnaDAOImpl implements QnaDAO {
 				String nickname = rs.getString("nickname");
 				String context = rs.getString("context");
 				String postdate = rs.getString("postdate");
-				dto = new QnaDTO(num, title, nickname, context, 0, postdate);
+				String updateDate = rs.getString("update_date");
+				
+				if (updateDate != null) dto = new QnaDTO(num, title, nickname, context, 0, postdate, updateDate);
+				else dto = new QnaDTO(num, title, nickname, context, 0, postdate, "0");
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -187,7 +190,7 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public QnaDTO getBoardNum(QnaDTO dto) {
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, nickname, title, context, file_id, file_name, postdate, visit_count FROM post WHERE num = ?";
+		sql = "SELECT num, nickname, title, context, file_id, file_name, postdate, update_date, visit_count FROM post WHERE num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -202,8 +205,11 @@ public class QnaDAOImpl implements QnaDAO {
 				int file_id = rs.getInt("file_id");
 				String file_name = rs.getString("file_name");
 				String postdate = rs.getString("postdate");
+				String updateDate = rs.getString("update_date");
 				int visitCount = rs.getInt("visit_count");
-				dto = new QnaDTO(num, file_id, visitCount, nickname, title, context, file_name, postdate);
+				
+				if (updateDate != null) dto = new QnaDTO(num, file_id, visitCount, nickname, title, context, file_name, updateDate, postdate);
+				else dto = new QnaDTO(num, file_id, visitCount, nickname, title, context, file_name, "0", postdate);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -327,7 +333,7 @@ public class QnaDAOImpl implements QnaDAO {
 		int rs = 0;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "UPDATE post SET title = ?, context = ? WHERE num = ?";
+		sql = "UPDATE post SET title = ?, context = ?, update_date = SYSDATE WHERE num = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -370,6 +376,20 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public int deleteReply(QnaDTO dto) {
 		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "DELETE FROM reply WHERE num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
 		return rs;
 	}
 }

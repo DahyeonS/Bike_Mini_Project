@@ -197,6 +197,18 @@ public class QnaJson {
 			String gson = new Gson().toJson(list);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
+		} else if (action.equals("/qnaDeleteReply.json")) {
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			
+			QnaDTO dto = new QnaDTO();
+			dto.setNum(num);
+			int rs = dao.deleteReply(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			response.getWriter().write(jsonObject.toString());
 		}
 	}
 }
