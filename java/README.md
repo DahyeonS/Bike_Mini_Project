@@ -10,6 +10,9 @@
 ### *DispathcherController*
 **do 작업을 실행하는 곳**
 
+### *JsonAPI*
+**Json 작업을 실행하는 곳**
+
 ## member
 **로그인 관리를 위한 시스템을 구축한 곳입니다.**
 
