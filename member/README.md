@@ -8,6 +8,8 @@
 
 ## *loginCheck.jsp*
 
+## *logout.jsp*
+
 ## *update.jsp*
 
 ## *delete.jsp*
