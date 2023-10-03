@@ -8,7 +8,7 @@
 
 - 파일을 업로드했을 땐, README.md에 파일 설명을 간단하게 넣어주세요.
 
-- 변수명은 팀원전원이 통일하여 사용할 것을 원칙으로 하며, 변수명은 README.md에 기재하시면 됩니다.
+- 변수명은 README.md에 기재하시면 됩니다.
 
 ## [database](database)
 데이터베이스 관리
@@ -20,10 +20,10 @@
 
 *관리자: 서다현*
 
-## [home](https://github.com/DahyeonS/Bike_Mini_Project/blob/main/home)
+## [home](home)
 홈 화면
 
-## [presentation](https://github.com/DahyeonS/Bike_Mini_Project/tree/main/presentation)
+## [presentation](presentation)
 발표 자료 및 계획표
 
 ## [board](board)
