@@ -37,4 +37,22 @@ MemberDAO의 자식클래스
 ## qna
 **Q&A 게시판 관리를 위한 시스템을 구축한 곳입니다.**
 
+### *QnaDTO*
+**Q&A 게시판 정보를 담은 곳**
+
+> #### 변수명
+> [참고](../database)
+
+### *QnaDAO*
+**Q&A 게시판 시스템을 처리하는 곳**
+
+#### *QnaDAOImpl*
+QnaDAO의 자식클래스
+
+### *QnaControl*
+**Q&A 게시판의 do 작업을 실행하는 곳**
+
+### *QnaJson*
+**Q&A 게시판의 Json 작업을 실행하는 곳**
+
 ## novel
