@@ -10,9 +10,6 @@
 ### *DispathcherController*
 **do 작업을 실행하는 곳**
 
-### *JsonAPI*
-**Json 작업을 실행하는 곳**
-
 ## member
 **로그인 관리를 위한 시스템을 구축한 곳입니다.**
 
@@ -27,3 +24,9 @@
 
 #### *MemberDAOImpl*
 MemberDAO의 자식클래스
+
+### *MemberControl*
+**회원 시스템의 do 작업을 실행하는 곳**
+
+### *MemberJson*
+**회원 시스템의 Json 작업을 실행하는 곳**
