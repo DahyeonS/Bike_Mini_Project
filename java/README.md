@@ -18,6 +18,32 @@
 
 > #### 변수명
 > [참고](../database)
+>
+> num - 게시판, 댓글 일련번호
+>
+> id - 회원 ID
+>
+> nickname - 회원 닉네임
+>
+> title - 게시글 제목
+>
+> context - 게시글, 댓글 내용
+>
+> category - 게시글 분류
+>
+> fileId - 파일 일련번호(post 테이블의 file_id)
+>
+> fileName - 파일 이름(post 테이블의 file_name)
+>
+> postdate - 게시글, 댓글 작성 날짜
+>
+> updateDate - 게시글 수정 날짜(post 테이블의 update_date)
+>
+> visitCount - 방문자 수(post 테이블의 visit_count)
+>
+> questNum - 게시글이 속한 질문 번호(답변 게시글 한정)(post 테이블의 quest_num)
+>
+> boardNum - 댓글이 속한 게시글 번호(reply 테이블의 post_num)
 
 ### *MemberDAO*
 **회원 시스템을 처리하는 곳**
