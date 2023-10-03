@@ -21,6 +21,30 @@
 
 > #### 변수명
 > [참고](../database)
+
+### *MemberDAO*
+**회원 시스템을 처리하는 곳**
+
+#### *MemberDAOImpl*
+MemberDAO의 자식클래스
+
+### *MemberControl*
+**회원 시스템의 do 작업을 실행하는 곳**
+
+### *MemberJson*
+**회원 시스템의 Json 작업을 실행하는 곳**
+
+## board
+**게시판 시스템을 구축한 샘플 폴더입니다.**
+
+## qna
+**Q&A 게시판 관리를 위한 시스템을 구축한 곳입니다.**
+
+### *QnaDTO*
+**Q&A 게시판 정보를 담은 곳**
+
+> #### 변수명
+> [참고](../database)
 >
 > num - 게시판, 댓글 일련번호
 >
@@ -47,30 +71,6 @@
 > questNum - 게시글이 속한 질문 번호(답변 게시글 한정)(post 테이블의 quest_num)
 >
 > boardNum - 댓글이 속한 게시글 번호(reply 테이블의 post_num)
-
-### *MemberDAO*
-**회원 시스템을 처리하는 곳**
-
-#### *MemberDAOImpl*
-MemberDAO의 자식클래스
-
-### *MemberControl*
-**회원 시스템의 do 작업을 실행하는 곳**
-
-### *MemberJson*
-**회원 시스템의 Json 작업을 실행하는 곳**
-
-## board
-**게시판 시스템을 구축한 샘플 폴더입니다.**
-
-## qna
-**Q&A 게시판 관리를 위한 시스템을 구축한 곳입니다.**
-
-### *QnaDTO*
-**Q&A 게시판 정보를 담은 곳**
-
-> #### 변수명
-> [참고](../database)
 
 ### *QnaDAO*
 **Q&A 게시판 시스템을 처리하는 곳**
