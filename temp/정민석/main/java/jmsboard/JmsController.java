@@ -26,15 +26,16 @@ public class JmsController {
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
+		//검색 
 		String serchField = request.getParameter("serchField");
 		String serchWord = request.getParameter("serchWord");
-//		로그인
+		//만든 업로드파일을 저장장소로 지정합니다
 		String saveDirectory=request.getServletContext().getRealPath("/uploads");
+		//업로드할 파일의 용량제한입니다
 		int maxPostSize=1024*1000;
 		if (action.equals("/write.do")) {
 			request.getRequestDispatcher("write.jsp").forward(request, response);
 		}
-//		게시판
 		else if (action.equals("/board.do")) {
 			BoardDAO dao = new BoardDAOimpl();
 			Map<String, Object> param = new HashMap<String, Object>();
@@ -92,7 +93,9 @@ public class JmsController {
 			request.setAttribute("map", map);
 			request.getRequestDispatcher("board.jsp").forward(request, response);
 		}else if (action.equals("/upload.do")) {
-			
+			// uploads 폴더를 webapp에 만들어주시고 업로드파일이라는 빈파일을 생성해주세요
+			// 업로드된 파일은 워크스페이스에/.metadata/.plugins/org.eclipse.wst.server.core/
+			// tmp0/wtpwebapps/본인 프로젝트 명/uploads 쪽으로 생깁니다 
 			MultipartRequest mr = FileUtil.uploadFile(request, saveDirectory, maxPostSize);
 			if(mr==null) {
 				return;
@@ -110,6 +113,7 @@ public class JmsController {
 			String category=mr.getParameter("category");
 			System.out.println(category);
 			String fileName=mr.getFilesystemName("fileUp");
+			//파일명을 현재시간으로 변환합니다
 			if(fileName!=null) {
 				String now =new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
 				String ext = fileName.substring(fileName.lastIndexOf("."));
@@ -126,6 +130,7 @@ public class JmsController {
 			bd.setId(id);
 			BoardDAO ba=new BoardDAOimpl();
 			int rs=ba.insertWrite(bd);
+			
 			if(rs==1) {
 				response.sendRedirect("board.do");
 			}else {
@@ -140,7 +145,7 @@ public class JmsController {
 			request.setAttribute("dto", dto);
 			request.getRequestDispatcher("Edit.jsp").forward(request, response);
 		}else if (action.equals("/EditProcess.do")) {
-			
+			//새 파일을 저장합니다
 			MultipartRequest mr = FileUtil.uploadFile(request, saveDirectory, maxPostSize);
 			if(mr==null) {
 				return;
@@ -165,7 +170,7 @@ public class JmsController {
 				File newFile=new File(saveDirectory+File.separator+newFileName);
 				oldFile.renameTo(newFile);
 				bd.setFileName(newFileName);
-				
+				//이전파일을 제거합니다
 				FileUtil.deleteFile(request,"/uploads", prevSfile);
 			}else {
 				bd.setFileName(prevSfile);
@@ -178,6 +183,7 @@ public class JmsController {
 			}
 		}else if (action.equals("/View.do")) {
 			String num=request.getParameter("num");
+			String index=request.getParameter("index");
 			HttpSession session = request.getSession();
 			String id=(String)session.getAttribute("id");
 			MemberDAO ma=new MemberDAOImpl();
@@ -196,7 +202,9 @@ public class JmsController {
 			
 			request.setAttribute("dto", dto);
 			request.setAttribute("id", id);
-			
+			request.setAttribute("index", index);
+			//등급이 스탭 이상이면 수정하기와 삭제하기가 보이도록 조건을 충족시키기위해 
+			//같은값을 두개를보냅니다
 			if(id!=null) {
 				if(grade.equals("MANAGER")||grade.equals("ASSOCIATE")||grade.equals("STAFF")) {
 					request.setAttribute("admin", "OK");

@@ -17,12 +17,20 @@ $(document).ready(function() {
             $(this).find('.inner-menu').hide();
     });
 }); // end
+
+function QnaLoginCheck() {
+	if (<%=session.getAttribute("id")%> === null) {
+		alert('회원만 작성할 수 있습니다.')
+		$('a').attr('href', '../member/login.do');
+	}
+};
 </script>
 
 <!-- 스타일-->
 <style>
 .outer-menu-item, #info {
     float: left;
+    text-align: center;
 }
 .outer-menu-item:hover {
     background: white;
@@ -37,11 +45,12 @@ $(document).ready(function() {
     background: white;
     z-index: 1000;
     text-align: center;
+    list-style: none;
 }
 </style>
 
 <div class="outer-menu-item">
-    <a href="index.do">Home</a>
+    <a href="../home/index.do">Home</a>
 </div>
 <div class="loginbutton">
 	<div id="info">
@@ -54,8 +63,8 @@ $(document).ready(function() {
     </c:if>
     </div>
 	<c:if test="${id == null}">
-    <a href="join.do">회원가입</a>
-    <a href="login.do">로그인</a>
+    <a href="../member/join.do">회원가입</a>
+    <a href="../member/login.do">로그인</a>
     </c:if>
     <c:if test="${id != null}">
     <div class="outer-menu-item" style="text-align: center;">
@@ -64,14 +73,14 @@ $(document).ready(function() {
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <c:if test="${grade != 'GENERAL'}">
-            <a href="memberList.do">회원목록</a><br>
+            <a href="../member/memberList.do">회원목록</a><br>
             </c:if>
-            <a href="update.do">정보수정</a><br>
+            <a href="../member/update.do">정보수정</a><br>
             <a href="#" onclick="deleteConfirm();">회원탈퇴</a>
         </div>
 	</div>
 	&nbsp
-    <a href="logout.do" id="logout-btn">로그아웃</a>
+    <a href="../member/logout.do" id="logout-btn">로그아웃</a>
     </c:if>
 </div>
 <br>
@@ -79,21 +88,18 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>서다현(Q&A)</li>
+        Q&A 게시판
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="../board/QBoardList.do">목록보기</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+            <li> <a href="../qna/qnaBoardList.do">목록보기</a></li>
+            <li> <a href="../qna/qnaWrite.do" onclick="QnaLoginCheck();">질문하기</a></li>
         </div>
     </ul>
 </div>
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>박철규</li>
+        박철규
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -107,7 +113,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>고훈</li>
+        고훈
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -121,7 +127,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>권지현</li>
+        권지현
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>
@@ -135,10 +141,10 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>정민석</li>
+        정민석
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="board.do">게시판</a></li>
+            <li> <a href="../jmsboard/board.do">게시판</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
@@ -149,7 +155,7 @@ $(document).ready(function() {
 <div class="outer-menu-item">
     <ul>
         <!-- 외부 메뉴 항목의 콘텐츠 -->
-        <li>황영선</li>
+        황영선
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="">데이터</a></li>

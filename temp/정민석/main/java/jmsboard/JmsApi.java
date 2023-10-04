@@ -12,12 +12,9 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import member.MemberService;
-import member.MemberServiceImpl;
 
 
 public class JmsApi {
-	MemberService service = new MemberServiceImpl();
 
 	
 	

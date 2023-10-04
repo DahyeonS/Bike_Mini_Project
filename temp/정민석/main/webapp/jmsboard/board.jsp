@@ -41,7 +41,7 @@
 </head>
 <%@include file="../home/topmenu.jsp" %>
 <body>
-	<h1>OO 게시판</h1>
+	<h1>자유 게시판</h1>
 	<form method="get">
 		<div class="board_box">
 			<div>
@@ -78,7 +78,9 @@
 						<tr>
 							<td>${map.totalCount - (((map.pageNum-1)*map.pageSize)+loop.index)}</td>
 							<td align="left">
-								<a href="View.do?num=${row.num }">${row.title }</a>
+								<a href="View.do?num=${row.num }&index=${map.totalCount - (((map.pageNum-1)*map.pageSize)+loop.index)}">
+									${row.title }
+								</a>
 							</td>
 							<td align="center">${row.nickname }</td>
 							<td align="center">${row.visitCount }</td>
@@ -89,15 +91,15 @@
 	           </c:choose>
 	          </tbody>
 	        </table>
-		 <table width="90%"  border='1'>
- 	<tr align="center">
- 		<td width="80%">${map.pagingImg }</td>
- 		<td >
- 			<button type="button" id="b_writeBtn">글쓰기</button>
- 		</td>
- 	</tr>
- </table>
-	
+	<table width="90%"  border='1'>
+ 		<tr align="center">
+ 			<td width="80%">${map.pagingImg }</td>
+ 			<td >
+ 				<button type="button" id="b_writeBtn">글쓰기</button>
+ 			</td>
+ 		</tr>
+ 	</table>
+	</div>
 	</form>
 </body>
 </html>

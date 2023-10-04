@@ -39,6 +39,8 @@
 	 <div class="wrap">
         <h1>회원제 게시판 - 글쓰기</h1>
         <!-- jmsboard패키지에 jmscontroller쪽으로 가게됩니다 -->
+        <!-- 파일 업로드의 경우 메이븐에서 cos를 검색하셔서 servlet에서 올린 메이븐을 
+        설치해주셔야 합니다 -->
         <form name="writeFrm" method="post" enctype="multipart/form-data"
         action="upload.do" onsubmit="return validateForm(this);">
             <div class="main">
