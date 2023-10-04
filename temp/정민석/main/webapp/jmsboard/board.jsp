@@ -23,7 +23,7 @@
 	        	}
 				else {
 					alert("게시글을 작성하려면 로그인을 먼저 하셔야됩니다");
-					location.href = 'login.do'
+					location.href = '../member/login.do'
 				};
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);

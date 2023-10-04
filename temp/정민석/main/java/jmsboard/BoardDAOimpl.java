@@ -187,4 +187,74 @@ public class BoardDAOimpl implements BoardDAO{
 		return result;
 	}
 	
+	@Override
+	public List<BoardDTO> getReplyList(BoardDTO dto) {
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		PreparedStatement pstmt = null;
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "SELECT num, id, nickname, context, postdate FROM reply WHERE post_num = ? ORDER BY num";
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int num = rs.getInt("num");
+				String id = rs.getString("id");
+				String nickname = rs.getString("nickname");
+				String context = rs.getString("context");
+				String postdate = rs.getString("postdate");
+				dto = new BoardDTO(num,id, nickname, context, postdate);
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public int writeReply(BoardDTO dto) {
+		int rs = 0;
+		PreparedStatement pstmt = null;
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "INSERT INTO reply (id, num, post_num, nickname, context) VALUES (?, reply_idx.NEXTVAL, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setInt(2, dto.getNum());
+			pstmt.setString(3, dto.getNickname());
+			pstmt.setString(4, dto.getContext());
+			
+			rs = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
+
+	@Override
+	public int deleteReply(BoardDTO dto) {
+		int rs = 0;
+		PreparedStatement pstmt = null;
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "DELETE FROM reply WHERE num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
 }
+	

@@ -7,6 +7,19 @@ public class BoardDTO {
 	public BoardDTO() {
 	}
 	
+	
+	
+	public BoardDTO(int num, String id, String nickname, String context, String postdate) {
+		super();
+		this.num = num;
+		this.id = id;
+		this.nickname = nickname;
+		this.context = context;
+		this.postdate = postdate;
+	}
+
+
+
 	public BoardDTO(int num, int fileID, int visitCount, String id, String nickname, String title,
 			String context, String category, String fileName, String postdate) {
 		super();
