@@ -17,6 +17,7 @@ public class khBoardController {
 		if (uri.split("/",4)[2].equals("khBoard")) {
 			if (action.equals("/boardList.do")) response.sendRedirect("../khBoard/boardList.jsp");
 			if (action.equals("/qnaList.do")) response.sendRedirect("../khBoard/qnaList.jsp");
+			if (action.equals("/imageList.do")) response.sendRedirect("../khBoard/imageList.jsp");
 			if (action.equals("/boardUpdate.do")) {
 			
 				String view = "../khBoard/boardUpdate.jsp";

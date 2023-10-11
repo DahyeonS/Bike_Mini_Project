@@ -18,8 +18,15 @@ public class khBoardDTO {
 		this.postdate = postdate;
 	}
 	
-	
-	
+	public khBoardDTO(int num, String nickname, String context, String postdate, String title) {
+		super();
+		this.num = num;
+		this.title = title;
+		this.nickname = nickname;
+		this.context = context;
+		this.postdate = postdate;
+	}
+
 	public khBoardDTO(int num, String nickname, String context, String postdate) {
 		super();
 		this.num = num;

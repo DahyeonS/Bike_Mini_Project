@@ -118,7 +118,7 @@ function QnaLoginCheck() {
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="../khBoard/boardList.do">일반 게시판</a></li>
             <li> <a href="../khBoard/qnaList.do">Q&A 게시판</a></li>
-            <li> <a href="">데이터</a></li>
+            <li> <a href="../khBoard/imageList.do">사진 업로드 게시판</a></li>
             <li> <a href="">데이터</a></li>
             <li> <a href="">데이터</a></li>
         </div>
