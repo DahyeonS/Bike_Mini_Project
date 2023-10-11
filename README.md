@@ -26,9 +26,6 @@
 ## [presentation](presentation)
 발표 자료 및 계획표
 
-## [board](board)
-게시판 샘플
-
 ## [qna](qna)
 Q&A 게시판
 

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.BoardController;
 import member.MemberController;
 import qna.QnaController;
 
@@ -54,9 +53,6 @@ public class DispatcherController extends HttpServlet {
 			}
 			QnaController qnaControl = new QnaController();
 			qnaControl.qnaProcess(request, response);
-		} else if (uri.split("/", 4)[2].equals("board")) {
-			BoardController boardControl = new BoardController();
-			boardControl.boardProcess(request, response);
 		} else {
 			if (action.equals("/index.do")) response.sendRedirect("./home/index.jsp");
 		}

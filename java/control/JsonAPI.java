@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.BoardJson;
 import member.MemberJson;
 import qna.QnaJson;
 
@@ -34,9 +33,6 @@ public class JsonAPI extends HttpServlet {
 		if (uri.split("/", 4)[2].equals("member")) {
 			MemberJson memberJson = new MemberJson();
 			memberJson.memberProcess(request, response);
-		} else if (uri.split("/", 4)[2].equals("board")) {
-			BoardJson boardJson = new BoardJson();
-			boardJson.boardProcess(request, response);
 		} else if (uri.split("/", 4)[2].equals("qna")) {
 			QnaJson qnaJson = new QnaJson();
 			qnaJson.qnaProcess(request, response);
