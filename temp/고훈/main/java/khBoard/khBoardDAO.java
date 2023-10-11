@@ -70,6 +70,36 @@ public class khBoardDAO {
 		
 		return totalCount;
 	}
+	
+	public int iSelectCount(String searchWord, String searchField) {
+
+		int totalCount = 0;
+		
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT COUNT(*) FROM POST WHERE CATEGORY = '사진' ";
+		if(searchWord != null) {
+			sql += "AND " + searchField + " LIKE ? ";
+		}
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(searchWord != null) {
+				pstmt.setString(1, "%" + searchWord + "%");
+			}
+			rs = pstmt.executeQuery();
+			rs.next();
+			totalCount = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		
+		return totalCount;
+	}
 
 
 	public List<khBoardDTO> boardList(int listNum, int pageNum) {
@@ -270,6 +300,53 @@ public class khBoardDAO {
 		return list;
 	}
 	
+	public List<khBoardDTO> iSearchList(String searchWord, String searchField, int listNum, int pageNum) {
+
+		List<khBoardDTO> list = new ArrayList<khBoardDTO>();
+
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT * FROM (SELECT tb.*, rownum AS rnum FROM (select * from post WHERE category = '사진' ";
+		if(searchField != null) {
+			if(searchField.equals("title")) {
+				sql += "AND title LIKE ? ";
+			}	
+			else if (searchField.equals("nickname")) {
+				sql += "AND nickname LIKE ? ";
+			}
+			sql +=  " ORDER BY num DESC) tb) WHERE rnum BETWEEN ? AND ? ";
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchWord +"%");
+			pstmt.setInt(2, (pageNum-1)*listNum + 1);
+			pstmt.setInt(3, (pageNum)*listNum);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int num = rs.getInt("num");
+				int file_id = rs.getInt("file_id");
+				int visit_count = rs.getInt("visit_count");
+				String id = rs.getString("id");
+				String nickname = rs.getString("nickname");
+				String title = rs.getString("title");
+				String context = rs.getString("context");
+				String file_name = rs.getString("file_name");
+				String postdate = rs.getString("postdate");
+				khBoardDTO dto = new khBoardDTO(num, file_id, visit_count, id, nickname, title, context, file_name, postdate);
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
+	
 	public int insertWrite(String title, String context, String id, String nickname) {
 
 		int rs = 0;
@@ -351,6 +428,33 @@ public class khBoardDAO {
 		}
 		return rs;
 	}
+	
+	public int upload(khBoardDTO dto) {
+
+		int rs = 0;
+		System.out.println(dto);
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		String sql = "insert into post (id, num, nickname, title, context, category, file_id, file_name, postdate) values ";
+		sql += "(?, post_idx.nextval, ?, ?, ?, '사진', file_idx.nextval, ?, sysdate)";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(3, dto.getTitle());
+			pstmt.setString(4, dto.getContext());
+			pstmt.setString(5, dto.getFile_name());
+
+			rs = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
 
 	public khBoardDTO getBoard(int num) {
 
@@ -397,6 +501,41 @@ public class khBoardDAO {
 		ResultSet rs = null;
 
 		String sql = "SELECT * FROM POST WHERE NUM = ? AND CATEGORY = '질문' ";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+
+				int file_id = rs.getInt("file_id");
+				int visit_count = rs.getInt("visit_count");
+				String id = rs.getString("id");
+				String nickname = rs.getString("nickname");
+				String title = rs.getString("title");
+				String context = rs.getString("context");
+				String category = rs.getString("category");
+				String file_name = rs.getString("file_name");
+				String postdate = rs.getString("postdate");
+				dto = new khBoardDTO(num, file_id, visit_count, id, nickname, title, context, category, file_name, postdate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return dto;
+	}
+	
+	public khBoardDTO iGetBoard(int num) {
+
+		khBoardDTO dto = new khBoardDTO();
+
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT * FROM POST WHERE NUM = ? AND CATEGORY = '사진' ";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -493,6 +632,28 @@ public class khBoardDAO {
 		ResultSet rs = null;
 
 		String sql = "select num from (select num from post where num > ? AND CATEGORY = '질문' order by num) where rownum = 1";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				before = rs.getInt("num");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return before;
+	}
+	
+	public int iBeforeBoard(int num) {
+		int before = 0;
+
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select num from (select num from post where num > ? AND CATEGORY = '사진' order by num) where rownum = 1";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

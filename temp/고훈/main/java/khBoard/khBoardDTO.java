@@ -59,6 +59,29 @@ public class khBoardDTO {
 		this.postdate = postdate;
 	}
 
+	public khBoardDTO(String id, String nickname, String title, String context, String file_name) {
+		super();
+		this.id = id;
+		this.nickname = nickname;
+		this.title = title;
+		this.context = context;
+		this.file_name = file_name;
+	}
+	
+	public khBoardDTO(int num, int file_id, int visit_count, String id, String nickname, String title, String context,
+			String file_name, String postdate) {
+		super();
+		this.num = num;
+		this.file_id = file_id;
+		this.visit_count = visit_count;
+		this.id = id;
+		this.nickname = nickname;
+		this.title = title;
+		this.context = context;
+		this.file_name = file_name;
+		this.postdate = postdate;
+	}
+
 	public int getNum() {
 		return num;
 	}
