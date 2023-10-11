@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -24,21 +25,23 @@ public class khBoardJson {
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
 		System.out.println(uri);
-		System.out.println(action + 111);
+		System.out.println(action);
 
 		if (action.equals("/selectCount.json")) {
-			
+			String searchWord = request.getParameter("searchWord");
+			String searchField = request.getParameter("searchField");
 			khBoardDAO dao = new khBoardDAO();
-			int totalCount = dao.selectCount();
+			int totalCount = dao.selectCount(searchWord, searchField);
 
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("totalCount", totalCount);
 			response.getWriter().write(jsonObject.toString());	
 		}
 		else if (action.equals("/qSelectCount.json")) {
-
+			String searchWord = request.getParameter("searchWord");
+			String searchField = request.getParameter("searchField");
 			khBoardDAO dao = new khBoardDAO();
-			int totalCount = dao.qSelectCount();
+			int totalCount = dao.qSelectCount(searchWord, searchField);
 
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("totalCount", totalCount);
@@ -47,13 +50,12 @@ public class khBoardJson {
 		}
 		else if(action.equals("/boardList.json")) {
 			
-			int posts_per_page = Integer.parseInt(request.getParameter("posts_per_page"));
-			int page = Integer.parseInt(request.getParameter("page"));
+			int listNum = Integer.parseInt(request.getParameter("listNum"));
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 			List<khBoardDTO> list = new ArrayList<khBoardDTO>();
 			khBoardDAO dao = new khBoardDAO();
-			System.out.println(posts_per_page);
-			System.out.println(page);
-			list = dao.boardList(posts_per_page, page);
+	
+			list = dao.boardList(listNum, pageNum);
 			System.out.println(list);
 
 			String gson = new Gson().toJson(list);
@@ -82,12 +84,12 @@ public class khBoardJson {
 			System.out.println(3333);
 			String searchWord = request.getParameter("searchWord");
 			String searchField = request.getParameter("searchField");
-			int posts_per_page = Integer.parseInt(request.getParameter("posts_per_page"));
-			int page = Integer.parseInt(request.getParameter("page"));
+			int listNum = Integer.parseInt(request.getParameter("listNum"));
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 
 			List<khBoardDTO> list = new ArrayList<khBoardDTO>();
 			khBoardDAO dao = new khBoardDAO();
-			list = dao.searchList(searchWord, searchField, posts_per_page, page);
+			list = dao.searchList(searchWord, searchField, listNum, pageNum);
 			System.out.println(list);
 			
 			String gson = new Gson().toJson(list);
@@ -96,10 +98,12 @@ public class khBoardJson {
 		else if(action.equals("/qSearchList.json")) {
 			String searchWord = request.getParameter("searchWord");
 			String searchField = request.getParameter("searchField");
+			int listNum = Integer.parseInt(request.getParameter("listNum"));
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 
 			List<khBoardDTO> list = new ArrayList<khBoardDTO>();
 			khBoardDAO dao = new khBoardDAO();
-			list = dao.qSearchList(searchWord, searchField);
+			list = dao.qSearchList(searchWord, searchField, listNum, pageNum);
 			
 			String gson = new Gson().toJson(list);
 			response.getWriter().write(gson);
@@ -145,7 +149,8 @@ public class khBoardJson {
 			
 			khBoardDAO dao = new khBoardDAO();
 			int rs = dao.aInsertWrite(title, context, id, nickname, num);
-
+			
+			System.out.println(rs);
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);
 			response.getWriter().write(jsonObject.toString());
@@ -240,9 +245,63 @@ public class khBoardJson {
 			jsonObject.addProperty("nextNum", nextNum);
 			response.getWriter().write(jsonObject.toString());
 		}
+		else if(action.equals("/visit_count_plus.json")) {
+			int num = Integer.parseInt(request.getParameter("num"));
+			khBoardDAO dao = new khBoardDAO();
+			int rs = dao.visit_count_plus(num);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
+			response.getWriter().write(jsonObject.toString());
+		}
+		else if(action.equals("/pagingBtns.json")) {
+			int listNum = Integer.parseInt(request.getParameter("listNum"));
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			String searchWord = request.getParameter("searchWord");
+			String searchField = request.getParameter("searchField");
+			
+			khBoardDAO dao = new khBoardDAO();
+			
+			int totalCount = dao.selectCount(searchWord, searchField);
+			int blockNum = 5;
+			
+			PagingDTO dto = new PagingDTO(totalCount, pageNum, blockNum, listNum);
+			dto.setPaging();
+			
+			String gson = new Gson().toJson(dto);
+			response.getWriter().write(gson);
+		}
+		else if(action.equals("/qPagingBtns.json")) {
+			int listNum = Integer.parseInt(request.getParameter("listNum"));
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			String searchWord = request.getParameter("searchWord");
+			String searchField = request.getParameter("searchField");
+			
+			khBoardDAO dao = new khBoardDAO();
+			
+			int totalCount = dao.qSelectCount(searchWord, searchField);
+			int blockNum = 5;
+			
+			PagingDTO dto = new PagingDTO(totalCount, pageNum, blockNum, listNum);
+			dto.setPaging();
+			
+			String gson = new Gson().toJson(dto);
+			response.getWriter().write(gson);
+		}
+		else if(action.equals("/uploadImage.json")) {
+			String uploadFolder = "D:\\kdigital2307\\jsp\\jspws\\mini_project\\src\\main\\webapp\\uploads";
+			
+			Part part = request.getPart("formData");
+			
+			System.out.println(part);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", 1);
+			response.getWriter().write(jsonObject.toString());
+			
 
-
-
+		}
+	
 
 
 	}

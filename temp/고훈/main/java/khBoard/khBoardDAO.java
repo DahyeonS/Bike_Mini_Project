@@ -10,17 +10,8 @@ import control.JDBCUtil;
 
 public class khBoardDAO {
 	
-	public String pagingStr(int totalCount, int posts_per_page, int blockPage, int pageNum, String reqUrl) {
 	
-		String pagingStr = "";
-		
-		int total_pages = (int)Math.ceil(totalCount / posts_per_page);
-		
-		
-		return pagingStr;
-	}
-	
-	public int selectCount() {
+	public int selectCount(String searchWord, String searchField) {
 
 		int totalCount = 0;
 		
@@ -29,9 +20,15 @@ public class khBoardDAO {
 		ResultSet rs = null;
 
 		String sql = "SELECT COUNT(*) FROM POST WHERE CATEGORY = '일반' ";
+		if(searchWord != null) {
+			sql += "AND " + searchField + " LIKE ? ";
+		}
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			if(searchWord != null) {
+				pstmt.setString(1, "%" + searchWord + "%");
+			}
 			rs = pstmt.executeQuery();
 			rs.next();
 			totalCount = rs.getInt(1);
@@ -44,7 +41,7 @@ public class khBoardDAO {
 		return totalCount;
 	}
 	
-	public int qSelectCount() {
+	public int qSelectCount(String searchWord, String searchField) {
 
 		int totalCount = 0;
 		
@@ -53,9 +50,15 @@ public class khBoardDAO {
 		ResultSet rs = null;
 
 		String sql = "SELECT COUNT(*) FROM POST WHERE CATEGORY = '질문' ";
+		if(searchWord != null) {
+			sql += "AND " + searchField + " LIKE ? ";
+		}
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			if(searchWord != null) {
+				pstmt.setString(1, "%" + searchWord + "%");
+			}
 			rs = pstmt.executeQuery();
 			rs.next();
 			totalCount = rs.getInt(1);
@@ -69,7 +72,7 @@ public class khBoardDAO {
 	}
 
 
-	public List<khBoardDTO> boardList(int posts_per_page, int page) {
+	public List<khBoardDTO> boardList(int listNum, int pageNum) {
 		System.out.println(2222);
 
 		List<khBoardDTO> list = new ArrayList<khBoardDTO>();
@@ -77,12 +80,12 @@ public class khBoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM (SELECT post.*, rownum AS rnum FROM post WHERE category = '일반' ORDER BY num DESC) WHERE rnum BETWEEN ? AND ? ";
+		String sql = "SELECT * FROM (SELECT tb.*, rownum AS rnum FROM (select * from post WHERE category = '일반' ORDER BY num DESC) tb) WHERE rnum BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (page-1)*posts_per_page + 1);
-			pstmt.setInt(2, (page)*posts_per_page);
+			pstmt.setInt(1, (pageNum-1)*listNum + 1);
+			pstmt.setInt(2, (pageNum)*listNum);
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {
@@ -160,10 +163,11 @@ public class khBoardDAO {
 
 				int num = rs.getInt("num");
 				String nickname = rs.getString("nickname");
+				String title = rs.getString("title");
 				String context = rs.getString("context");
 				String postdate = rs.getString("postdate");
 
-				khBoardDTO dto = new khBoardDTO(num, nickname, context, postdate);
+				khBoardDTO dto = new khBoardDTO(num, nickname, context, postdate, title);
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -171,11 +175,11 @@ public class khBoardDAO {
 		} finally {
 			JDBCUtil.close(rs, pstmt, conn);
 		}
-
+		System.out.println(list);
 		return list;
 	}
 	
-	public List<khBoardDTO> searchList(String searchWord, String searchField, int posts_per_page, int page) {
+	public List<khBoardDTO> searchList(String searchWord, String searchField, int listNum, int pageNum) {
 
 		List<khBoardDTO> list = new ArrayList<khBoardDTO>();
 
@@ -183,7 +187,7 @@ public class khBoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM (SELECT post.*, rownum AS rnum FROM post WHERE category = '일반' ";
+		String sql = "SELECT * FROM (SELECT tb.*, rownum AS rnum FROM (select * from post WHERE category = '일반' ";
 		if(searchField != null) {
 			if(searchField.equals("title")) {
 				sql += "AND title LIKE ? ";
@@ -191,13 +195,14 @@ public class khBoardDAO {
 			else if (searchField.equals("nickname")) {
 				sql += "AND nickname LIKE ? ";
 			}
-			sql +=  "ORDER BY num DESC) WHERE rnum BETWEEN ? AND ?";
+			sql +=  " ORDER BY num DESC) tb) WHERE rnum BETWEEN ? AND ? ";
 		}
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + searchWord +"%");
-			pstmt.setInt(2, (page-1)*posts_per_page + 1);
-			pstmt.setInt(3, (page)*posts_per_page);
+			pstmt.setInt(2, (pageNum-1)*listNum + 1);
+			pstmt.setInt(3, (pageNum)*listNum);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				String id = rs.getString("id");
@@ -220,7 +225,7 @@ public class khBoardDAO {
 		return list;
 	}
 	
-	public List<khBoardDTO> qSearchList(String searchWord, String searchField) {
+	public List<khBoardDTO> qSearchList(String searchWord, String searchField, int listNum, int pageNum) {
 
 		List<khBoardDTO> list = new ArrayList<khBoardDTO>();
 
@@ -228,19 +233,21 @@ public class khBoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT id, num, title, nickname, postdate, visit_count FROM POST ";
+		String sql = "SELECT * FROM (SELECT tb.*, rownum AS rnum FROM (select * from post WHERE category = '질문' ";
 		if(searchField != null) {
 			if(searchField.equals("title")) {
-				sql += "WHERE title LIKE ? ";
+				sql += "AND title LIKE ? ";
 			}	
 			else if (searchField.equals("nickname")) {
-				sql += "WHERE nickname LIKE ? ";
+				sql += "AND nickname LIKE ? ";
 			}
-			sql += " AND CATEGORY = '질문' ORDER BY num DESC";
+			sql +=  " ORDER BY num DESC) tb) WHERE rnum BETWEEN ? AND ? ";
 		}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + searchWord +"%");
+			pstmt.setInt(2, (pageNum-1)*listNum + 1);
+			pstmt.setInt(3, (pageNum)*listNum);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				String id = rs.getString("id");
@@ -413,7 +420,6 @@ public class khBoardDAO {
 		} finally {
 			JDBCUtil.close(rs, pstmt, conn);
 		}
-
 		return dto;
 	}
 	
@@ -541,6 +547,25 @@ public class khBoardDAO {
 			e.printStackTrace();
 		}
 		return next;
+	}
+	public int visit_count_plus(int num) {
+	
+		int rs = 0;
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+
+		String sql = "update post set visit_count=visit_count+1 where num = ?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+		
 	}
 
 
