@@ -47,3 +47,8 @@
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+.member {
+	display: flex;
+	gap: 15px;
+}
+.count_box {font-weight: bold; display: flex; gap: 5px;}

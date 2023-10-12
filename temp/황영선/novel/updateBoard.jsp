@@ -4,30 +4,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="../css/write.css">
+ <link rel="stylesheet" type="text/css" href="./css/write.css">
  <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
  <script>
  function writeBoard() {
 	 <%String num_de = request.getParameter("num");
 		int numD = Integer.parseInt(num_de);
 		%>
-		console.log("num : " + num);
+		console.log("num : " + <%=numD%>);
 		const num = "<%=numD%>";
 		const title = $('#wTitle').val();
 		const context = $('#wContext').val();
 		const param = {title:title, context:context, num:num};
 		                                                                                                                                                                                                                                                                                                                                                    
 		$.ajax({
-			contentType: 'application/json',
 	        type: 'POST',
 	        url: 'updateJson.json',
-	        dataType: 'json',
+	        dataType: 'text',
 	        data: param,
-	        success: function(data) {
-	        	console.log("data : "+ data);
-	        	console.log("param : "+ param);
+	        success: function(r) {
+	        	const result = JSON.parse(r);
+	        	const rs = result.rs;
 	        	
-	        	if (data['rs'] === 1) {
+	        	if (rs === 1) {
 	        		alert('게시글이 수정되었습니다');
 	        		location.href = 'board.do';
 	        	}
@@ -44,20 +43,21 @@
 				const num2 = "<%=numCh%>";
 			                                                                                                                                                                                                                                                                                                                                                    
 			$.ajax({
-				contentType: 'application/json',
 		        type: 'POST',
 		        url: 'prevWrite.json',
-		        dataType: 'json',
+		        dataType: 'text',
 		        data: {num:num2},
-		        success: function(data) {
+		        success: function(r) {
 		        	console.log("num2 : "+ num2);
+		        	const result = JSON.parse(r);
+		        	const title = result.title;
+		        	const context = result.context;
 		        	
-		        	if (data['rs'] === 1) {
-		        		alert('헤헤헿');
-		        		console.log("data : " + JSON.stringify(data));
+		        	if (r !== null) {
+		        		console.log("r : " + JSON.stringify(r));
 			        	 
-	        			$('#wTitle').html(data['title']);
-	        			$('#wContext').html(data['context']);
+	        			$('#wTitle').val(title);
+	        			$('#wContext').val(context);
 		        	}
 					else alert('삐바 좀 있다 다시혀');
 		        }, error: function(xhr, status, error) {
@@ -94,11 +94,11 @@
                     <tbody>
                         <tr>
                             <td class="w_name">제목</td>
-                            <td><input type="text" name="wTitle" id="wTitle"></td>
+                            <td><input type="textarea" name="wTitle" id="wTitle"></td>
                         </tr>
                         <tr>
                             <td class="w_name">내용</td>
-                            <td><input type="text" name="wContext" id="wContext"></td>
+                            <td><input type="textarea" name="wContext" id="wContext"></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="w_btn">
@@ -107,10 +107,7 @@
                                 <input type="button" value="목록 보기" id="listBtn">
                             </td>
                         </tr>
-                        <tr>
-                        	<td> <input type="button" value="&lt;" id="prevBtn"></td>
-                        	<td><input type="button" value="&gt;" id="nextBtn"></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>

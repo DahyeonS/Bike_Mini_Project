@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="../css/write.css">
+ <link rel="stylesheet" type="text/css" href="./css/write.css">
  <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
  <script>
  function writeBoard() {
@@ -13,8 +13,9 @@
 	 %>
 		const id = "<%=id%>";
 		const name = "<%=name%>";
-		const title = $('#wTitle').val();
-		const context = $('#wContext').val();
+		var title = $('#wTitle').val();
+		var context = $('#wContext').val();
+			
 		const param = {title:title, context:context, id:id, name:name};
 		                                                                                                                                                                                                                                                                                                                                                    
 		$.ajax({
@@ -77,11 +78,11 @@
                     <tbody>
                         <tr>
                             <td class="w_name">제목</td>
-                            <td><input type="text" name="wTitle" id="wTitle"></td>
+                            <td><input type="textarea" name="wTitle" id="wTitle"></td>
                         </tr>
                         <tr>
                             <td class="w_name">내용</td>
-                            <td><input type="text" name="wContext" id="wContext"></td>
+                            <td><input type="textarea" name="wContext" id="wContext"></td>
                         </tr>
                         <tr>
                             <td colspan="2" class="w_btn">
@@ -91,10 +92,7 @@
                                 <input type="button" value="목록 보기" id="listBtn">
                             </td>
                         </tr>
-                        <tr>
-                        	<td> <input type="button" value="&lt;" id="prevBtn"></td>
-                        	<td><input type="button" value="&gt;" id="nextBtn"></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>

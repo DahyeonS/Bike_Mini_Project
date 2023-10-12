@@ -5,37 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" type="text/css" href="../css/view.css">
+ 	<link rel="stylesheet" type="text/css" href="./css/view.css">
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
  <script>
+ 
  <% String id = (String)session.getAttribute("id"); %>
-
- function modifyBtn() {
-	 	const id = "<%=id%>";
-		const param = {id:id};
-		$.ajax({
-	        type: 'POST',
-	        url: 'viewJson.json',
-	        dataType: 'json',
-	        data: param,
-	        success: function(data) {
-	        	console.log("id : " + id);
-	        	console.log("data : " + data);
-	        	console.log("data['rs'] : " + data['rs']);
-	        	if (data['rs'] === 1) {
-	        		location.href = 'write.do';
-	        	}
-				else {
-					alert("게시글을 수정하려면 로그인을 먼저 하셔야됩니다");
-					location.href = 'login.do'
-				};
-	        }, error: function(xhr, status, error) {
-	        	console.log(xhr, status, error);
-	        }
-		});
-	};
-	
-	
 	function ViewJson() {
 		<%String num2 = request.getParameter("num");
 		int num = Integer.parseInt(num2);
@@ -44,15 +18,21 @@
 		$.ajax({
 	        type: 'POST',
 	        url: 'viewJson.json',
-	        dataType: 'json',
+	        dataType: 'text',
 	        data: {num:num},
-	        success: function(data) {
-	        	 console.log("data : " + JSON.stringify(data));
+	        success: function(r) {
+	        	const result = JSON.parse(r);
+	        	const nickname = result.nickname;
+	        	const title = result.title;
+	        	const context = result.context;
+	        	const postdate = result.postdate;
+	        	const count = result.visitCount;
 	        	 
-        			$('#title').html(data['title']);
-        			$('.date').html(data['postdate']);
-        			$('#m_id').html(data['nickname']);
-        			$('#context').html(data['context']);
+        			$('#title').html(title);
+        			$('.date').html(postdate);
+        			$('#m_id').html(nickname);
+        			$('#context').html(context);
+	        		$('.count').html(count);
         			
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);
@@ -103,7 +83,7 @@
 		if (id !== idCh2) {
 	        $('.modify_btn, .delete_btn').click(function(event) {
 	            event.preventDefault(); // 클릭 이벤트의 기본 동작을 막음
-	            alert("작성하신 글이 아니시므로 삭제할 수 없습니다");
+	            alert("작성하신 글이 아니시므로 삭제하거나 수정할 수 없습니다");
 	        });
 	    } else {
 	    	$('.delete_btn').click(function(){
@@ -121,6 +101,30 @@
 			})
 	    }
 	});
+	function count() {
+		<%String n6 = request.getParameter("num6");
+		int nCh6 = Integer.parseInt(n6);
+		%>
+		const num_6 = "<%=nCh6%>";
+		console.log("nuk : "+ num_6);
+		$.ajax({
+	        type: 'POST',
+	        url: 'count.json',
+	        dataType: 'text',
+	        data: {num:num_6},
+	        success: function(r) {
+	        	console.log("r : "+ r);
+	        	
+	        	if(typeof r != "undefined") {
+	        		console.log("웅웅");
+	        	}else {
+	        		alert("잘못되셨습니다");
+	        	}
+	        }, error: function(xhr, status, error) {
+	        	console.log(xhr, status, error);
+	        }
+		});
+	};
 	function prevJson() {
 		<%String n4 = request.getParameter("num4");
 		int nCh4 = Integer.parseInt(n4);
@@ -130,17 +134,19 @@
 		$.ajax({
 	        type: 'POST',
 	        url: 'prevJson.json',
-	        dataType: 'json',
+	        dataType: 'text',
 	        data: {num:num_4},
-	        success: function(data) {
-	        	console.log("data : " + data);
-	        	console.log("data['rs'] : " + data['rs']);
-	        	if (data['rs'] === 1) {
-	        		alert("전꺼로 이도옹");
+	        success: function(r) {
+	        	const result = JSON.parse(r);
+	        	const id = result.id;
+	        	const num = result.num;
+	        	
+	        	if (num != num_4) {
+    				location.href = 'view.jsp?num='+num+'&id='+id+'&num2='+num+'&num3='+num+'&num4='+num+'&num5='+num+'&num6='+ num +'';
+    				/* alert("location : "+ 'view.jsp?num='+num+'&id='+id+'&num2='+num+'&num3='+num+'&num4='+num+'&num5='+num+'&num6='+ num +''); */
 	        	}
-				else {
-					alert("야잇");
-					/* location.href = 'login.do' */
+				else if(num == num_4) {
+					alert("더이상 넘어가실 수 없습니다. 첫번째 게시글입니다");
 				};        			
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);
@@ -156,17 +162,20 @@
 		$.ajax({
 	        type: 'POST',
 	        url: 'nextJson.json',
-	        dataType: 'json',
+	        dataType: 'text',
 	        data: {num:num_5},
-	        success: function(data) {
-	        	console.log("data : " + data);
-	        	console.log("data['rs'] : " + data['rs']);
-	        	if (data['rs'] === 1) {
-	        		alert("다음꺼로 이도옹");
+	        success: function(r) {
+	        	const result = JSON.parse(r);
+	        	const id = result.id;
+	        	const num2 = result.num;
+	        	console.log("num 다음페이지 :" + num2);
+	        	
+	        	if (num2 != num_5 && num2 !== 0) {
+    				location.href = 'view.jsp?num='+num2+'&id='+id+'&num2='+num2+'&num3='+num2+'&num4='+num2+'&num5='+num2+'&num6='+ num2 +'';
+    				/* alert("location : "+ 'view.jsp?num='+num2+'&id='+id+'&num2='+num2+'&num3='+num2+'&num4='+num2+'&num5='+num2+'&num6='+ num2 +''); */
 	        	}
-				else {
-					alert("야잇");
-					/* location.href = 'login.do' */
+				else if(num2 === 0) {
+					alert("더이상 넘어가실 수 없습니다. 마지막 게시글입니다");
 				};        			
 	        }, error: function(xhr, status, error) {
 	        	console.log(xhr, status, error);
@@ -181,6 +190,20 @@
 		$('#next').click(function(){
 			nextJson();
 		})
+		count();
+		
+		
+		<%String search = request.getParameter("search");%>
+		const agree = "<%=search%>";
+		console.log("agree : "+ agree);
+		if(agree == "t") {
+			$('.pe_neBtn_box').hide();
+		}
+		
+		/* $('#m_id').click(function(){
+			const getNick = $('#m_id').text();
+			console.log("getNick : "+ getNick);
+		}) */
 	})
  </script>
  
@@ -195,8 +218,9 @@
 	            <div class="date_box">
 	                <div class="date"></div>
 	                <div class="member">
-	                    <a href="#" id="m_id"></a>
-	                   </div>
+	                    <div id="m_id"></div>
+	                	<div class="count_box">조회수 : <div class="count"></div></div>
+                   </div>
 	            </div>
 	        </div>
 	        <div class="main">
@@ -204,11 +228,11 @@
 	        </div>
 	        <div class="footer_box">
 	            <div class="pe_neBtn_box">
-	                <div class="prevBtn btn">
-	                    <a href="#" id="prev">◀ PREV</a>
-	                </div>
 	                <div class="nextBtn btn">
-	                    <a href="#" id="next">NEXT ▶</a>
+	                    <a href="#" id="next">◀ NEXT</a>
+	                </div>
+	                <div class="prevBtn btn">
+	                    <a href="#" id="prev">PREV ▶</a>
 	                </div>
 	            </div>
 	            <div class="list_box">
