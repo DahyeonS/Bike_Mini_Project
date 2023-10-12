@@ -15,7 +15,10 @@ public class QnaController {
 		String action = uri.substring(uri.lastIndexOf("/"));
 		System.out.println(uri.split("/",4)[2]);
 		if (uri.split("/",4)[2].lastIndexOf(".") == -1) {
-			if (action.equals("/qnaBoardList.do")) response.sendRedirect("../qna/boardList.jsp");
+			if (action.equals("/qnaBoardList.do")) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("../qna/boardList.jsp");
+				dispatcher.forward(request, response);
+			}
 			else if (action.equals("/qnaBoardView.do")) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("../qna/boardView.jsp");
 				dispatcher.forward(request, response);

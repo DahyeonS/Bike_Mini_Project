@@ -99,12 +99,20 @@ $(function() {
 		else return;
 	});
 	$('#submit').click(function() {
-		if (num == null) num = 0;
-		qnaWrite(num);
+		if ($('#title').val() === '') alert('제목을 입력하세요');
+		else if ($('#context').val() === '') alert('내용을 입력하세요');
+		else {
+			if (num == null) num = 0;
+			qnaWrite(num);
+		}
 	});
 	$('#update').click(function() {
-		if (num == null) num = 0;
-		qnaUpdate(update, num);
+		if ($('#title').val() === '') alert('제목을 입력하세요');
+		else if ($('#context').val() === '') alert('내용을 입력하세요');
+		else {
+			if (num == null) num = 0;
+			qnaUpdate(update, num);
+		}
 	});
 });
 </script>

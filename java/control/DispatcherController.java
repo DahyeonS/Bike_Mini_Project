@@ -53,7 +53,7 @@ public class DispatcherController extends HttpServlet {
 			}
 			QnaController qnaControl = new QnaController();
 			qnaControl.qnaProcess(request, response);
-		} else {
+		}  else {
 			if (action.equals("/index.do")) response.sendRedirect("./home/index.jsp");
 		}
 	}

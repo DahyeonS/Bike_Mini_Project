@@ -18,7 +18,7 @@ function getQnaBoardView() {
         	if (data['updateDate'] !== "0") $('#updatedate').html("수정일자 " + data['updateDate']);
         	$('#visitcount').html("조회수 " + data['visitCount']);
         	let string = '';
-        	if ('<%=session.getAttribute("nickname")%>' === data['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') string += '<input type="button" value="삭제하기" onclick="deleteBoard(' + data['num'] + ');" style="float: right;">';
+        	if (('<%=session.getAttribute("nickname")%>' === data['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') && data['nickname'] !== '관리자') string += '<input type="button" value="삭제하기" onclick="deleteBoard(' + data['num'] + ');" style="float: right;">';
     		if ('<%=session.getAttribute("nickname")%>' === data['nickname']) string += '<input type="button" value="수정하기" onclick="updateBoard(' + data['num'] + ');" style="float: right;">';
     		$('.control').html(string);
         },
@@ -43,7 +43,7 @@ function getQnaAnswerView() {
 		        		string += '<br><br><h2>' + item['title'] + '</h2><hr><h4>작성자 ' + item['nickname'] + '</h4><h4 id="apostdate">작성일자 ' + item['postdate'] + '</h4>';
 		        		if (item['updateDate'] !== "0") string += '<h4 id="aupdatedate">수정일자 ' + item['updateDate'] + '</h4>';
 		        		string += '<hr><h3>' + item['context'] + '</h3>';
-		        		if ('<%=session.getAttribute("nickname")%>' === item['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') string += '<input type="button" value="삭제하기" onclick="deleteAnswer(' + item['num'] + ');" style="float: right;">';
+		        		if (('<%=session.getAttribute("nickname")%>' === data['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') && item['nickname'] !== '관리자') string += '<input type="button" value="삭제하기" onclick="deleteAnswer(' + item['num'] + ');" style="float: right;">';
 		        		if ('<%=session.getAttribute("nickname")%>' === item['nickname']) string += '<input type="button" value="수정하기" onclick="updateBoard(' + item['num'] + ');" style="float: right;">';
 		        		getQnaReplyView(item['num']);
 		        		string += '<br><br><br><br><div class="replies"><table id="replylist' + item['num'] + '"></table>'
