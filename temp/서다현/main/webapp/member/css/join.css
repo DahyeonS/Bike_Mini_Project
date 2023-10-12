@@ -21,12 +21,13 @@ th {width: 200px;}
 #join {text-align: right;}
 #check, #nickcheck, #submit {
     font-weight: 500;
+    color: rgb(66, 66, 66);
     text-align: center;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(215, 255, 255);
     border-radius: 10%;
-    border: 1px solid rgb(220, 220, 220);
+    border: 1px solid rgb(200, 225, 225);
 }
-#check:hover, #nickcheck:hover, #submit:hover {background-color: rgb(220, 220, 220);}
+#check:hover, #nickcheck:hover, #submit:hover {background-color: rgb(200, 225, 225);}
 .btn {
     height: 60px;
     width: 600px;
@@ -34,6 +35,7 @@ th {width: 200px;}
 #id, #pw, #pw2, #nickname {
     border-radius: 5%;
     border: 1px solid rgb(100, 100, 100);
+    background-color: rgb(245, 245, 245);
 }
 #check, #nickcheck {margin-left: 80px;}
 #submit {margin-right: 20px;}
