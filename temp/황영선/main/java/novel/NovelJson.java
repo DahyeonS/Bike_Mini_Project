@@ -234,29 +234,6 @@ public class NovelJson {
 			System.out.print("text: "+ text + " /");
 			List<NovelDTO> list = dao.searchBtn(option,text, pageNum, listNum);
 			
-			/////////////////////////////
-			int blockNum = 5;
-			if(request.getParameter("page") != null){
-				pageNum = Integer.parseInt(request.getParameter("page"));
-			};	
-			
-			NovelDAO dao = new NovelDAOImpl();
-			int totalCount = dao.getSearchMemberCount(option, text);  
-			System.out.print(" // totalCount:  " + totalCount);			
-			PagingDTO paging = new PagingDTO(totalCount, pageNum, listNum, blockNum);
-			paging.setPaging();	
-			
-			int totalPage = paging.getTotalPage();
-			int startPage = paging.getStartPage();
-			int endPage = paging.getEndPage();
-			boolean isPrev = paging.isPrev();
-			boolean isNext = paging.isNext();
-			boolean isBPrev = paging.isBPrev();
-			boolean isBNext = paging.isBNext();
-			
-			
-			////////////////////////////////////
-			
 			
 			JsonArray jsonArray = new JsonArray();
 			for(NovelDTO dto: list){
@@ -274,10 +251,49 @@ public class NovelJson {
 			}
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(jsonArray.toString());	
+		} else if (action.equals("/searchCount.json")) {
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			int listNum = Integer.parseInt(request.getParameter("listNum"));
+			System.out.print("search pageNum : "+ pageNum);
+			System.out.print("search listNum : "+ listNum);
 			
+			String option = request.getParameter("option");
+			String text = request.getParameter("text");
 			
-						
-						
+			System.out.print("option : "+ option+ " / ");
+			System.out.print("text: "+ text + " /");
+			
+			/////////////////////////////
+			int blockNum = 5;
+			if(request.getParameter("page") != null){
+			pageNum = Integer.parseInt(request.getParameter("page"));
+			};	
+			
+			NovelDAO dao = new NovelDAOImpl();
+			int totalCount = dao.getSearchMemberCount(option, text);  
+			System.out.print(" // totalCount:  " + totalCount);			
+			PagingDTO paging = new PagingDTO(totalCount, pageNum, listNum, blockNum);
+			paging.setPaging();	
+			
+			int totalPage = paging.getTotalPage();
+			int startPage = paging.getStartPage();
+			int endPage = paging.getEndPage();
+			boolean isPrev = paging.isPrev();
+			boolean isNext = paging.isNext();
+			boolean isBPrev = paging.isBPrev();
+			boolean isBNext = paging.isBNext();
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("totalPage", totalPage);
+			jsonObject.addProperty("startPage", startPage);
+			jsonObject.addProperty("endPage", endPage);
+			jsonObject.addProperty("isPrev", isPrev);
+			jsonObject.addProperty("isNext", isNext);
+			jsonObject.addProperty("isBPrev", isBPrev);
+			jsonObject.addProperty("isBNext", isBNext);
+			
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(jsonObject.toString());	
 		}
 		
 	}

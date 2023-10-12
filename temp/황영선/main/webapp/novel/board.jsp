@@ -110,9 +110,7 @@ $(function() {
 	 	const option = $("#search_select option:selected").val();
 	 	const text = $('#b_search').val();
 		const param = {option:option, text:text, pageNum:pageNum, listNum:listNum};
-		<%
-			int totalCount2 = dao.getSearchMemberCount(option, text);  
-		%>
+		
 		$.ajax({
 	        type: 'GET',
 	        url: 'searchBtn.json',
@@ -138,7 +136,7 @@ $(function() {
 	        }
 		});
 	}; 
-	<%-- function searchBtn() {
+	function searchCount() {
 		
 		const pageNum = <%=pageNum%>;
 		const listNum = <%=listNum%>;
@@ -146,8 +144,39 @@ $(function() {
 	 	const text = $('#b_search').val();
 		const param = {option:option, text:text, pageNum:pageNum, listNum:listNum};
 		
-		
-	}; --%>
+		$.ajax({
+	        type: 'GET',
+	        url: 'searchCount.json',
+	        dataType: 'json',
+	        data: param,
+	        success: function(r) {
+	        	let {totalPage, startPage, endPage, isPrev, isNext, isBPrev, isBNext} = r;
+	        	console.log("item  : "+ item);
+	        	console.log("r  : "+ r);
+	        	let div = '';
+	        	
+        		if(isBPrev) div += '<a href="../novel/board.jsp?page=' + (startPage-1)+'">&nbsp;<<&nbsp;</a>';
+				if(isPrev)div+='<a href="../novel/board.jsp?page='+ (pageNum -1) +'">&nbsp;<&nbsp;</a>';
+				
+				for(let i=startPage; i<=endPage; i++) {
+					if(i == pageNum) {
+						div+='<span style="color:red;">&nbsp;'+i+'&nbsp;</span>'
+					}else{
+						div+='<a href="../novel/board.jsp?page=='+i+'">&nbsp;'+i+'&nbsp;</a>'
+					}
+				}
+				
+				if(isNext)div+='<a href="../novel/board.jsp?page='+(pageNum+1)+'">&nbsp;>&nbsp;</a> ';
+				if(isBNext)div+='<a href="../novel/board.jsp?page='+(endPage+1)+'">&nbsp;>>&nbsp;</a>';
+				
+				$('.pageBtn2').html(div);
+	        	
+	        }, error: function(xhr, status, error) {
+	        	console.log(xhr, status, error);
+	        }
+		});
+	};  
+	
 	
 	$(function() {
 		$('#b_writeBtn').click(function() {
@@ -177,6 +206,8 @@ $(function() {
 		$('#b_searchBtn').click(function(){
 			/* $(".pageBtn").hide(); */
 			searchBtn();
+			searchCount();
+			$('.pageBtn').hide();
 		})
 		});
 	
@@ -238,6 +269,7 @@ $(function() {
 						<%if(isNext){ %> <a href="../novel/board.jsp?page=<%=pageNum+1%>">&nbsp;>&nbsp;</a> <%} %>
 						<%if(isBNext){ %> <a href="../novel/board.jsp?page=<%=endPage+1%>">&nbsp;>>&nbsp;</a> 
 						<%} %></div>
+			<div class="pageBtn2"></div>
 			<div><input type="button" value="글쓰기" id="b_writeBtn"></div>
 		</div>
 	</form>
