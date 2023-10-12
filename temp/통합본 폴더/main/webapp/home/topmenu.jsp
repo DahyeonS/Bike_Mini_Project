@@ -102,11 +102,8 @@ function QnaLoginCheck() {
         박철규
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+            <li> <a href="../pcgboard/FreeBoardList.do">자유게시판</a></li>
+            <li> <a href="../pcgboard/FreeBoardListPaging.do">자유페이징</a></li>
         </div>
     </ul>
 </div>
@@ -118,9 +115,7 @@ function QnaLoginCheck() {
             <!-- 내부 메뉴 항목의 콘텐츠 -->
             <li> <a href="../khBoard/boardList.do">일반 게시판</a></li>
             <li> <a href="../khBoard/qnaList.do">Q&A 게시판</a></li>
-            <li> <a href="../khBoard/imageList.do">사진 업로드 게시판</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+            <li> <a href="../khBoard/imageList.do">업로드 게시판</a></li>
         </div>
     </ul>
 </div>
@@ -130,11 +125,8 @@ function QnaLoginCheck() {
         권지현
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+             <li> <a href="../jhBoard/boardList.do">일반 게시판</a></li>
+            <li> <a href="../jhBoard/qnaBoardList.do">Q&A 게시판</a></li>
         </div>
     </ul>
 </div>
@@ -144,10 +136,7 @@ function QnaLoginCheck() {
         정민석
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+            <li> <a href="../jmsboard/board.do">게시판</a></li>
             <li> <a href="">데이터</a></li>
         </div>
     </ul>
@@ -158,11 +147,7 @@ function QnaLoginCheck() {
         황영선
         <div class="inner-menu">
             <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+            <li> <a href="../novel/board.do">소설 게시판</a></li>
         </div>
     </ul>
 </div>
