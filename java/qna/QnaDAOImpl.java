@@ -16,18 +16,17 @@ public class QnaDAOImpl implements QnaDAO {
 	String sql = "";
 	
 	@Override
-	public List<QnaDTO> getBoardList(int pageNum, int listNum) {
+	public List<QnaDTO> getBoardList(int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
-		int offSet = (pageNum - 1) * listNum;
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM"
-		+ "(SELECT * FROM post WHERE category = '질문' ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= ?";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+		+ "(SELECT * FROM post WHERE category = '질문' ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, offSet);
-			pstmt.setInt(2, listNum);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -48,19 +47,18 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> getBoardListTitle(QnaDTO dto, int pageNum, int listNum) {
+	public List<QnaDTO> getBoardListTitle(QnaDTO dto, int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
-		int offSet = (pageNum - 1) * listNum;
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM"
-				+ "(SELECT * FROM post WHERE category = '질문' AND title LIKE ? ORDER BY num DESC)) WHERE offset >= ? AND ROWNUM <= ?";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+				+ "(SELECT * FROM post WHERE category = '질문' AND title LIKE ? ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + dto.getTitle() + "%");
 			pstmt.setInt(2, offSet);
-			pstmt.setInt(3, listNum);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -81,19 +79,18 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> getBoardListContext(QnaDTO dto, int pageNum, int listNum) {
+	public List<QnaDTO> getBoardListContext(QnaDTO dto, int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
-		int offSet = (pageNum - 1) * listNum;
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM"
-				+ "(SELECT * FROM post WHERE category = '질문' AND context LIKE ? ORDER BY num DESC)) WHERE offset >= ? AND ROWNUM <= ?";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+				+ "(SELECT * FROM post WHERE category = '질문' AND context LIKE ? ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + dto.getContext() + "%");
 			pstmt.setInt(2, offSet);
-			pstmt.setInt(3, listNum);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -114,19 +111,18 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> getBoardListNickname(QnaDTO dto, int pageNum, int listNum) {
+	public List<QnaDTO> getBoardListNickname(QnaDTO dto, int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
-		int offSet = (pageNum - 1) * listNum;
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM"
-				+ "(SELECT * FROM post WHERE category = '질문' AND nickname LIKE ? ORDER BY num DESC)) WHERE offset >= ? AND ROWNUM <= ?";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+				+ "(SELECT * FROM post WHERE category = '질문' AND nickname LIKE ? ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + dto.getNickname() + "%");
 			pstmt.setInt(2, offSet);
-			pstmt.setInt(3, listNum);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

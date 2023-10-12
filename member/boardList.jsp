@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A 게시판</title>
+<title>게시글 조회</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>
-<h2>Q&A 게시판</h2>
+<h2>게시글 조회</h2>
 <hr>
 	<form id="board">
 		<div>
@@ -23,10 +23,19 @@
 					<select id="select">
 						<option value="title">제목</option>
 						<option value="context">내용</option>
-						<option value="nickname">작성자</option>
 					</select>
 					<input type="text" id="context">
 					<input type="button" value="검색하기" id="search">
+					<select id="category">
+						<option value="none">선택</option>
+						<option value="question">질문</option>
+						<option value="normal">일반</option>
+						<option value="answer">답변</option>
+						<option value="reply">답글</option>
+						<option value="novel">소설</option>
+						<option value="free">자유</option>
+						<option value="photo">사진</option>
+					</select>
 				</div>
 			</div>
 			<table border="1">
@@ -34,12 +43,10 @@
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
-						<th>작성자</th>
+						<th>카테고리</th>
 						<th>조회수</th>
 						<th>작성일</th>
-						<c:if test="${id != null && grade != 'GENERAL'}">
 						<th>&nbsp</th>
-						</c:if>
 					</tr>
 				</thead>
 				<tbody id="tbody">

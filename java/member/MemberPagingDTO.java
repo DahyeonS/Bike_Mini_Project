@@ -1,6 +1,6 @@
-package qna;
+package member;
 
-public class QnaPagingDTO {
+public class MemberPagingDTO {
 	int totalCount;
 	int listNum;
 	int blockNum;
@@ -14,7 +14,7 @@ public class QnaPagingDTO {
 	boolean isBPrev;
 	boolean isBNext;
 	
-	public QnaPagingDTO(int totalCount, int pageNum, int listNum, int blockNum) {
+	public MemberPagingDTO(int totalCount, int pageNum, int listNum, int blockNum) {
 		this.totalCount = totalCount;
 		this.pageNum = pageNum;
 		this.listNum = listNum;

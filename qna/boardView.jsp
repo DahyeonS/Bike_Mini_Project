@@ -7,34 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<style>
-	#nickname, #anickname {text-align: left;}
-	#postdate, #updatedate, #visitcount, #apostdate, #aupdatedate {text-align: right;}
-	form, h2 {text-align: center;}
-	#answertext {text-align: left;}
-	#rcontext {text-align: left;}
-	table, th, td, input, select {
-		margin: 0 auto;
-		border-collapse: collapse;
-		font-size: 14pt;
-	}
-	textarea {
-		width:300px;
-		height:50px;
-		text-align: initial;
-	}
-	#rpostdate {
-		font-size: 12pt;
-		text-align: right;
-		font-style: italic;
-	}
-	#rdelete {
-		font-size: 12pt;
-		text-align: right;
-	}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/boardview.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<%@include file="./script/boardViewScript.jsp"%>
+<%@include file="script/boardViewScript.jsp"%>
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>

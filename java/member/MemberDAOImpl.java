@@ -211,4 +211,84 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 		return rs;
 	}
+
+	@Override
+	public List<MemberBoardDTO> getBoardList(MemberBoardDTO dto, int pageNum) {
+		List<MemberBoardDTO> list = new ArrayList<MemberBoardDTO>();
+		int offSet = (pageNum - 1) * 10;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT * FROM (SELECT num, title, category, visit_count, postdate, ROWNUM AS offset FROM "
+				+ "(SELECT * FROM post WHERE id = ? AND title LIKE ? AND context LIKE ? AND category LIKE ? "
+				+ "ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, "%" + dto.getTitle() + "%");
+			pstmt.setString(3, "%" + dto.getContext() + "%");
+			pstmt.setString(4, "%" + dto.getCategory() + "%");
+			pstmt.setInt(5, offSet);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int num = rs.getInt("num");
+				String title = rs.getString("title");
+				String category = rs.getString("category");
+				int visitCount = rs.getInt("visit_count");
+				String postdate = rs.getString("postdate");
+				dto = new MemberBoardDTO(num, visitCount, title, null, category, postdate);
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return list;
+	}
+
+	@Override
+	public int getBoardCount(MemberBoardDTO dto) {
+		int result = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT COUNT(*) AS cnt FROM post WHERE id = ? AND title LIKE ? AND context LIKE ? AND category LIKE ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, "%" + dto.getTitle() + "%");
+			pstmt.setString(3, "%" + dto.getContext() + "%");
+			pstmt.setString(4, "%" + dto.getCategory() + "%");
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt("cnt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteBoard(MemberBoardDTO dto) {
+		int rs = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "DELETE FROM post WHERE num = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getNum());
+			
+			rs = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt, conn);
+		}
+		return rs;
+	}
 }
