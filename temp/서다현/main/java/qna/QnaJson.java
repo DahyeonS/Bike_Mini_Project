@@ -73,14 +73,6 @@ public class QnaJson {
 			QnaPagingDTO paging = new QnaPagingDTO(totalCount, pageNum, listNum, blockNum);
 			paging.setPaging();	
 			
-			int totalPage = paging.getTotalPage();
-			int startPage = paging.getStartPage();
-			int endPage = paging.getEndPage();
-			boolean isPrev = paging.isPrev();
-			boolean isNext = paging.isNext();
-			boolean isBPrev = paging.isBPrev();
-			boolean isBNext = paging.isBNext();
-			
 			String gson = new Gson().toJson(paging);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);

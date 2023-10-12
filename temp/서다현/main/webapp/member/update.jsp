@@ -6,17 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
-<style>
-	h2 {text-align: center;}
-	table, th, td, input {
-		margin: 0 auto;
-		border-collapse: collapse;
-		font-size: 14pt;
-	}
-	#update {text-align: right;}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/update.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<%@include file="./script/updateScript.jsp"%>
+<%@include file="script/updateScript.jsp"%>
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>
