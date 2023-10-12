@@ -1,0 +1,24 @@
+#nickname, #anickname {text-align: left;}
+#postdate, #updatedate, #visitcount, #apostdate, #aupdatedate {text-align: right;}
+form, h2 {text-align: center;}
+#answertext {text-align: left;}
+#rcontext {text-align: left;}
+table, th, td, input, select {
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 14pt;
+}
+textarea {
+    width:300px;
+    height:50px;
+    text-align: initial;
+}
+#rpostdate {
+    font-size: 12pt;
+    text-align: right;
+    font-style: italic;
+}
+#rdelete {
+    font-size: 12pt;
+    text-align: right;
+}

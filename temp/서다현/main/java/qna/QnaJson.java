@@ -30,14 +30,14 @@ public class QnaJson {
 			
 			if (title != null) {
 				dto.setTitle(title);
-				list = dao.getBoardListTitle(dto, page, 10);
+				list = dao.getBoardListTitle(dto, page);
 			} else if (context != null) {
 				dto.setContext(context);
-				list = dao.getBoardListContext(dto, page, 10);
+				list = dao.getBoardListContext(dto, page);
 			} else if (nickname != null) {
 				dto.setNickname(nickname);
-				list = dao.getBoardListNickname(dto, page, 10);
-			} else list = dao.getBoardList(page, 10);
+				list = dao.getBoardListNickname(dto, page);
+			} else list = dao.getBoardList(page);
 			
 			if (list.size() == 0) list.add(new QnaDTO());
 			

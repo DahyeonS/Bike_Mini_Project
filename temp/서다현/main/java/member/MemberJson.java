@@ -1,6 +1,7 @@
 package member;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import qna.QnaDTO;
 
 public class MemberJson {
 	MemberDAO dao = new MemberDAOImpl();
@@ -165,6 +168,92 @@ public class MemberJson {
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rs", rs);
 			
+			response.getWriter().write(jsonObject.toString());
+		} else if (action.equals("/memberPagingBoard.json")) {
+			String id = request.getParameter("id");
+			String title = request.getParameter("title");
+			String context = request.getParameter("context");
+			String category = request.getParameter("category");
+			MemberBoardDTO dto = new MemberBoardDTO();
+			dto.setId(id);
+			dto.setTitle("");
+			dto.setContext("");
+			if (category == null) dto.setCategory("");
+			
+			int listNum = 10;
+			int blockNum = 10;
+			int pageNum = 1;
+			if(request.getParameter("page") != null){
+				pageNum = Integer.parseInt(request.getParameter("page"));
+			};
+			
+			int totalCount = 0;
+			if (title != "") {
+				dto.setTitle(title);
+			} else if (context != null) {
+				dto.setContext(context);
+			} else if (category != null) {
+				if (category.equals("normal")) dto.setCategory("일반");
+				else if (category.equals("question")) dto.setCategory("질문");
+				else if (category.equals("answer")) dto.setCategory("답변");
+				else if (category.equals("reply")) dto.setCategory("답글");
+				else if (category.equals("novel")) dto.setCategory("소설");
+				else if (category.equals("free")) dto.setCategory("자유");
+				else if (category.equals("photo")) dto.setCategory("사진");
+			}
+			totalCount = dao.getBoardCount(dto);
+			
+			//paging
+			MemberPagingDTO paging = new MemberPagingDTO(totalCount, pageNum, listNum, blockNum);
+			paging.setPaging();	
+			
+			String gson = new Gson().toJson(paging);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
+		} else if (action.equals("/memberBoardList.json")) {
+			String id = request.getParameter("id");
+			String title = request.getParameter("title");
+			String context = request.getParameter("context");
+			String category = request.getParameter("category");
+			MemberBoardDTO dto = new MemberBoardDTO();
+			dto.setId(id);
+			dto.setTitle("");
+			dto.setContext("");
+			if (category == null) dto.setCategory("");
+			else {
+				if (category.equals("normal")) dto.setCategory("일반");
+				else if (category.equals("question")) dto.setCategory("질문");
+				else if (category.equals("answer")) dto.setCategory("답변");
+				else if (category.equals("reply")) dto.setCategory("답글");
+				else if (category.equals("novel")) dto.setCategory("소설");
+				else if (category.equals("free")) dto.setCategory("자유");
+				else if (category.equals("photo")) dto.setCategory("사진");
+			}
+			
+			int page = 1;
+			if (request.getParameter("page") != null) page = Integer.parseInt(request.getParameter("page"));
+			List<MemberBoardDTO> list = new ArrayList<MemberBoardDTO>();
+			
+			if (title != "") dto.setTitle(title);
+			else if (context != null) dto.setContext(context);
+			
+			list = dao.getBoardList(dto, page);
+			if (list.size() == 0) list.add(new MemberBoardDTO());
+			
+			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(gson);
+		} else if (action.equals("/memberDeleteBoard.json")) {
+			String sNum = request.getParameter("num");
+			int num = 0;
+			if (sNum != null) num = Integer.parseInt(sNum);
+			
+			MemberBoardDTO dto = new MemberBoardDTO();
+			dto.setNum(num);
+			int rs = dao.deleteBoard(dto);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("rs", rs);
 			response.getWriter().write(jsonObject.toString());
 		}
 	}
