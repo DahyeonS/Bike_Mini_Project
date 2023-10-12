@@ -26,9 +26,9 @@ public class JmsApi {
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
+		HttpSession session = request.getSession();
 		
 		if (action.equals("/writeJson.json")) {
-			HttpSession session = request.getSession();
 			String id=	(String)session.getAttribute("id");
 			System.out.println(id);
 			
@@ -42,7 +42,6 @@ public class JmsApi {
 			}
 			response.getWriter().write(jsonObject.toString());
 		}else if (action.equals("/DeleteProcess.json")) {
-			HttpSession session = request.getSession();
 			String sNum=request.getParameter("num");
 			int num=Integer.parseInt(sNum);
 			BoardDTO dto=new BoardDTO();
@@ -64,7 +63,6 @@ public class JmsApi {
 			String gson = new Gson().toJson(map);
 			response.getWriter().write(gson);
 		}else if (action.equals("/ReplyView.json")) {
-			HttpSession session = request.getSession();
 			BoardDAO dao =new BoardDAOimpl();
 			MemberDTO md=new MemberDTO(); 
 			MemberDAO ma=new MemberDAOImpl();
@@ -91,31 +89,34 @@ public class JmsApi {
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}else if (action.equals("/WriteReply.json")) {
-			HttpSession session = request.getSession();
 			BoardDAO dao =new BoardDAOimpl();
 			MemberDTO md=new MemberDTO(); 
 			MemberDAO ma=new MemberDAOImpl();
+			JsonObject jsonObject = new JsonObject();
 			String sNum = request.getParameter("num");
 			int num = 0;
 			if (sNum != null) num = Integer.parseInt(sNum);
 			String id = (String)session.getAttribute("id");
-			md.setId(id);
-			md=ma.getMember(md);
-			
-			String nickname = md.getNickname();
-			String context = request.getParameter("context");
 			int rs = 0;
-			
-			BoardDTO dto = new BoardDTO();
-			dto.setId(id);
-			dto.setNickname(nickname);
-			dto.setContext(context);
-			dto.setNum(num);
-			rs = dao.writeReply(dto);
-			
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty("rs", rs);
-			response.getWriter().write(jsonObject.toString());
+			if(id==null) {
+				jsonObject.addProperty("rs", rs);
+				response.getWriter().write(jsonObject.toString());
+			}else {
+				md.setId(id);
+				md=ma.getMember(md);				
+				String nickname = md.getNickname();
+				String context = request.getParameter("context");
+				
+				BoardDTO dto = new BoardDTO();
+				dto.setId(id);
+				dto.setNickname(nickname);
+				dto.setContext(context);
+				dto.setNum(num);
+				rs = dao.writeReply(dto);
+				
+				jsonObject.addProperty("rs", rs);
+				response.getWriter().write(jsonObject.toString());				
+			}
 		}else if (action.equals("/DeleteReply.json")) {
 			BoardDAO dao =new BoardDAOimpl();
 			

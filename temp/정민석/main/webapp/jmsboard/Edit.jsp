@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
- <link rel="stylesheet" type="text/css" href="../css/write.css">
+ <link rel="stylesheet" type="text/css" href="./css/write.css">
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
  <script>
@@ -29,7 +29,7 @@
 		$('#listBtn').click(function() {
 			const wCheck = confirm("게시글 수정 안하실건가요?");
 			if(!(wCheck == false)) {
-				location.href = 'View.do?num='+${dto.num};				
+				location.href = 'View.do?num='+${dto.num}+'&index='+${index };				
 			}
 		});
 	});
@@ -44,6 +44,7 @@
         <form name="writeFrm" method="post" action="EditProcess.do"  enctype="multipart/form-data"
         onsubmit="return validateForm(this);">
         <input type="hidden" name="num" value="${dto.num }">
+        <input type="hidden" name="index" value="${index }">
         <input type="hidden" name="prevSfile" value="${dto.fileName }">
             <div class="main">
                <table border="1">

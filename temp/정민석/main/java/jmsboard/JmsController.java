@@ -40,7 +40,7 @@ public class JmsController {
 			BoardDAO dao = new BoardDAOimpl();
 			Map<String, Object> param = new HashMap<String, Object>();
 			
-			String reqUrl="board.do";
+			String reqUrl=uri;
 			if(serchWord!=null){
 				param.put("serchField", serchField);
 				param.put("serchWord", serchWord);
@@ -52,7 +52,6 @@ public class JmsController {
 			
 			int pageNum=1;
 			String pageNumTemp=request.getParameter("pageNum");
-			System.out.println(pageNumTemp);
 			if(pageNumTemp!=null && !pageNumTemp.equals("")){
 				pageNum=Integer.parseInt(pageNumTemp);
 			}
@@ -64,9 +63,15 @@ public class JmsController {
 			String pagingStr="";
 			int pageTemp=(((pageNum-1)/blockPage)*blockPage)+1;
 			if(pageTemp!=1) {
-				pagingStr += "<a href='" + reqUrl + "?pageNum=1'>[첫 페이지]</a>";
-				pagingStr+="&nbsp;";
-				pagingStr+="<a href='"+reqUrl+"?pageNum="+(pageTemp-1)+"'>[이전블록]</a>";	
+				if(serchWord!=null){
+					pagingStr += "<a href='" + reqUrl + "?pageNum=1"+"&serchField="+serchField+"&serchWord="+serchWord+"'>[첫 페이지]</a>";
+					pagingStr+="<a href='"+reqUrl+"?pageNum="+(pageTemp-1)+"&serchField="+serchField+"&serchWord="+serchWord+"'>[이전블록]</a>";	
+					pagingStr+="&nbsp;";
+				}else {
+					pagingStr += "<a href='" + reqUrl + "?pageNum=1'>[첫 페이지]</a>";
+					pagingStr+="<a href='"+reqUrl+"?pageNum="+(pageTemp-1)+"'>[이전블록]</a>";	
+					pagingStr+="&nbsp;";
+				}
 			}
 			
 			int blockCount=1;
@@ -74,21 +79,32 @@ public class JmsController {
 				if(pageTemp==pageNum) {
 					pagingStr+="&nbsp;"+pageTemp+"&nbsp;";
 				}else {
-					pagingStr+="&nbsp;<a href = '"+reqUrl+"?pageNum="+pageTemp+"'>"+pageTemp+"</a>&nbsp;";
+					if(serchWord!=null){
+						pagingStr+="&nbsp;<a href = '"+reqUrl+"?pageNum="+pageTemp+"&serchField="+serchField+"&serchWord="+serchWord+"'>"+pageTemp+"</a>&nbsp;";
+					}else {
+						pagingStr+="&nbsp;<a href = '"+reqUrl+"?pageNum="+pageTemp+"'>"+pageTemp+"</a>&nbsp;";
+					}
 				}
 				pageTemp++;
 				blockCount++;
 			}
 			if(pageTemp<=totalPage) {
-				pagingStr+="<a href='"+reqUrl+"?pageNum="+pageTemp+"'>[다음 블록]</a>";
-				pagingStr+="&nbsp;";
-				pagingStr+="<a href='"+reqUrl+"?pageNum="+totalPage+"'>[마지막 페이지]</a>";
+				if(serchWord!=null){
+					pagingStr+="<a href='"+reqUrl+"?pageNum="+pageTemp+"&serchField="+serchField+"&serchWord="+serchWord+"'>[다음 블록]</a>";
+					pagingStr+="&nbsp;";
+					pagingStr+="<a href='"+reqUrl+"?pageNum="+totalPage+"&serchField="+serchField+"&serchWord="+serchWord+"'>[마지막 페이지]</a>";
+				}else {
+					pagingStr+="<a href='"+reqUrl+"?pageNum="+pageTemp+"'>[다음 블록]</a>";
+					pagingStr+="&nbsp;";
+					pagingStr+="<a href='"+reqUrl+"?pageNum="+totalPage+"'>[마지막 페이지]</a>";
+				}
 			}
 			Map<String, Object> map=new HashMap<String, Object>();
 			map.put("totalCount", totalCount);
 			map.put("pageSize", pageSize);
 			map.put("pageNum", pageNum);
-			map.put("pagingImg", pagingStr);
+			map.put("pagingStr", pagingStr);
+			map.put("serchWord", serchWord);
 			request.setAttribute("boardLists", boardLists);
 			request.setAttribute("map", map);
 			request.getRequestDispatcher("board.jsp").forward(request, response);
@@ -139,10 +155,12 @@ public class JmsController {
 			
 		}else if (action.equals("/Edit.do")) {
 			String Num=request.getParameter("num");
+			String index=request.getParameter("index");
 			BoardDAO dao=new BoardDAOimpl();
 			BoardDTO dto=dao.selectView(Num);
 			
 			request.setAttribute("dto", dto);
+			request.setAttribute("index", index);
 			request.getRequestDispatcher("Edit.jsp").forward(request, response);
 		}else if (action.equals("/EditProcess.do")) {
 			//새 파일을 저장합니다
@@ -152,6 +170,7 @@ public class JmsController {
 			}
 			BoardDTO bd=new BoardDTO();
 			BoardDAO ba=new BoardDAOimpl();
+			String index=mr.getParameter("index");
 			String sNum=mr.getParameter("num");
 			int num=Integer.parseInt(sNum);
 			String title=mr.getParameter("wTitle");
@@ -177,9 +196,9 @@ public class JmsController {
 			}
 			int rs=ba.updateEdit(bd);
 			if(rs==1) {
-				response.sendRedirect("View.do?num="+num);
+				response.sendRedirect("View.do?num="+num+"&index="+index);
 			}else {
-				response.sendRedirect("Edit.do?num="+num);
+				response.sendRedirect("Edit.do?num="+num+"&index="+index);
 			}
 		}else if (action.equals("/View.do")) {
 			String num=request.getParameter("num");

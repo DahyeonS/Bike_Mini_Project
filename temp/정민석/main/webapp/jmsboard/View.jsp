@@ -9,9 +9,19 @@
 <title>회원제 게시판</title>
 <style>
 	textarea {
-	width:300px;
+	width:600px;
 	height:50px;
 	text-align: initial;
+	}
+	#rcontext {text-align: left;}
+	#rpostdate {
+		font-size: 12pt;
+		text-align: right;
+		font-style: italic;
+	}
+	#rdelete {
+		font-size: 12pt;
+		text-align: right;
 	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
@@ -82,10 +92,13 @@ function writeReply(num) {
 	        dataType: 'json',
 	        data: params,
 	        success: function(data) {
-	        	if(data['rs'] !== 0) {
+	        	if(data['rs']===0){
+	        		alert('로그인이 필요합니다');
+	        		location.href='../member/login.do';
+	        	}else if(data['rs'] !== 0) {
 	                alert('댓글이 작성되었습니다.');
 	                location.href = '../jmsboard/View.do?num=' + ${dto.num}+'&index='+${index};
-	            } else alert('다시 시도해주세요.');
+	            }
 	        },
 	        error: function(xhr, status, error) {
 	            console.log(xhr, status, error);
@@ -159,7 +172,7 @@ function deleteReply(num) {
 		
 			<tr>
 			<td colspan="4" align="center">
-					<button type="button" onclick="location.href='Edit.do?num=${dto.num}';">
+					<button type="button" onclick="location.href='Edit.do?num=${dto.num}&index=${index }';">
 						수정하기
 					</button>
 					<button type="button" onclick="deletePost();">

@@ -31,8 +31,8 @@ public class DispatcherController extends HttpServlet {
 
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		System.out.println(uri+"11111");
-		System.out.println(uri.split("/", 4)[2]);
+		System.out.println(uri+"메인 컨트롤러 process");
+		System.out.println(uri.split("/", 4)[2]+"메인 컨트롤러 process");
 		
 		String action = uri.substring(uri.lastIndexOf("/"));
 		
@@ -53,7 +53,7 @@ public class DispatcherController extends HttpServlet {
 			QnaController qnaControl = new QnaController();
 			qnaControl.qnaProcess(request, response);
 		} else if (uri.split("/", 4)[2].equals("khBoard")) {
-			System.out.println(uri.split("/", 4)[2]);
+			System.out.println(uri.split("/", 4)[2]+"+khBoard");
 			khBoardController khBoardControl = new khBoardController();
 			khBoardControl.khBoardProcess(request, response);
 		} else {

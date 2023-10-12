@@ -18,8 +18,9 @@ public class BoardDAOimpl implements BoardDAO{
 		ResultSet rs = null;
 		int totalcount=0;
 		String sql="select count(*) from post ";
+		sql+=" WHERE category NOT IN ('질문','답변') ";
 		if(map.get("serchWord")!=null) {
-			sql+=" where "+map.get("serchField")+" "
+			sql+=" and "+map.get("serchField")+" "
 			+ " like '%" + map.get("serchWord") + "%'";
 		}
 		System.out.println(sql);
@@ -46,9 +47,10 @@ public class BoardDAOimpl implements BoardDAO{
 		ResultSet rs = null;
 		String sql="SELECT * FROM ( ";
 		sql+="	SELECT Tb.*, rownum rNum FROM (";
-		sql+="		SELECT * FROM post";
+		sql+="		SELECT * FROM post ";
+		sql+=" WHERE category NOT IN ('질문','답변') ";
 		if(map.get("serchWord")!=null) {
-			sql+=" where "+map.get("serchField")
+			sql+=" and "+map.get("serchField")
 			+ " Like '%"+map.get("serchWord")+"%' ";
 		}
 		sql+=" ORDER BY num Desc	) Tb";
