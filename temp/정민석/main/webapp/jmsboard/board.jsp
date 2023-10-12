@@ -41,7 +41,7 @@
 </head>
 <%@include file="../home/topmenu.jsp" %>
 <body>
-	<h1>자유 게시판</h1>
+	<h1>전체 게시판</h1>
 	<form method="get">
 		<div class="board_box">
 			<div>
@@ -51,7 +51,7 @@
 						<option value="context">내용</option>
 						<option value="nickname">작성자</option>
 					</select>
-					<input type="text"  name="serchWord">
+					<input type="text"  name="serchWord" value="${map.serchWord }">
 					<input type="submit" value="검색하기">
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 	         	<thead>
 	                <tr class="tul_th">
 	                    <td class="th_span th_num">번호</td>
-	                    <td class="th_span">제목</td>
+	                    <td class="th_span" width="30%">제목</td>
 	                    <td class="th_span">작성자</td>
 	                    <td class="th_span">조회수</td>
 	                    <td class="th_span">작성일</td>
@@ -93,7 +93,7 @@
 	        </table>
 	<table width="90%"  border='1'>
  		<tr align="center">
- 			<td width="80%">${map.pagingImg }</td>
+ 			<td width="80%">${map.pagingStr }</td>
  			<td >
  				<button type="button" id="b_writeBtn">글쓰기</button>
  			</td>
