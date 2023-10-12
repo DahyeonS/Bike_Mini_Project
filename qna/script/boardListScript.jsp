@@ -1,115 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script>
-function getQnaBoard() {
+function pagingQnaBoard(param) {
+	$.ajax({
+        type: 'POST',
+        url: 'qnaBoardPaging.json',
+        dataType: 'json',
+        data: param,
+        success: function(data) {
+        	const {blockNum, endPage, isBNext, isBPrev, isNext, isPrev, listNum, pageNum, startPage, totalCount, totalPage} = data;
+        	let tr = '<tr><td colspan="6">';
+			if(isPrev) tr += '<a href="#" onclick="getQnaBoard('+ (pageNum - 1) + ');">[<]</a>';
+            if(isBPrev) tr += '<a href="#" onclick="getQnaBoard('+ (startPage - 1) + ');">[<<]</a>';
+			for(let i=startPage; i<=endPage; i++) {
+				if(i === pageNum) tr += '<span style="color:red;">['+ i + ']</span>';
+				else tr += '<a href="#" onclick="getQnaBoard(' + i + ');">['+ i +']</a>';
+			};
+			if(isNext) tr += '<a href="#" onclick="getQnaBoard(' + (pageNum + 1) + ');">[>]</a>';
+			if(isBNext) tr += '<a href="#" onclick="getQnaBoard(' + (endPage + 1) + ');">[>>]</a></td></tr>';
+            $('#paging').html(tr);
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr, status, error);
+        }
+    });
+};
+
+function getQnaBoard(page) {
 	const grade = '<%=session.getAttribute("grade")%>';
 	const id = '<%=session.getAttribute("id")%>';
+	
+	let title, context, nickname;
+	if ($('#select').val() === 'title') {
+		title = $('#context').val();
+	} else if ($('#select').val() === 'context') {
+		context = $('#context').val();
+	} else if ($('#select').val() === 'nickname') {
+		nickname = $('#context').val();
+	}
+	let search = false;
+	if (title === '' && context === undefined && nickname === undefined) search = true;
+	
+	const param = {page, title, context, nickname};
     $.ajax({
         type: 'POST',
         url: 'qnaBoardList.json',
         dataType: 'json',
+        data: param,
         success: function(data) {
             let tr = '';
             for (item of data) {
             	if (item['num'] === 0) {
 	        		alert('조회되는 게시글이 없습니다.');
-	        		location.href = 'index.do';
+	        		if (search) location.href = 'index.do';
+	        		else return;
 	        	}
             	$('#board').show();
                 const {num, title, nickname, visitCount, postdate} = item;
                 tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
-                + title + '</a></td><td>' + nickname + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
-                if (id !== 'null' && grade !== 'GENERAL') tr += '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
+                	+ title + '</a></td><td>' + nickname + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
+                if ((id !== 'null' && grade !== 'GENERAL' && item['nickname'] !== '관리자') || grade === 'MANAGER') tr += '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
+                else if (id !== 'null' && grade !== 'GENERAL') tr += '<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td></tr>';
 	            else tr += '</tr>';
             }
             $('#tbody').html(tr);
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr, status, error);
-        }
-    });
-};
-
-function getQnaBoardTitle(param) {
-	const grade = '<%=session.getAttribute("grade")%>';
-	const id = '<%=session.getAttribute("id")%>';
-	$.ajax({
-        type: 'POST',
-        url: 'qnaBoardListTitle.json',
-        dataType: 'json',
-        data: param,
-        success: function(data) {
-	    	let tr = '';
-	        for (item of data) {
-	        	if (item['num'] === 0) {
-	        		alert('조회되는 게시글이 없습니다.');
-	        		return;
-	        	}
-	        	const {num, title, nickname, visitCount, postdate} = item;
-                tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
-                + title + '</a></td><td>' + nickname + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
-                if (id !== 'null' && grade !== 'GENERAL') tr += '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
-	            else tr += '</tr>';
-	        }
-	        $('#tbody').html(tr);
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr, status, error);
-        }
-    });
-};
-
-function getQnaBoardContext(param) {
-	const grade = '<%=session.getAttribute("grade")%>';
-	const id = '<%=session.getAttribute("id")%>';
-	$.ajax({
-        type: 'POST',
-        url: 'qnaBoardListContext.json',
-        dataType: 'json',
-        data: param,
-        success: function(data) {
-	    	let tr = '';
-	        for (item of data) {
-	        	if (item['num'] === 0) {
-	        		alert('조회되는 게시글이 없습니다.');
-	        		return;
-	        	}
-	        	const {num, title, nickname, visitCount, postdate} = item;
-                tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
-                + title + '</a></td><td>' + nickname + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
-                if (id !== 'null' && grade !== 'GENERAL') tr += '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
-	            else tr += '</tr>';
-	        }
-	        $('#tbody').html(tr);
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr, status, error);
-        }
-    });
-};
-
-function getQnaBoardNickname(param) {
-	const grade = '<%=session.getAttribute("grade")%>';
-	const id = '<%=session.getAttribute("id")%>';
-	$.ajax({
-        type: 'POST',
-        url: 'qnaBoardListNickname.json',
-        dataType: 'json',
-        data: param,
-        success: function(data) {
-	    	let tr = '';
-	        for (item of data) {
-	        	if (item['num'] === 0) {
-	        		alert('조회되는 게시글이 없습니다.');
-	        		return;
-	        	}
-	        	const {num, title, nickname, visitCount, postdate} = item;
-                tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
-                + title + '</a></td><td>' + nickname + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
-                if (id !== 'null' && grade !== 'GENERAL') tr += '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
-	            else tr += '</tr>';
-	        }
-	        $('#tbody').html(tr);
+            pagingQnaBoard(param);
         },
         error: function(xhr, status, error) {
             console.log(xhr, status, error);
@@ -151,24 +106,25 @@ function deleteBoard(num) {
 
 $(function() {
 	$('#board').hide();
-	getQnaBoard();
+	const sPage = '<%=request.getParameter("page")%>'
+	let page = 1;
+	if (sPage !== 'null') page = sPage;
+	getQnaBoard(page);
 	$('#search').click(function() {
 		const context = $('#context').val();
 		if (context === '') {
 			alert('검색어를 입력해주세요.');
-			return;
-		}
-		else if ($('#select').val() === 'title') {
-			const param = {title : context};
-			getQnaBoardTitle(param);
-		} else if ($('#select').val() === 'context') {
-			const param = {context};
-			getQnaBoardContext(param);
-		} else if ($('#select').val() === 'nickname') {
-			const param = {nickname : context};
-			getQnaBoardNickname(param);
-		}
+		} else getQnaBoard(page);
 	});
+	$('#context').keydown(function(event) {
+    	if (event.keyCode === 13) {
+    		const context = $('#context').val();
+    		if (context === '') {
+    			alert('검색어를 입력해주세요.');
+    			return;
+    		} else getQnaBoard(page);
+    	}
+    });
 	$('#write').click(function() {
 		if ('<%=session.getAttribute("id")%>' === 'null') {
 			alert('회원만 작성할 수 있습니다.')

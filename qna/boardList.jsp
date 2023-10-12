@@ -1,6 +1,3 @@
-<%@page import="member.MemberDAO"%>
-<%@page import="member.MemberDTO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -50,7 +47,8 @@
 					</tr>
 				</thead>
 				<tbody id="tbody">
-						
+				</tbody>
+				<tbody id="paging">
 				</tbody>
 			</table>
 		</div>

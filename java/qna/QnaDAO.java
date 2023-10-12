@@ -5,10 +5,10 @@ import java.util.List;
 public interface QnaDAO {
 	QnaDTO getBoardNum(QnaDTO dto);
 	
-	List<QnaDTO> getBoardList();
-	List<QnaDTO> getBoardListTitle(QnaDTO dto);
-	List<QnaDTO> getBoardListContext(QnaDTO dto);
-	List<QnaDTO> getBoardListNickname(QnaDTO dto);
+	List<QnaDTO> getBoardList(int pageNum, int listNum);
+	List<QnaDTO> getBoardListTitle(QnaDTO dto, int pageNum, int listNum);
+	List<QnaDTO> getBoardListContext(QnaDTO dto, int pageNum, int listNum);
+	List<QnaDTO> getBoardListNickname(QnaDTO dto, int pageNum, int listNum);
 	List<QnaDTO> getAnswerList(QnaDTO dto);
 	List<QnaDTO> getReplyList(QnaDTO dto);
 	
@@ -20,4 +20,9 @@ public interface QnaDAO {
 	int updateBoard(QnaDTO dto);
 	int writeReply(QnaDTO dto);
 	int deleteReply(QnaDTO dto);
+	
+	int getBoardCount();
+	int getBoardTitleCount(QnaDTO dto);
+	int getBoardContextCount(QnaDTO dto);
+	int getBoardNicknameCount(QnaDTO dto);
 }

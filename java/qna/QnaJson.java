@@ -1,6 +1,7 @@
 package qna;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,46 +19,69 @@ public class QnaJson {
 		String action = uri.substring(uri.lastIndexOf("/"));
 		
 		if (action.equals("/qnaBoardList.json")) {
-			List<QnaDTO> list = dao.getBoardList();
-			if (list.size() == 0) list.add(new QnaDTO());
-				
-			String gson = new Gson().toJson(list);
-			response.setContentType("text/html; charset=UTF-8");
-			response.getWriter().write(gson);
-		} else if (action.equals("/qnaBoardListTitle.json")) {
 			String title = request.getParameter("title");
-			
-			QnaDTO dto = new QnaDTO();
-			dto.setTitle(title);
-			
-			List<QnaDTO> list = dao.getBoardListTitle(dto);
-			if (list.size() == 0) list.add(dto);
-			
-			String gson = new Gson().toJson(list);
-			response.setContentType("text/html; charset=UTF-8");
-			response.getWriter().write(gson);
-		} else if (action.equals("/qnaBoardListContext.json")) {
 			String context = request.getParameter("context");
-			
+			String nickname = request.getParameter("nickname");
 			QnaDTO dto = new QnaDTO();
-			dto.setContext(context);
 			
-			List<QnaDTO> list = dao.getBoardListContext(dto);
-			if (list.size() == 0) list.add(dto);
+			int page = 1;
+			if (request.getParameter("page") != null) page = Integer.parseInt(request.getParameter("page"));
+			List<QnaDTO> list = new ArrayList<QnaDTO>();
+			
+			if (title != null) {
+				dto.setTitle(title);
+				list = dao.getBoardListTitle(dto, page, 10);
+			} else if (context != null) {
+				dto.setContext(context);
+				list = dao.getBoardListContext(dto, page, 10);
+			} else if (nickname != null) {
+				dto.setNickname(nickname);
+				list = dao.getBoardListNickname(dto, page, 10);
+			} else list = dao.getBoardList(page, 10);
+			
+			if (list.size() == 0) list.add(new QnaDTO());
 			
 			String gson = new Gson().toJson(list);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
-		} else if (action.equals("/qnaBoardListNickname.json")) {
+		} else if (action.equals("/qnaBoardPaging.json")) {
+			String title = request.getParameter("title");
+			String context = request.getParameter("context");
 			String nickname = request.getParameter("nickname");
-			
 			QnaDTO dto = new QnaDTO();
-			dto.setNickname(nickname);
 			
-			List<QnaDTO> list = dao.getBoardListNickname(dto);
-			if (list.size() == 0) list.add(dto);
+			int listNum = 10;
+			int blockNum = 10;
+			int pageNum = 1;
+			if(request.getParameter("page") != null){
+				pageNum = Integer.parseInt(request.getParameter("page"));
+			};
 			
-			String gson = new Gson().toJson(list);
+			int totalCount = 0;
+			if (title != null) {
+				dto.setTitle(title);
+				totalCount = dao.getBoardTitleCount(dto);
+			} else if (context != null) {
+				dto.setContext(context);
+				totalCount = dao.getBoardContextCount(dto);
+			} else if (nickname != null) {
+				dto.setNickname(nickname);
+				totalCount = dao.getBoardNicknameCount(dto);
+			} else totalCount = dao.getBoardCount();
+			
+			//paging
+			QnaPagingDTO paging = new QnaPagingDTO(totalCount, pageNum, listNum, blockNum);
+			paging.setPaging();	
+			
+			int totalPage = paging.getTotalPage();
+			int startPage = paging.getStartPage();
+			int endPage = paging.getEndPage();
+			boolean isPrev = paging.isPrev();
+			boolean isNext = paging.isNext();
+			boolean isBPrev = paging.isBPrev();
+			boolean isBNext = paging.isBNext();
+			
+			String gson = new Gson().toJson(paging);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		} else if (action.equals("/qnaBoardView.json")) {
