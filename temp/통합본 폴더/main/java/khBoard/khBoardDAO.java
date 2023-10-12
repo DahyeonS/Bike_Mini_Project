@@ -709,6 +709,27 @@ public class khBoardDAO {
 		}
 		return next;
 	}
+	public int iNextBoard(int num) {
+		int next = 0;
+
+		Connection conn = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select num from (select num from post where num < ? AND CATEGORY = '사진' order by num desc) where rownum = 1";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				next = rs.getInt("num");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return next;
+	}
 	public int visit_count_plus(int num) {
 	
 		int rs = 0;

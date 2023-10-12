@@ -27,23 +27,6 @@
 		})
 	}
 	
-	function updateBoard () {
-	    num = location.search.split('=')[1];
-	    const param = {num : num, title : $('#title').val(), context : $('#context').val()};
-	
-	    sendAjax('updateBoard.json', param).then( (data) => {
-	    	if(data['rs'] == 1) {
-        		alert('수정이 완료 되었습니다');
-        		location.href = '../khBoard/boardList.do';
-        	}
-        	else {
-        		alert('정상적으로 처리 하지 못했습니다');
-        		location.href = '../khBoard/boardUpdate.do';
-        	}
-		})
-	}
-	   
-	
 	function deleteBoard () {
 	    num = location.search.split('=')[1];
 	    const param = {num : num};
@@ -51,11 +34,11 @@
 	    sendAjax('deleteBoard.json', param).then( (data) => {
 	    	if(data['rs'] == 1) {
         		alert('게시글 삭제가 완료 되었습니다');
-        		location.href = '../khBoard/boardList.do';
+        		location.href = '../khBoard/imageList.do';
         	}
         	else {
         		alert('정상적으로 처리 하지 못했습니다');
-        		location.href = '../khBoard/boardUpdate.do';
+        		location.href = '../khBoard/imageView.do?num=' + num;
         	}
 		})
 	}
@@ -67,10 +50,10 @@
 	    sendAjax('iBeforeBoard.json', param).then( (data) => {
 	    	if(data['beforeNum'] == 0) {
         		alert('이전 게시글이 존재하지 않습니다');
-        		location.href = '../khBoard/boardUpdate.do?num=' + num;
+        		location.href = '../khBoard/imageView.do?num=' + num;
         	}
         	else {
-        		location.href = '../khBoard/boardUpdate.do?num=' + data['beforeNum'];
+        		location.href = '../khBoard/imageView.do?num=' + data['beforeNum'];
         	}
 		})
 	}
@@ -79,27 +62,31 @@
 	    num = location.search.split('=')[1];
 	    const param = {num : num};
 	    
-	    sendAjax('nextBoard.json', param).then( (data) => {
+	    sendAjax('iNextBoard.json', param).then( (data) => {
 	    	if(data['nextNum'] == 0) {
         		alert('다음 게시글이 존재하지 않습니다');
-        		location.href = '../khBoard/boardUpdate.do?num=' + num;
+        		location.href = '../khBoard/imageView.do?num=' + num;
         	}
         	else {
-        		location.href = '../khBoard/boardUpdate.do?num=' + data['nextNum'];
+        		location.href = '../khBoard/imageView.do?num=' + data['nextNum'];
         	}
 		})
 	}
 	
+	function buttons () {
+		num = location.search.split('=')[1];
+	    const param = {num : num};
+	    $('.buttons').hide();
+	    sendAjax('iGetBoard.json', param).then( (data) => {
+	    	if(data['id'] == "${id}") {
+        		$('.buttons').show();
+        	}
+		})
+		
+		
+	}
+	
 	$(function name() {  // 실행시 자동으로 실행
-		$('#updateBtn').on('click', function() {
-			updateBoard();
-			getBoard();
-		});
-		$('#resetBtn').on('click', function() {
-			$('#title').attr('value', '');
-        	str = '<textarea name="context" id="context"style="width:100%; height: 300px;"></textarea>';
-        	$('#textArea').html(str);
-		});
 		$('#deleteBtn').on('click', function() {
 			deleteBoard();
 			getBoard();
@@ -124,6 +111,7 @@
 	window.onload = function() {
 		visit_count_plus();
 		getBoard();
+		buttons();
 	}
 	
 </script>
@@ -151,9 +139,7 @@
 							</div>
 							
 								<input class="btn btn-secondary btn-sm" type="button" value="<<<이전글" id="beforeBtn" style="float: left;" /> 
-								<input class="btn btn-secondary btn-sm" type="button" value="수정 하기" id="updateBtn" /> 
-								<input class="btn btn-secondary btn-sm" type="reset" value="다시 입력" id="resetBtn"> 
-								<input class="btn btn-secondary btn-sm" type="button" value="삭제 하기" id="deleteBtn">
+								<input class="btn btn-secondary btn-sm buttons" type="button" value="삭제 하기" id="deleteBtn">
 								<input class="btn btn-secondary btn-sm" type="button" value="목록보기" onclick="location.href = 'boardList.do';">
 								<input class="btn btn-secondary btn-sm" type="button" value="다음글>>>" id="nextBtn" style="float: right;">
 						</div>
