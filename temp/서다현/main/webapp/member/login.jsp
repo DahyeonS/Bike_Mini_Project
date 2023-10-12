@@ -15,7 +15,7 @@
 <body>
 <%@include file="../home/topmenu.jsp" %>
 <h2>로그인</h2>
-<form action="loginProc" method="post">
+<form id="loginProc">
 	<table>
 		<tr><th>아이디&nbsp</th><td><input type="text" name="id" id="id"></td></tr>
 		<tr><th>비밀번호&nbsp</th><td><input type="password" name="pw" id="pw"></td></tr>
