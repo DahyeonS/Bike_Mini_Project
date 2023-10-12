@@ -1,7 +1,9 @@
 package khBoard;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -46,20 +48,23 @@ public class khBoardController {
 				System.out.println("uploadProcess");
 
 				String saveDirectory = request.getServletContext().getRealPath("/uploads");
-				System.out.println("saveDirectory" + saveDirectory);
+				String saveDirectory2 = "D:\\kdigital2307\\jsp\\jspws\\mini_project\\src\\main\\webapp\\khBoard\\images";
+				System.out.println("saveDirectory : " + saveDirectory);
 				int maxPostSize = 2048 * 2000;
 				String encoding = "UTF-8";
 
-				MultipartRequest mr = new MultipartRequest(request, saveDirectory, maxPostSize, encoding);
+				MultipartRequest mr = new MultipartRequest(request, saveDirectory2, maxPostSize, encoding);
+				
 
 				String fileName = mr.getFilesystemName("attechedFile");
 				String ext = fileName.substring(fileName.lastIndexOf("."));
-				String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
-				String newFileName = now + ext;
+				String now = new SimpleDateFormat("yyyyMMdd_Hms").format(new Date());
+				String newFileName = now + "(" + fileName + ")" + ext;
 
 				File oldFile = new File(saveDirectory + File.separator + fileName);
 				File newFile = new File(saveDirectory + File.separator + newFileName);
-				oldFile.renameTo(newFile);
+				
+				File saveFile = new File(saveDirectory2 + File.separator + fileName);
 
 				String title = mr.getParameter("title");
 				String context = mr.getParameter("context");
@@ -73,6 +78,13 @@ public class khBoardController {
 				khBoardDAO dao = new khBoardDAO();
 				int rs = dao.upload(dto);
 				request.setAttribute("rs", rs);
+				
+				// 파일을 업로드 한 후에 khBoard 안의 images 폴더에 업로드한 파일을 다운받아 저장하는 과정
+			
+				
+				
+				// 파일 업로드
+		
 				if( rs == 1) {
 					String view = "../khBoard/imageList.jsp";
 					RequestDispatcher dispatcher = request.getRequestDispatcher(view);
