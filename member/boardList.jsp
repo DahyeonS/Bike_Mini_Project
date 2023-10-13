@@ -15,11 +15,10 @@
 <body>
 <%@include file="../home/topmenu.jsp" %>
 <h2>게시글 조회</h2>
-<hr>
 	<form id="board">
 		<div>
 			<div>
-				<div>
+				<div class="search">
 					<select id="select">
 						<option value="title">제목</option>
 						<option value="context">내용</option>
@@ -41,12 +40,12 @@
 			<table border="1">
 				<thead>
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>카테고리</th>
-						<th>조회수</th>
-						<th>작성일</th>
-						<th>&nbsp</th>
+						<th class="num">번호</th>
+						<th class="title">제목</th>
+						<th class="category">카테고리</th>
+						<th class="count">조회수</th>
+						<th class="date">작성일</th>
+						<th class="control">&nbsp</th>
 					</tr>
 				</thead>
 				<tbody id="tbody">
@@ -55,7 +54,6 @@
 				</tbody>
 			</table>
 		</div>
-	<div style="float: right;"><input type="button" value="글쓰기" id="write"></div>
 	</form>
 </body>
 </html>

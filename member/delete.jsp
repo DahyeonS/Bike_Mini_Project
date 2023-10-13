@@ -16,8 +16,7 @@
 <body>
 <%@include file="../home/topmenu.jsp" %>
 <h2>회원탈퇴</h2>
-<hr>
-<form action="deleteProc" method="post">
+<form id="deleteProc">
 	<table>
 		<tr><th>비밀번호 입력&nbsp</th><td><input type="password" name="pw" id="pw"></td></tr>
 		<tr><td colspan="2" id="delete"><input type="button" value="회원탈퇴" id="submit"></td></tr>

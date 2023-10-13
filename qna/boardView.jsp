@@ -18,7 +18,6 @@
 <%@include file="../home/topmenu.jsp" %>
 <div class="question">
 <h2 id="title"></h2>
-<hr>
 <h4 id="nickname"></h4><h4 id="postdate"></h4><h4 id="updatedate"></h4><br><h4 id="visitcount"></h4>
 <hr>
 <h3 id="context"></h3>
@@ -36,8 +35,9 @@
 <td><input type="button" value="댓글 작성" onclick="writeReply(${param.num});"></td>
 <tr>
 </table>
+<br><br>
 </div>
-<br><br><br>
+<br>
 <form>
 <br>
 <input type="button" value="답변하기" id="answer">

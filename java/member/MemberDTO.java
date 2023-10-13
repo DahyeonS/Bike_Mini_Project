@@ -16,6 +16,14 @@ public class MemberDTO {
 		this.grade = grade;
 		this.regdate = regdate;
 	}
+	
+	public MemberDTO(int idx, String id, String nickname, String grade, String regdate) {
+		this.idx = idx;
+		this.id = id;
+		this.nickname = nickname;
+		this.grade = grade;
+		this.regdate = regdate;
+	}
 
 	public MemberDTO(String id, String pw, String nickname, String grade) {
 		this.id = id;

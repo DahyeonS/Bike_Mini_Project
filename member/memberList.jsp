@@ -19,18 +19,18 @@
 <body>
 <%@include file="../home/topmenu.jsp" %>
 <h2>회원목록</h2>
-<hr>
-<a href="../member/updateAdmin.do" id="manage">회원관리</a>
-<br><br>
-<table border="1">
+<br>
+<div class="manage">
+<a href="../member/updateAdmin.do" id="manage">회원관리</a></td>
+</div>
+<table border="1" class="list">
 
 <thead>
 <tr>
-	<th>일련번호</th>
+	<th class="num">일련번호</th>
 	<th>아이디</th>
-	<th>비밀번호</th>
 	<th>닉네임</th>
-	<th>등급</th>
+	<th class="grade">등급</th>
 	<th>가입날짜</th>
 </tr>
 </thead>

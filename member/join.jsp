@@ -16,7 +16,7 @@
 <%@include file="../home/topmenu.jsp" %>
 <div class="joinPage">
 <h2>회원가입</h2>
-<form id="joinForm" method="post">
+<form id="joinForm">
 	<table>
 		<tr class="join"><th>아이디&nbsp</th>
 		<td class="btn">

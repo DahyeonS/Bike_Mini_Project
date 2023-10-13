@@ -71,9 +71,9 @@ function getBoard(page) {
 	        	}
             	$('#board').show();
                 const {num, title, category, visitCount, postdate} = item;
-                tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="#" onclick="loginCheck();">'
-                	+ title + '</a></td><td>' + category + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
-                	+ '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
+                tr += '<tr style="text-align: center;"><td class="num">' + num + '</td><td class="title"><a href="#" onclick="loginCheck();">'
+                	+ title + '</a></td><td class="category">' + category + '</td><td class="count">' + visitCount + '</td><td class="date">' + postdate + '</td>'
+                	+ '<td class="control"><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
             }
             $('#tbody').html(tr);
             pagingBoard(param);
@@ -130,7 +130,7 @@ $(function() {
 	});
 	$('#context').keydown(function(event) {
     	if (event.keyCode === 13) {
-    		location.href = '#';
+    		event.preventDefault();
     		const context = $('#context').val();
     		if (context === '') {
     			alert('검색어를 입력해주세요.');

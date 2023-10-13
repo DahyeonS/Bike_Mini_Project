@@ -20,7 +20,7 @@ public class MemberDAOImpl implements MemberDAO {
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT idx, id, pw, nickname, grade, regdate FROM member";
+		sql = "SELECT idx, id, nickname, grade, regdate FROM member";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -29,11 +29,14 @@ public class MemberDAOImpl implements MemberDAO {
 			while (rs.next()) {
 				int idx = rs.getInt("idx");
 				String id = rs.getString("id");
-				String pw = rs.getString("pw");
 				String nickname = rs.getString("nickname");
 				String grade = rs.getString("grade");
+				if (grade.equals("MANAGER")) grade = "매니저";
+				else if (grade.equals("ASSOCIATE")) grade = "부매니저";
+				else if (grade.equals("STAFF")) grade = "스탭";
+				else grade = "일반회원";
 				String regdate = rs.getString("regdate");
-				MemberDTO dto = new MemberDTO(idx, id, pw, nickname, grade, regdate);
+				MemberDTO dto = new MemberDTO(idx, id, nickname, grade, regdate);
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -103,7 +106,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberDTO memberSearch(MemberDTO dto) {
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT id, pw, nickname FROM member WHERE id = ? OR nickname = ?";
+		sql = "SELECT id, pw, nickname, grade FROM member WHERE id = ? OR nickname = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -115,8 +118,9 @@ public class MemberDAOImpl implements MemberDAO {
 				String id = rs.getString("id");
 				String pw = rs.getString("pw");
 				String nickname = rs.getString("nickname");
+				String grade = rs.getString("grade");
 				
-				dto = new MemberDTO(id, pw, nickname);
+				dto = new MemberDTO(id, pw, nickname, grade);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

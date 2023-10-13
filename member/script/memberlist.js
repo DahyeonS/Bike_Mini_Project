@@ -7,8 +7,8 @@ function getJson() {
             let tr = '';
             for (item of data) {
                 const {idx, id, pw, nickname, grade, regdate} = item;
-                tr += '<tr style="text-align: center;"><td>' + idx + '</td><td>' + id + '</td><td>' + pw
-                + '</td><td>' + nickname + '</td><td>' + grade + '</td><td>' + regdate + '</td></tr>';
+                tr += '<tr class="info"><td class="num">' + idx + '</td><td>' + id + '</td><td>'
+                + nickname + '</td><td class="grade">' + grade + '</td><td>' + regdate + '</td></tr>';
             }
             $('#tbody').html(tr);
         },

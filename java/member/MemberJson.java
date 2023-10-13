@@ -21,7 +21,6 @@ public class MemberJson {
 		String uri = request.getRequestURI();
 		String action = uri.substring(uri.lastIndexOf("/"));
 		
-//		로그인
 		if (action.equals("/login.json")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
@@ -143,6 +142,7 @@ public class MemberJson {
 			jsonObject.addProperty("id", dto.getId());
 			jsonObject.addProperty("pw", dto.getPw());
 			jsonObject.addProperty("nickname", dto.getNickname());
+			jsonObject.addProperty("grade", dto.getGrade());
 			
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(jsonObject.toString());

@@ -2,9 +2,9 @@ h2 {
     text-align: center;
     margin-bottom: 30px;
 }
+body {background-color: rgb(248, 248, 248);}
 .joinPage {
     font-family: 'Gothic A1', sans-serif;
-    background-color: rgb(248, 248, 248);
     padding-top: 10px;
     margin-left: 130px;
     margin-right: 130px;
@@ -20,22 +20,27 @@ th {width: 200px;}
 #success, #fail {margin-left: 10%;}
 #join {text-align: right;}
 #check, #nickcheck, #submit {
-    font-weight: 500;
+    font-weight: bold;
+    color: rgb(66, 66, 66);
     text-align: center;
-    background-color: rgb(245, 245, 245);
+    height: 40px;
+    width: 100px;
+    background-color: rgb(215, 215, 215);
     border-radius: 10%;
-    border: 1px solid rgb(220, 220, 220);
+    border: 1px solid rgb(235, 235, 235);
 }
-#check:hover, #nickcheck:hover, #submit:hover {background-color: rgb(220, 220, 220);}
+#check:hover, #nickcheck:hover, #submit:hover {background-color: rgb(235, 235, 235)}
 .btn {
     height: 60px;
-    width: 600px;
+    width: 550px;
 }
 #id, #pw, #pw2, #nickname {
     border-radius: 5%;
-    border: 1px solid rgb(100, 100, 100);
+    border: 2px solid rgb(100, 100, 100);
+    background-color: rgb(245, 245, 245);
 }
 #check, #nickcheck {margin-left: 80px;}
 #submit {margin-right: 20px;}
+#submit:disabled {background-color: rgb(150, 150, 150);}
 .success, .fail {font-style: italic;}
 .fail {color: red;}

@@ -9,11 +9,11 @@ function pagingQnaBoard(param) {
         data: param,
         success: function(data) {
         	const {blockNum, endPage, isBNext, isBPrev, isNext, isPrev, listNum, pageNum, startPage, totalCount, totalPage} = data;
-        	let tr = '<tr><td colspan="6">';
+        	let tr = '<tr><td colspan="6" class="paging">';
 			if(isPrev) tr += '<a href="#" onclick="getQnaBoard('+ (pageNum - 1) + ');">[<]</a>';
             if(isBPrev) tr += '<a href="#" onclick="getQnaBoard('+ (startPage - 1) + ');">[<<]</a>';
 			for(let i=startPage; i<=endPage; i++) {
-				if(i === pageNum) tr += '<span style="color:red;">['+ i + ']</span>';
+				if(i === pageNum) tr += '<span style="color:rgb(255, 170, 120);;">['+ i + ']</span>';
 				else tr += '<a href="#" onclick="getQnaBoard(' + i + ');">['+ i +']</a>';
 			};
 			if(isNext) tr += '<a href="#" onclick="getQnaBoard(' + (pageNum + 1) + ');">[>]</a>';
@@ -57,9 +57,9 @@ function getQnaBoard(page) {
 	        	}
             	$('#board').show();
                 const {num, title, nickname, visitCount, postdate} = item;
-                tr += '<tr style="text-align: center;"><td>' + num + '</td><td><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
-                	+ title + '</a></td><td>' + nickname + '</td><td>' + visitCount + '</td><td>' + postdate + '</td>'
-                if ((id !== 'null' && grade !== 'GENERAL' && item['nickname'] !== '관리자') || grade === 'MANAGER') tr += '<td><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
+                tr += '<tr style="text-align: center;"><td class="num">' + num + '</td><td class="title"><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
+                	+ title + '</a></td><td class="nickname">' + nickname + '</td><td class="count">' + visitCount + '</td><td class="date">' + postdate + '</td>'
+                if ((id !== 'null' && grade !== 'GENERAL' && item['nickname'] !== '관리자') || grade === 'MANAGER') tr += '<td class="control"><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
                 else if (id !== 'null' && grade !== 'GENERAL') tr += '<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td></tr>';
 	            else tr += '</tr>';
             }

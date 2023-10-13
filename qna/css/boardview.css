@@ -1,7 +1,19 @@
-#nickname, #anickname {text-align: left;}
-#postdate, #updatedate, #visitcount, #apostdate, #aupdatedate {text-align: right;}
+body {background-color: rgb(240, 255, 255);}
+#nickname, #anickname {
+    text-align: left;
+    margin-left: 150px;
+}
+#postdate, #updatedate, #visitcount, #apostdate, #aupdatedate {
+	text-align: right;
+	margin-right: 150px;
+}
+#context, #acontext {
+	margin-left: 150px;
+}
 form, h2 {text-align: center;}
-#answertext {text-align: left;}
+#answertext {
+	text-align: left;
+}
 #rcontext {text-align: left;}
 table, th, td, input, select {
     margin: 0 auto;
