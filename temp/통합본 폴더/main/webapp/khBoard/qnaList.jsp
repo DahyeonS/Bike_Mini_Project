@@ -35,7 +35,7 @@
         		console.log(data);
         		str = '<thead><tr><th style="width: 2%; text-align: center;">번호</th>';
     			str += '<th style="width: 40%; text-align: center">제목</th>';
-    			str += '<th style="width: 5%; text-align: center">닉네임</th>';
+    			str += '<th style="width: 3%; text-align: center">닉네임</th>';
     			str += '<th style="width: 9%; text-align: center">작성일자</th>';
     			str += '<th style="width: 3%; text-align: center">조회수</th></tr></thead>';
             	for(item of data) {

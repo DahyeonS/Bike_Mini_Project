@@ -18,6 +18,7 @@ function memberShow() {
                 $('#id').attr('value', data['id']);
                 $('#nickname').attr('value', data['nickname']);
                 nickCheck = data['nickname'];
+                grade = data['grade'];
                 $('#member').show();
             }
         },
@@ -35,7 +36,6 @@ function nicknameCheck(param) {
         dataType: 'json',
         success: function(data) {
             if(data['rs'] === 1) {
-            	console.log(param['nickname'])
             	if(param['nickname'] === nickCheck) {
                 	$('#nicksuccess').hide();
                 	$('#nickfail').hide();
@@ -63,7 +63,7 @@ function nicknameCheck(param) {
 function updateAdminJson() {
     const id = $('#id').val();
     const nickname = $('#nickname').val();
-    const grade = $('#grade').val();
+    if ('<%=session.getAttribute("id")%>' === 'MANAGER') grade = $('#grade').val();
     const params = {id, nickname, grade};
     $.ajax({
         type: 'POST',
@@ -110,12 +110,19 @@ function memberDeleteConfirm() {
 
 $(function() {
 	let nickCheck = '';
+	let grade = '';
 	$('#nicksuccess').hide();
     $('#nickfail').hide();
     $('#nickequal').hide();
     $('#member').hide();
     $('#search').click(function() {
-        memberShow();
+    	memberShow();
+    });
+    $('#context').keydown(function(event) {
+    	if (event.keyCode === 13) {
+    		event.preventDefault();
+	        memberShow();
+    	}
     });
     $('#submit').click(function() {
         updateAdminJson();

@@ -16,14 +16,17 @@ public class QnaDAOImpl implements QnaDAO {
 	String sql = "";
 	
 	@Override
-	public List<QnaDTO> getBoardList() {
+	public List<QnaDTO> getBoardList(int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, title, nickname, visit_count, postdate FROM post WHERE category = '질문' ORDER BY num DESC";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+		+ "(SELECT * FROM post WHERE category = '질문' ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, offSet);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -44,15 +47,18 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> getBoardListTitle(QnaDTO dto) {
+	public List<QnaDTO> getBoardListTitle(QnaDTO dto, int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, title, nickname, visit_count, postdate FROM post WHERE category = '질문' AND title LIKE ?";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+				+ "(SELECT * FROM post WHERE category = '질문' AND title LIKE ? ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + dto.getTitle() + "%");
+			pstmt.setInt(2, offSet);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -73,15 +79,18 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> getBoardListContext(QnaDTO dto) {
+	public List<QnaDTO> getBoardListContext(QnaDTO dto, int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, title, nickname, visit_count, postdate FROM post WHERE category = '질문' AND context LIKE ?";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+				+ "(SELECT * FROM post WHERE category = '질문' AND context LIKE ? ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + dto.getContext() + "%");
+			pstmt.setInt(2, offSet);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -102,15 +111,18 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> getBoardListNickname(QnaDTO dto) {
+	public List<QnaDTO> getBoardListNickname(QnaDTO dto, int pageNum) {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
+		int offSet = (pageNum - 1) * 10;
 		
 		conn = JDBCUtil.getConnection();
-		sql = "SELECT num, title, nickname, visit_count, postdate FROM post WHERE category = '질문' AND nickname LIKE ?";
+		sql = "SELECT * FROM (SELECT num, title, nickname, visit_count, postdate, ROWNUM AS offset FROM "
+				+ "(SELECT * FROM post WHERE category = '질문' AND nickname LIKE ? ORDER BY num DESC)) WHERE offset > ? AND ROWNUM <= 10";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + dto.getNickname() + "%");
+			pstmt.setInt(2, offSet);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -391,5 +403,88 @@ public class QnaDAOImpl implements QnaDAO {
 			JDBCUtil.close(pstmt, conn);
 		}
 		return rs;
+	}
+
+	@Override
+	public int getBoardCount() {
+		int result = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT COUNT(*) AS cnt FROM post WHERE category = '질문'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt("cnt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return result;
+	}
+
+	@Override
+	public int getBoardTitleCount(QnaDTO dto) {
+		int result = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT COUNT(*) AS cnt FROM post WHERE category = '질문' AND title LIKE ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + dto.getTitle() + "%");
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt("cnt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return result;
+	}
+
+	@Override
+	public int getBoardContextCount(QnaDTO dto) {
+		int result = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT COUNT(*) AS cnt FROM post WHERE category = '질문' AND context LIKE ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + dto.getContext() + "%");
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt("cnt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return result;
+	}
+
+	@Override
+	public int getBoardNicknameCount(QnaDTO dto) {
+		int result = 0;
+		
+		conn = JDBCUtil.getConnection();
+		sql = "SELECT COUNT(*) AS cnt FROM post WHERE category = '질문' AND nickname LIKE ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + dto.getNickname() + "%");
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt("cnt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, pstmt, conn);
+		}
+		return result;
 	}
 }

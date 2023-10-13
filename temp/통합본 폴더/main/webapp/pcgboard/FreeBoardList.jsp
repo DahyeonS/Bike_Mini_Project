@@ -83,8 +83,8 @@ function searchJson(param){
 </tr>
 
 <tr>
- <td  width="10%"><h3> 게시글 번호 </h3></td>
-<td  width="50%" ><h3> 게시글명 </h3></td>
+<td ><h3> 게시글 번호 </h3></td>
+<td ><h3> 게시글명 </h3></td>
 <td><h3> 작성자 닉네임 </h3></td>
 <td><h3> 방문자 수</h3></td>
 <td><h3> 작성일자 </h3></td>

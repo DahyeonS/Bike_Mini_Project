@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>pcg 게시판 뷰어</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
@@ -65,7 +71,7 @@ function Insert() {
 	<h2>게시판 -글쓰기</h2>
 	<form name="writeFrm" method="post" action="write.json"
 		onsubmit="return validateForm(this);">
-	<table border="1" width="90%">
+	<table border="1"  class="container">
 		<tr>
 			<td>제목</td>
 			
@@ -78,8 +84,12 @@ function Insert() {
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td><textarea name="content" id="content"
-					style="width: 95%; height: 200px" rows="" cols=""></textarea></td>
+			<td>
+			<div class="form-floating">
+			  <textarea name="content" id="content" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+  			  <label for="floatingTextarea">Comments</label>
+			</div>
+					</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
@@ -93,5 +103,17 @@ function Insert() {
 
 	</table>
 	</form>
+	<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+			integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+			crossorigin="anonymous"></script>
 </body>
 </html>

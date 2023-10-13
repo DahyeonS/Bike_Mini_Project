@@ -163,7 +163,7 @@ $(function() {
 	</tr>
 		<tbody id="boardList"></tbody>
 	</table>
-	<div>
+	<div style="text-align: center;">
 		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		&nbsp; &nbsp; &nbsp; <select id="listNum" class="border"
 			onclick="searchList()">

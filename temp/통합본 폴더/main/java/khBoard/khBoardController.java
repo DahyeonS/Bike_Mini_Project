@@ -48,7 +48,8 @@ public class khBoardController {
 				System.out.println("uploadProcess");
 
 				String saveDirectory = request.getServletContext().getRealPath("/uploads");
-				String saveDirectory2 = "D:\\kdigital2307\\jsp\\jspws\\mini_project\\src\\main\\webapp\\khBoard\\images";
+				String saveDirectory2 = "C:\\kdigital2307\\jsp\\jspws\\miniproject\\src\\main\\webapp\\khBoard\\images";
+										
 				System.out.println("saveDirectory : " + saveDirectory);
 				int maxPostSize = 2048 * 2000;
 				String encoding = "UTF-8";

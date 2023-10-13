@@ -11,4 +11,8 @@ public interface MemberDAO {
 	int update(MemberDTO dto);
 	int delete(MemberDTO dto);
 	int updateAdmin(MemberDTO dto);
+	
+	List<MemberBoardDTO> getBoardList(MemberBoardDTO dto, int pageNum);
+	int getBoardCount(MemberBoardDTO dto);
+	int deleteBoard(MemberBoardDTO dto);
 }

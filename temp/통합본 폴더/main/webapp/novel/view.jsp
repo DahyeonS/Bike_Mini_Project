@@ -17,7 +17,7 @@
 		const num = "<%=num%>";
 		$.ajax({
 	        type: 'POST',
-	        url: '../novel/viewJson.json',
+	        url: 'viewJson.json',
 	        dataType: 'text',
 	        data: {num:num},
 	        success: function(r) {
@@ -47,14 +47,14 @@
 		console.log("nuk : "+ num_2);
 		$.ajax({
 	        type: 'POST',
-	        url: '../novel/deleteJson.json',
+	        url: 'deleteJson.json',
 	        dataType: 'json',
 	        data: {num:num_2},
 	        success: function(data) {
 	        	console.log("data : " + data);
 	        	console.log("data['rs'] : " + data['rs']);
 	        	if (data['rs'] === 1) {
-	        		location.href = '../novel/board.do';
+	        		location.href = 'board.do';
 	        		alert("삭제 됬습니다아아~");
 	        	}
 				else {
@@ -109,7 +109,7 @@
 		console.log("nuk : "+ num_6);
 		$.ajax({
 	        type: 'POST',
-	        url: '../novel/count.json',
+	        url: 'count.json',
 	        dataType: 'text',
 	        data: {num:num_6},
 	        success: function(r) {
@@ -133,7 +133,7 @@
 		console.log("nuk : "+ num_4);
 		$.ajax({
 	        type: 'POST',
-	        url: '../novel/prevJson.json',
+	        url: 'prevJson.json',
 	        dataType: 'text',
 	        data: {num:num_4},
 	        success: function(r) {
@@ -161,7 +161,7 @@
 		console.log("nuk : "+ num_5);
 		$.ajax({
 	        type: 'POST',
-	        url: '../novel/nextJson.json',
+	        url: 'nextJson.json',
 	        dataType: 'text',
 	        data: {num:num_5},
 	        success: function(r) {
@@ -171,7 +171,7 @@
 	        	console.log("num 다음페이지 :" + num2);
 	        	
 	        	if (num2 != num_5 && num2 !== 0) {
-    				location.href = '../novel/view.jsp?num='+num2+'&id='+id+'&num2='+num2+'&num3='+num2+'&num4='+num2+'&num5='+num2+'&num6='+ num2 +'';
+    				location.href = 'view.jsp?num='+num2+'&id='+id+'&num2='+num2+'&num3='+num2+'&num4='+num2+'&num5='+num2+'&num6='+ num2 +'';
     				/* alert("location : "+ 'view.jsp?num='+num2+'&id='+id+'&num2='+num2+'&num3='+num2+'&num4='+num2+'&num5='+num2+'&num6='+ num2 +''); */
 	        	}
 				else if(num2 === 0) {
@@ -205,18 +205,6 @@
 			console.log("getNick : "+ getNick);
 		}) */
 	})
-	
-	$(document).ready(function() {
-		<%String search2 = request.getParameter("search");%>
-		const agree = "<%=search2%>";
-		console.log("agree2 : "+ agree);
-		if(agree == "t") {
-		  $('.listBtn a').click(function() {
-				$('.listBtn a').removeAttr("href");
-			    window.history.back();
-		  });
-		};
-	});
  </script>
  
 <title>view</title>

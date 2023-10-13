@@ -1,70 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@include file="../member/loginCheck.jsp" %>
 <html>
 <head>
 <meta charset="UTF-8">
 <title></title>
-<style>
-	#nickname {text-align: left;}
-	#postdate, #visitcount {text-align: right;}
-	form, h2 {text-align: center;}
-	table, th, td, input, select {
-		margin: 0 auto;
-		border-collapse: collapse;
-		font-size: 14pt;
-	}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/boardview.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script>
-function getQnaBoardView() {
-	const num = '<%=request.getParameter("num")%>';
-	const param = {num};
-    $.ajax({
-        type: 'POST',
-        url: 'qnaBoardView.json',
-        dataType: 'json',
-        data: param,
-        success: function(data) {
-        	$('title').html(data['title']);
-        	$('h2').html(data['title']);
-        	$('h3').html(data['context']);
-        	$('#nickname').html("작성자 " + data['nickname']);
-        	$('#postdate').html("작성일자 " + data['postdate']);
-        	$('#visitcount').html("조회수 " + data['visitCount']);
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr, status, error);
-        }
-    });
-};
-
-$(function() {
-	getQnaBoardView();
-	$('#list').click(function() {
-		location.href = '../qna/qnaBoardList.do';
-	});
-	$('#write').click(function() {
-		location.href = '../qna/qnaWrite.do';
-	});
-	$('#answer').click(function() {
-		location.href = '../qna/qnaWrite.do?num=<%=request.getParameter("num")%>';
-	});
-});
-</script>
+<%@include file="script/boardViewScript.jsp"%>
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>
-<h2></h2>
+<div class="question">
+<h2 id="title"></h2>
+<h4 id="nickname"></h4><h4 id="postdate"></h4><h4 id="updatedate"></h4><br><h4 id="visitcount"></h4>
 <hr>
-<h4 id="nickname"></h4><h4 id="postdate"></h4><h4 id="visitcount"></h4>
-<hr>
-<h3></h3>
+<h3 id="context"></h3>
+<div class="control"></div><br><br>
 <br><br><br>
+<div class="replies">
+<table id="replylist${param.num}">
+</table>
+<br><br><br>
+</div>
+<table>
+<tr>
+<td>${nickname}님</td>
+<td>&nbsp&nbsp<textarea id="reply${param.num}"></textarea>&nbsp&nbsp</td>
+<td><input type="button" value="댓글 작성" onclick="writeReply(${param.num});"></td>
+<tr>
+</table>
+<br><br>
+</div>
+<br>
 <form>
+<br>
 <input type="button" value="답변하기" id="answer">
 </form>
+<div class="answer">
+<br>
+<br><br><br><br>
+<hr style="border: solid black 1pt;">
+<h2 id="answertext">답변</h2>
+<div class="answerlist">
+</div>
+</div>
+<br><br><br><br>
 <input type="button" value="목록보기" id="list">
 <input style="text-align: right;" type="button" value="글쓰기" id="write">
 </body>

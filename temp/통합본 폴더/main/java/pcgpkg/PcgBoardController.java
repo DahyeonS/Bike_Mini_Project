@@ -106,6 +106,10 @@ public class PcgBoardController {
 				String categorySelect = request.getParameter("categorySelect");
 				String textInputValue = request.getParameter("textInputValue");
 				String Selecttext = request.getParameter("Selecttext");
+				
+				if(request.getParameter("listNum")!=null) {
+				listNum = Integer.parseInt( request.getParameter("listNum"));
+				}
 				System.out.println("똑바로좀 와라"+categorySelect+textInputValue+Selecttext);
 				if(request.getParameter("pageNum") != null){
 					pageNum = Integer.parseInt(request.getParameter("pageNum"));
@@ -113,7 +117,7 @@ public class PcgBoardController {
 				
 				PcgBoardDAO dao = new PcgBoardDAO();
 				List<PcgBoardDTO> list = null;
-				System.out.println(categorySelect+"/"+textInputValue+"/"+Selecttext+"검색값이 컨트롤러에 왔다");
+				System.out.println(categorySelect+"/"+textInputValue+"/"+Selecttext+listNum+"검색값이 컨트롤러에 왔다");
 				int totalCount=0;
 				//검색 값이 왔다
 				if( textInputValue  == null && Selecttext  == null) {
@@ -155,6 +159,8 @@ public class PcgBoardController {
 				request.setAttribute("PagingDTO", PagingDTO);
 				request.setAttribute("categorylist", categorylist);
 				request.setAttribute("list", list);
+				request.setAttribute("listNum", listNum);
+				
 				System.out.println(totalCount+categorySelect+textInputValue+Selecttext +"여기까지 또왔어");
 				request.getRequestDispatcher("FreeBoardListPaging.jsp").forward(request, response);
 				

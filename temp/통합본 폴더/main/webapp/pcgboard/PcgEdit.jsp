@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
-<link rel="stylesheet" type="text/css" href="../css/write.css">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="./css/style.css">
 
 <script>
 	function validateForm(form) {
@@ -44,22 +47,24 @@
 			 onsubmit="return validateForm(this);">
 			<input type="hidden" name="num" id="num" value="${dto.num }"> 
 			<div class="main">
-				<table border="1">
+				<table border="1" class="container">
 					<tbody>
 						<tr>
-							<td class="up_name">제목</td>
-							<td><input type="text"  name="uptitle" id="uptitle" value="${dto.title }"></td>
+							<td>제목</td>	<td><input type="text"  name="uptitle" id="uptitle" value="${dto.title }"></td>
 						</tr>
 						<tr>
-							<td class="up_name">내용</td>
-							<td><textarea name="upcontext" id="upcontext" > ${dto.context }</textarea></td>
+							<td>내용</td>
+							<td><div class="form-floating">
+			  					<textarea  name="upcontext" id="upcontext" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"> ${dto.context }</textarea>
+  			  					<label for="floatingTextarea">Comments</label>
+								</div>
 						</tr>
 
 						<tr>
 							<td colspan="2" class="w_btn">
-							<input type="submit" value="작성 완료" id="writeBtn">
-								 <input type="reset"value="다시 입력">
-								  <input type="button" value="취소"id="listBtn"></td>
+							<button type="submit" value="작성 완료" id="writeBtn" class="btn btn-outline-secondary btn-3">작성 완료</button>
+								 <button type="reset"value="다시 입력" class="btn btn-outline-secondary btn-3">다시 입력</button>
+								  <button value="취소"id="listBtn" class="btn btn-outline-secondary btn-3"> 취소</button> </td>
 						</tr>
 
 					</tbody>
@@ -68,5 +73,17 @@
 		</form>
 
 	</div>
+	<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+			integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+			crossorigin="anonymous"></script>
 </body>
 </html>

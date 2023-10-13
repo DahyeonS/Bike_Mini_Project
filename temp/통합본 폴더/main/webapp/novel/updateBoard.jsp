@@ -19,7 +19,7 @@
 		                                                                                                                                                                                                                                                                                                                                                    
 		$.ajax({
 	        type: 'POST',
-	        url: '../novel/updateJson.json',
+	        url: 'updateJson.json',
 	        dataType: 'text',
 	        data: param,
 	        success: function(r) {
@@ -44,7 +44,7 @@
 			                                                                                                                                                                                                                                                                                                                                                    
 			$.ajax({
 		        type: 'POST',
-		        url: '../novel/prevWrite.json',
+		        url: 'prevWrite.json',
 		        dataType: 'text',
 		        data: {num:num2},
 		        success: function(r) {
@@ -90,26 +90,26 @@
         <h1>회원제 게시판 - 글쓰기</h1>
         <form action="view">
             <div class="main">
-                <div border="1" class="table">
-                    <div>
-                        <div>
-                            <div class="w_name bottom">제목</div>
-                            <div class="inputDiv"><input type="textarea" name="wTitle" id="wTitle"></div>
-                        </div>
-                        <div>
-                            <div class="w_name">내용</div>
-                            <div class="inputDiv"><input type="textarea" name="wContext" id="wContext"></div>
-                        </div>
-                        <div>
-                            <div colspan="2" class="w_btn">
+                <table border="1">
+                    <tbody>
+                        <tr>
+                            <td class="w_name">제목</td>
+                            <td><input type="textarea" name="wTitle" id="wTitle"></td>
+                        </tr>
+                        <tr>
+                            <td class="w_name">내용</td>
+                            <td><input type="textarea" name="wContext" id="wContext"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="w_btn">
                                 <input type="hidden" name="category" value="소설" id="cateHidden">
                                 <input type="button" value="작성 완료" id="writeBtn">
                                 <input type="button" value="목록 보기" id="listBtn">
-                            </div>
-                        </div>
+                            </td>
+                        </tr>
                         
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </form>
     </div>
