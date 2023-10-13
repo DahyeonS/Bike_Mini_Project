@@ -31,17 +31,18 @@ function getQnaBoard(page) {
 	const id = '<%=session.getAttribute("id")%>';
 	
 	let title, context, nickname;
-	if ($('#select').val() === 'title') {
+	if ($('.select').val() === 'title') {
 		title = $('#context').val();
-	} else if ($('#select').val() === 'context') {
+	} else if ($('.select').val() === 'context') {
 		context = $('#context').val();
-	} else if ($('#select').val() === 'nickname') {
+	} else if ($('.select').val() === 'nickname') {
 		nickname = $('#context').val();
 	}
 	let search = false;
 	if (title === '' && context === undefined && nickname === undefined) search = true;
 	
 	const param = {page, title, context, nickname};
+	console.log(param);
     $.ajax({
         type: 'POST',
         url: 'qnaBoardList.json',
@@ -118,7 +119,7 @@ $(function() {
 	});
 	$('#context').keydown(function(event) {
     	if (event.keyCode === 13) {
-    		location.href = '#';
+    		event.preventDefault();
     		const context = $('#context').val();
     		if (context === '') {
     			alert('검색어를 입력해주세요.');
