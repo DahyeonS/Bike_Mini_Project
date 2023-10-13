@@ -3,7 +3,7 @@ h1 {
     font-size: 2em;
     font-weight: bold;
 }
-table{width: 100%;}
+.table{width: 100%;}
 
 a {
     text-decoration: none;
@@ -32,15 +32,17 @@ a {
     margin: 5px 0;
 }
 .board_box  > div:last-child {text-align: right !important;}
-td {text-align: center;}
+.tul_span {text-align: center;}
 .th_num {padding:  0 10px;}
 .upload {text-align: left;}
 .tul_span a {
 	width: 100%;
 	display: inline-block;
 }
-tbody tr:hover {
-	background : #e5e5e5;
+#tbody .tr:hover {
+	background : #555;
+	border-color: #555;
+	color: #fff;
 }
 h1 {
 	text-align: center;
@@ -77,4 +79,19 @@ h1 {
     background: #e94343;
 }
 
+.tul_th {
+    display: grid !important;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 2px solid #888;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+    background: #f1f1f1;
+}
+.tr {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
 

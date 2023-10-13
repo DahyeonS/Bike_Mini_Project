@@ -74,27 +74,27 @@
         <h1>회원제 게시판 - 글쓰기</h1>
         <form action="view">
             <div class="main">
-                <table border="1">
-                    <tbody>
-                        <tr>
-                            <td class="w_name">제목</td>
-                            <td><input type="textarea" name="wTitle" id="wTitle"></td>
-                        </tr>
-                        <tr>
-                            <td class="w_name">내용</td>
-                            <td><input type="textarea" name="wContext" id="wContext"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="w_btn">
+                <div border="1" class="table">
+                    <div>
+                        <div>
+                            <div class="w_name bottom">제목</td>
+                            <div><input type="textarea" name="wTitle" id="wTitle"></div>
+                        </div>
+                        <div>
+                            <div class="w_name">내용</div>
+                            <div class="inputDiv"><input type="textarea" name="wContext" id="wContext"></div>
+                        </div>
+                        <div>
+                            <div colspan="2" class="w_btn">
                                 <input type="hidden" name="category" value="소설" id="cateHidden">
                                 <input type="button" value="작성 완료" id="writeBtn">
                                 <input type="button" value="다시 입력" id="resetBtn">
                                 <input type="button" value="목록 보기" id="listBtn">
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
                         
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
