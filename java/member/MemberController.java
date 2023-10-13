@@ -21,6 +21,7 @@ public class MemberController {
 			else if (action.equals("/delete.do")) response.sendRedirect("../member/delete.jsp");
 			else if (action.equals("/memberList.do")) response.sendRedirect("../member/memberList.jsp");
 			else if (action.equals("/updateAdmin.do")) response.sendRedirect("../member/updateAdmin.jsp");
+			else if (action.equals("/boardList.do")) response.sendRedirect("../member/boardList.jsp");
 		} 
 	}
 }

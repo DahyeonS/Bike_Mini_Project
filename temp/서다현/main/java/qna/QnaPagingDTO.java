@@ -91,6 +91,4 @@ public class QnaPagingDTO {
 				+ pageNum + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", isPrev=" + isPrev + ", isNext=" + isNext + ", isBPrev=" + isBPrev + ", isBNext=" + isBNext + "]";
 	}
-	
-	
 }

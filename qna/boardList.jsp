@@ -5,16 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Q&A 게시판</title>
-<style>
-	form, h2 {text-align: center;}
-	table, th, td, input, select {
-		margin: 0 auto;
-		border-collapse: collapse;
-		font-size: 14pt;
-	}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/boardlist.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<%@include file="./script/boardListScript.jsp"%>
+<%@include file="script/boardListScript.jsp"%>
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>

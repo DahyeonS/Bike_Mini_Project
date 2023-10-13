@@ -75,6 +75,7 @@ function QnaLoginCheck() {
             <c:if test="${grade != 'GENERAL'}">
             <a href="../member/memberList.do">회원목록</a><br>
             </c:if>
+            <a href="../member/boardList.do">게시글 조회</a><br>
             <a href="../member/update.do">정보수정</a><br>
             <a href="#" onclick="deleteConfirm();">회원탈퇴</a>
         </div>

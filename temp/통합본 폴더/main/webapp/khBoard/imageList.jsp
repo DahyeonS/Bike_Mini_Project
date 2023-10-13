@@ -35,8 +35,8 @@
 	        		str += '<div class="card-body"><a class="nav-link" href="#" onclick="aClick(' + item.num + ')"><h5 class="card-title">' + item['title'] + '</h5></a></div></div></div>' 
         		}
 	            $('#imageList').html(str);
-
 		})
+		pagingBtns(pageNum, $('#searchWord').val(), $('#searchField').val());
 	}
 	function aClick (num) {
 		str = '${id}';

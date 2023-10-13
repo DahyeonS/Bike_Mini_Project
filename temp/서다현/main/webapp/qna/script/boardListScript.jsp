@@ -118,6 +118,7 @@ $(function() {
 	});
 	$('#context').keydown(function(event) {
     	if (event.keyCode === 13) {
+    		location.href = '#';
     		const context = $('#context').val();
     		if (context === '') {
     			alert('검색어를 입력해주세요.');

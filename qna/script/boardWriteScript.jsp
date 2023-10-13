@@ -86,10 +86,12 @@ $(function() {
 	let num = <%=request.getParameter("num")%>
 	let update = <%=request.getParameter("update")%>
 	if (num !== null) {
+		$('title').html('답변 작성');
 		const param = {num};
 		getQnaWriteView(param);
 	}
 	if (update !== null) {
+		$('title').html('게시글 수정');
 		const param = {update};
 		getQnaUpdateView(param);
 	}

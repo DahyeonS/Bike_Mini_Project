@@ -262,7 +262,7 @@ public class khBoardJson {
 		else if(action.equals("/iBeforeBoard.json")) {
 			int num = Integer.parseInt(request.getParameter("num"));
 			khBoardDAO dao = new khBoardDAO();
-			int beforeNum = dao.qBeforeBoard(num);
+			int beforeNum = dao.iBeforeBoard(num);
 
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("beforeNum", beforeNum);
@@ -281,6 +281,15 @@ public class khBoardJson {
 			int num = Integer.parseInt(request.getParameter("num"));
 			khBoardDAO dao = new khBoardDAO();
 			int nextNum = dao.qNextBoard(num);
+
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("nextNum", nextNum);
+			response.getWriter().write(jsonObject.toString());
+		}
+		else if(action.equals("/iNextBoard.json")) {
+			int num = Integer.parseInt(request.getParameter("num"));
+			khBoardDAO dao = new khBoardDAO();
+			int nextNum = dao.iNextBoard(num);
 
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("nextNum", nextNum);
@@ -330,7 +339,7 @@ public class khBoardJson {
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/iPagingBtns.json")) {
-			int listNum = Integer.parseInt(request.getParameter("listNum"));
+			int listNum = 8;
 			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 			String searchWord = request.getParameter("searchWord");
 			String searchField = request.getParameter("searchField");

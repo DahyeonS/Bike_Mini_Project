@@ -7,24 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 작성</title>
-<style>
-	#nickname {text-align: left;}
-	#postdate {text-align: right;}
-	form, h2 {text-align: center;}
-	#write {text-align: right;}
-	table, th, td, input, select {
-		margin: 0 auto;
-		border-collapse: collapse;
-		font-size: 14pt;
-	}
-	#context {
-		width:1000px;
-		height:800px;
-		text-align: initial;
-	}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/boardwrite.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<%@include file="./script/boardWriteScript.jsp"%>
+<%@include file="script/boardWriteScript.jsp"%>
 </head>
 <body>
 <%@include file="../home/topmenu.jsp" %>

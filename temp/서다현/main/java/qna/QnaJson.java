@@ -30,14 +30,14 @@ public class QnaJson {
 			
 			if (title != null) {
 				dto.setTitle(title);
-				list = dao.getBoardListTitle(dto, page, 10);
+				list = dao.getBoardListTitle(dto, page);
 			} else if (context != null) {
 				dto.setContext(context);
-				list = dao.getBoardListContext(dto, page, 10);
+				list = dao.getBoardListContext(dto, page);
 			} else if (nickname != null) {
 				dto.setNickname(nickname);
-				list = dao.getBoardListNickname(dto, page, 10);
-			} else list = dao.getBoardList(page, 10);
+				list = dao.getBoardListNickname(dto, page);
+			} else list = dao.getBoardList(page);
 			
 			if (list.size() == 0) list.add(new QnaDTO());
 			
@@ -72,14 +72,6 @@ public class QnaJson {
 			//paging
 			QnaPagingDTO paging = new QnaPagingDTO(totalCount, pageNum, listNum, blockNum);
 			paging.setPaging();	
-			
-			int totalPage = paging.getTotalPage();
-			int startPage = paging.getStartPage();
-			int endPage = paging.getEndPage();
-			boolean isPrev = paging.isPrev();
-			boolean isNext = paging.isNext();
-			boolean isBPrev = paging.isBPrev();
-			boolean isBNext = paging.isBNext();
 			
 			String gson = new Gson().toJson(paging);
 			response.setContentType("text/html; charset=UTF-8");

@@ -23,6 +23,7 @@ function loginJson() {
 };
 
 $(function() {
+	$('#id').focus();
     $('#submit').click(function() {
         const id = $('#id').val();
     	const pw = $('#pw').val();
