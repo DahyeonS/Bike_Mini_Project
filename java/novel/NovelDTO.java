@@ -23,6 +23,17 @@ public class NovelDTO {
 		this.postdate = postdate;
 		this.context = context;
 	}
+	public NovelDTO(String id,int num,  String nickname,  String title, String category, String context,String postdate, int visitCount) {
+		super();
+		this.id = id;
+		this.num = num;
+		this.nickname = nickname;
+		this.title = title;
+		this.category = category;
+		this.context = context;
+		this.postdate = postdate;
+		this.visitCount = visitCount;
+	}
 	public NovelDTO(String context, String id, String nickname, String title) {
 		super();
 		this.id = id;
@@ -46,6 +57,16 @@ public class NovelDTO {
 		this.postdate = postdate;
 		this.context = context;
 		this.visitCount = visitCount;
+	}
+	public NovelDTO(String context,String nickname, String id,String title, int visitCount, String postdate, int num) {
+		super();
+		this.id = id;
+		this.nickname = nickname;
+		this.title = title;
+		this.postdate = postdate;
+		this.context = context;
+		this.visitCount = visitCount;
+		this.num = num;
 	}
 	public NovelDTO(String context,String title, int num) {
 		super();

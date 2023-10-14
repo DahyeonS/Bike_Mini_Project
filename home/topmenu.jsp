@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 <%@include file="../member/script/deleteConfrim.jsp" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <script>
 //탑 메뉴 숨기기
 $(document).ready(function() {
@@ -47,20 +50,35 @@ function QnaLoginCheck() {
     text-align: center;
     list-style: none;
 }
+a {
+	text-decoration: none;
+}
+a:link {
+    color : black;
+}
+a:visited {
+    color : black;
+}
+a:hover {
+    color : black;
+}
+a:active {
+    color : black
+}
 </style>
-
+<div class="home">
 <div class="outer-menu-item">
-    <a href="index.do">Home</a>
+    <a href="../home/index.do">Home</a>
 </div>
 <div class="loginbutton">
 	<div id="info">
-	<c:if test="${id != null}">
-	<c:if test="${grade == 'MANAGER'}">매니저</c:if>
-	<c:if test="${grade == 'ASSOCIATE'}">부매니저</c:if>
-	<c:if test="${grade == 'STAFF'}">스탭</c:if>
-	<c:if test="${grade == 'GENERAL'}">일반회원</c:if>
-    ${nickname}(${id})님&nbsp
-    </c:if>
+        <c:if test="${id != null}">
+        <c:if test="${grade == 'MANAGER'}">매니저</c:if>
+        <c:if test="${grade == 'ASSOCIATE'}">부매니저</c:if>
+        <c:if test="${grade == 'STAFF'}">스탭</c:if>
+        <c:if test="${grade == 'GENERAL'}">일반회원</c:if>
+        ${nickname}(${id})님&nbsp
+        </c:if>
     </div>
 	<c:if test="${id == null}">
     <a href="../member/join.do">회원가입</a>
@@ -86,86 +104,99 @@ function QnaLoginCheck() {
 </div>
 <br>
 <hr>
-<div class="outer-menu-item">
-    <ul>
-        <!-- 외부 메뉴 항목의 콘텐츠 -->
-        Q&A 게시판
-        <div class="inner-menu">
-            <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="../qna/qnaBoardList.do">목록보기</a></li>
-            <li> <a href="../qna/qnaWrite.do" onclick="QnaLoginCheck();">질문하기</a></li>
+<div class="container">
+    <div class="row">
+        <div class="col" style="margin:auto;">
+            <div class="outer-menu-item">
+                <ul class="list-group">
+                    <!-- 외부 메뉴 항목의 콘텐츠 -->
+                    <div class="text-center">
+                        <h5>Q&A</h5>
+                    </div>
+                    <div class="inner-menu">
+                        <!-- 내부 메뉴 항목의 콘텐츠 -->
+                        <li class="list-group-item"> <a href="../qna/qnaBoardList.do">목록보기</a></li>
+                        <li class="list-group-item"> <a href="../qna/qnaWrite.do" onclick="QnaLoginCheck();">질문하기</a></li>
+                    </div>
+                </ul>
+            </div>
         </div>
-    </ul>
-</div>
-<div class="outer-menu-item">
-    <ul>
-        <!-- 외부 메뉴 항목의 콘텐츠 -->
-        박철규
-        <div class="inner-menu">
-            <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+        <div class="col" style="margin:auto;">
+	        <div class="outer-menu-item">
+	            <ul class="list-group">
+	                <!-- 외부 메뉴 항목의 콘텐츠 -->
+	                <div class="text-center">
+						<h5>박철규</h5>
+					</div>
+	                <div class="inner-menu">
+	                    <!-- 내부 메뉴 항목의 콘텐츠 -->
+	                    <li class="list-group-item"> <a href="../pcgboard/FreeBoardList.do">게시판</a></li>
+					    <li class="list-group-item"> <a href="../pcgboard/FreeBoardListPaging.do">페이징</a></li>
+	                </div>
+	            </ul>
+	        </div>
         </div>
-    </ul>
-</div>
-<div class="outer-menu-item">
-    <ul>
-        <!-- 외부 메뉴 항목의 콘텐츠 -->
-        고훈
-        <div class="inner-menu">
-            <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+        <div class="col" style="margin:auto;">
+	        <div class="outer-menu-item">
+	            <ul class="list-group">
+	                <!-- 외부 메뉴 항목의 콘텐츠 -->
+	                <div class="text-center">
+						<h5>고훈</h5>
+					</div>
+	                <div class="inner-menu">
+	                    <!-- 내부 메뉴 항목의 콘텐츠 -->
+	                    <li class="list-group-item"> <a href="../khBoard/boardList.do">일반</a></li>
+					    <li class="list-group-item"> <a href="../khBoard/qnaList.do">Q&A</a></li>
+					    <li class="list-group-item"> <a href="../khBoard/imageList.do">사진</a></li>
+	                </div>
+	            </ul>
+	        </div>
         </div>
-    </ul>
-</div>
-<div class="outer-menu-item">
-    <ul>
-        <!-- 외부 메뉴 항목의 콘텐츠 -->
-        권지현
-        <div class="inner-menu">
-            <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+        <div class="col" style="margin:auto;">
+	        <div class="outer-menu-item">
+	            <ul class="list-group">
+	                <!-- 외부 메뉴 항목의 콘텐츠 -->
+	                <div class="text-center"">
+						<h5>권지현</h5>
+					</div>
+	                <div class="inner-menu">
+	                    <!-- 내부 메뉴 항목의 콘텐츠 -->
+	                    <li class="list-group-item"> <a href="../jhBoard/boardList.do">일반</a></li>
+					    <li class="list-group-item"> <a href="../jhBoard/qnaBoardList.do">Q&A</a></li>
+	                </div>
+	            </ul>
+	        </div>
         </div>
-    </ul>
-</div>
-<div class="outer-menu-item">
-    <ul>
-        <!-- 외부 메뉴 항목의 콘텐츠 -->
-        정민석
-        <div class="inner-menu">
-            <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+        <div class="col" style="margin:auto;">
+	        <div class="outer-menu-item">
+	            <ul class="list-group">
+	                <!-- 외부 메뉴 항목의 콘텐츠 -->
+	                <div class="text-center">
+						<h5>정민석</h5>
+					</div>
+	                <div class="inner-menu">
+	                    <!-- 내부 메뉴 항목의 콘텐츠 -->
+	                    <li class="list-group-item"> <a href="../jmsboard/board.do">게시판</a></li>
+	                </div>
+	            </ul>
+	        </div>
         </div>
-    </ul>
-</div>
-<div class="outer-menu-item">
-    <ul>
-        <!-- 외부 메뉴 항목의 콘텐츠 -->
-        황영선
-        <div class="inner-menu">
-            <!-- 내부 메뉴 항목의 콘텐츠 -->
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
-            <li> <a href="">데이터</a></li>
+        <div class="col" style="margin:auto;">
+	        <div class="outer-menu-item">
+	            <ul class="list-group">
+	                <!-- 외부 메뉴 항목의 콘텐츠 -->
+	                <div class="text-center">
+						<h5>황영선</h5>
+					</div>
+	                <div class="inner-menu">
+	                    <!-- 내부 메뉴 항목의 콘텐츠 -->
+	                    <li class="list-group-item">  <a href="../novel/board.do">소설</a></li>
+	                </div>
+	            </ul>
+            </div>
         </div>
-    </ul>
+    </div>
 </div>
-<br><br><br>
 <hr style="position: relative;">
+<br>
+</div>

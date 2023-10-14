@@ -74,3 +74,4 @@ td:nth-child(2n+1) {background-color: rgb(240, 255, 250)}
 .title > a:visited, .paging > a:visited {
 	color: rgb(199, 163, 255);
 }
+#delete {color: rgb(98, 171, 253);}

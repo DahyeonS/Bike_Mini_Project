@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jhBoard.JhBoardController;
+import jmsboard.JmsController;
+import khBoard.KhBoardController;
 import member.MemberController;
+import novel.NovelController;
+import pcgpkg.PcgBoardController;
 import qna.QnaController;
 
 @WebServlet("*.do")
@@ -41,6 +46,8 @@ public class DispatcherController extends HttpServlet {
 			if (action.equals("/index.do")) {
 				response.sendRedirect("../index.jsp");
 			}
+			JmsController jmsControll = new JmsController();
+			jmsControll.process(request, response);
 		} else if (uri.split("/", 4)[2].equals("member")) {
 			if (action.equals("/index.do")) {
 				response.sendRedirect("../index.jsp");
@@ -53,7 +60,31 @@ public class DispatcherController extends HttpServlet {
 			}
 			QnaController qnaControl = new QnaController();
 			qnaControl.qnaProcess(request, response);
-		}  else {
+		} else if (uri.split("/", 4)[2].equals("novel")) {
+			if (action.equals("/index.do")) {
+				response.sendRedirect("../index.jsp");
+			}
+			NovelController novelControl = new NovelController();
+			novelControl.novelProcess(request, response);
+		}  else if (uri.split("/", 4)[2].equals("pcgboard")) {
+			if (action.equals("/index.do")) {
+				response.sendRedirect("../index.jsp");
+			}
+			PcgBoardController boardControl = new PcgBoardController();
+			boardControl.PcgProcess(request, response);
+		} else if (uri.split("/", 4)[2].equals("khBoard")) {
+			if (action.equals("/index.do")) {
+				response.sendRedirect("../index.jsp");
+			}
+			KhBoardController khBoardControl = new KhBoardController();
+			khBoardControl.khBoardProcess(request, response);
+		} else if (uri.split("/", 4)[2].equals("jhBoard")) {
+			if (action.equals("/index.do")) {
+				response.sendRedirect("../index.jsp");
+			}
+			JhBoardController jhboardControl = new JhBoardController();
+			jhboardControl.jhboardProcess(request, response);			
+		} else {
 			if (action.equals("/index.do")) response.sendRedirect("./home/index.jsp");
 		}
 	}

@@ -60,7 +60,7 @@ function getQnaBoard(page) {
                 const {num, title, nickname, visitCount, postdate} = item;
                 tr += '<tr style="text-align: center;"><td class="num">' + num + '</td><td class="title"><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
                 	+ title + '</a></td><td class="nickname">' + nickname + '</td><td class="count">' + visitCount + '</td><td class="date">' + postdate + '</td>'
-                if ((id !== 'null' && grade !== 'GENERAL' && item['nickname'] !== '관리자') || grade === 'MANAGER') tr += '<td class="control"><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
+                if ((id !== 'null' && grade !== 'GENERAL' && item['nickname'] !== '관리자') || grade === 'MANAGER') tr += '<td class="control"><a href="#" onclick="deleteBoard(' + num + ');" id="delete">삭제</td></tr>';
                 else if (id !== 'null' && grade !== 'GENERAL') tr += '<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td></tr>';
 	            else tr += '</tr>';
             }

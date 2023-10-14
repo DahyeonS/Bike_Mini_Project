@@ -61,3 +61,4 @@ td:nth-child(2n+1) {background-color: white;}
     border: 2px solid rgb(100, 100, 100);
     background-color: rgb(245, 245, 245);
 }
+#delete {color: rgb(98, 171, 253)};

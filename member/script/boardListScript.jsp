@@ -73,7 +73,7 @@ function getBoard(page) {
                 const {num, title, category, visitCount, postdate} = item;
                 tr += '<tr style="text-align: center;"><td class="num">' + num + '</td><td class="title"><a href="#" onclick="loginCheck();">'
                 	+ title + '</a></td><td class="category">' + category + '</td><td class="count">' + visitCount + '</td><td class="date">' + postdate + '</td>'
-                	+ '<td class="control"><a href="#" onclick="deleteBoard(' + num + ');">삭제</td></tr>';
+                	+ '<td class="control"><a href="#" onclick="deleteBoard(' + num + ');" id="delete">삭제</td></tr>';
             }
             $('#tbody').html(tr);
             pagingBoard(param);
