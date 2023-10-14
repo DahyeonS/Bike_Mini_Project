@@ -83,5 +83,3 @@ Q&A 게시판의 do 작업을 실행하는 곳
 
 ### *QnaJson*
 Q&A 게시판의 Json 작업을 실행하는 곳
-
-## novel
