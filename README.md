@@ -26,3 +26,15 @@ Q&A 게시판
 소설 게시판
 
 *담당자: 황영선*
+
+## [jhBoard](jhBoard)
+게시판
+
+## [jmsBoard](jmsBoard)
+게시판
+
+## [khBoard](khBoard)
+게시판
+
+## [pcgpkg](pcgpkg)
+게시판
