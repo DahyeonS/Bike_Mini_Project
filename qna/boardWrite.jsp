@@ -18,18 +18,17 @@
 <%@include file="../home/topmenu.jsp" %>
 <div class="question">
 <h2 id="qtitle"></h2>
-<hr>
-<h4 id="nickname"></h4><h4 id="postdate"></h4>
-<hr>
+<h4 id="nickname"></h4><h4 id="postdate"></h4><h4 id="updatedate"></h4>
+<br>
 <h3 id="qcontext"></h3>
 <br><br><br>
-<hr><hr>
-<h1 style="text-align: left;">답변 작성</h1>
-<hr>
+<hr style="border: solid black 1pt;">
+<h1 style="text-align: left; font-weight: bold;">답변 작성</h1>
+<br>
 </div>
 <form>
 <h2><input type="text" id="title" placeholder="제목을 입력하세요."></h2>
-<hr>
+<br>
 <textarea id="context" placeholder="내용을 입력하세요."></textarea>
 </form>
 <br>

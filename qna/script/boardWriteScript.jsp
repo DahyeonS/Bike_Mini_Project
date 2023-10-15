@@ -12,6 +12,7 @@ function getQnaWriteView(param) {
         	$('#qcontext').html(data['context']);
         	$('#nickname').html(data['nickname']);
         	$('#postdate').html("작성일자: " + data['postdate']);
+        	if (data['updateDate'] !== '0') $('#updatedate').html("수정일자: " + data['updateDate']);
         	$('.question').show();
         },
         error: function(xhr, status, error) {

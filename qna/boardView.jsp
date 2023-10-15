@@ -17,10 +17,10 @@
 <body>
 <%@include file="../home/topmenu.jsp" %>
 <div class="question">
-<h2 id="title"></h2>
+<h2 id="title" style="font-weight: bold;"></h2><br>
 <h4 id="nickname"></h4><h4 id="postdate"></h4><h4 id="updatedate"></h4><br><h4 id="visitcount"></h4>
 <hr>
-<h3 id="context"></h3>
+<h3 id="context"></h3><br><br>
 <div class="control"></div><br><br>
 <br><br><br>
 <div class="replies">
@@ -32,7 +32,7 @@
 <tr>
 <td>${nickname}님</td>
 <td>&nbsp&nbsp<textarea id="reply${param.num}"></textarea>&nbsp&nbsp</td>
-<td><input type="button" value="댓글 작성" onclick="writeReply(${param.num});"></td>
+<td><input type="button" value="댓글 작성" onclick="writeReply(${param.num});" id="rwrite"></td>
 <tr>
 </table>
 <br><br>
@@ -46,12 +46,12 @@
 <br>
 <br><br><br><br>
 <hr style="border: solid black 1pt;">
-<h2 id="answertext">답변</h2>
+<h2 id="answertext" style="font-weight: bolder;">답변</h2>
 <div class="answerlist">
 </div>
 </div>
 <br><br><br><br>
 <input type="button" value="목록보기" id="list">
-<input style="text-align: right;" type="button" value="글쓰기" id="write">
+<input type="button" value="글쓰기" id="write">
 </body>
 </html>

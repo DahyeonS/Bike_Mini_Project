@@ -1,4 +1,3 @@
-body {background-color: rgb(240, 255, 255);}
 #nickname, #anickname {
     text-align: left;
     margin-left: 150px;
@@ -22,7 +21,7 @@ table, th, td, input, select {
 }
 textarea {
     width:300px;
-    height:50px;
+    height:80px;
     text-align: initial;
 }
 #rpostdate {
@@ -34,3 +33,17 @@ textarea {
     font-size: 12pt;
     text-align: right;
 }
+#delete, #update, #list, #write, #answer, #rwrite {
+    font-weight: bold;
+    color: rgb(66, 66, 66);
+    text-align: center;
+    height: 40px;
+    width: 100px;
+    background-color: rgb(215, 215, 215);
+    border-radius: 10%;
+    border: 1px solid rgb(235, 235, 235);
+}
+#delete:hover, #update:hover, #list:hover,
+#write:hover, #answer:hover, #rwrite:hover {background-color: rgb(235, 235, 235)}
+#rdelete > a {color: red;}
+#rdelete > a:hover {color: blue;}

@@ -18,8 +18,8 @@ function getQnaBoardView() {
         	if (data['updateDate'] !== "0") $('#updatedate').html("수정일자 " + data['updateDate']);
         	$('#visitcount').html("조회수 " + data['visitCount']);
         	let string = '';
-        	if (('<%=session.getAttribute("nickname")%>' === data['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') && data['nickname'] !== '관리자') string += '<input type="button" value="삭제하기" onclick="deleteBoard(' + data['num'] + ');" style="float: right;">';
-    		if ('<%=session.getAttribute("nickname")%>' === data['nickname']) string += '<input type="button" value="수정하기" onclick="updateBoard(' + data['num'] + ');" style="float: right;">';
+        	if (('<%=session.getAttribute("nickname")%>' === data['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') && data['nickname'] !== '관리자') string += '<input type="button" value="삭제하기" onclick="deleteBoard(' + data['num'] + ');" style="float: right;" id="delete">'
+				+ '<input type="button" value="수정하기" onclick="updateBoard(' + data['num'] + ');" style="float: right;" id="update">';
     		$('.control').html(string);
         },
         error: function(xhr, status, error) {
@@ -40,14 +40,14 @@ function getQnaAnswerView() {
         	if (data[0]['num'] !== 0) {
 	        	let string = '';
 	        		for (item of data) {
-		        		string += '<br><br><h2>' + item['title'] + '</h2><hr><h4 id="anickname">작성자 ' + item['nickname'] + '</h4><h4 id="apostdate">작성일자 ' + item['postdate'] + '</h4>';
+		        		string += '<br><br><br><h2 style="font-weight: bold;">' + item['title'] + '</h2><hr><h4 id="anickname">작성자 ' + item['nickname'] + '</h4><h4 id="apostdate">작성일자 ' + item['postdate'] + '</h4>';
 		        		if (item['updateDate'] !== "0") string += '<h4 id="aupdatedate">수정일자 ' + item['updateDate'] + '</h4>';
 		        		string += '<h3 id="acontext">' + item['context'] + '</h3>';
-		        		if (('<%=session.getAttribute("nickname")%>' === data['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') && item['nickname'] !== '관리자') string += '<input type="button" value="삭제하기" onclick="deleteAnswer(' + item['num'] + ');" style="float: right;">';
-		        		if ('<%=session.getAttribute("nickname")%>' === item['nickname']) string += '<input type="button" value="수정하기" onclick="updateBoard(' + item['num'] + ');" style="float: right;">';
+		        		if (('<%=session.getAttribute("nickname")%>' === data['nickname'] || '<%=session.getAttribute("grade")%>' !== 'GENERAL') && item['nickname'] !== '관리자') string += '<br><br><input type="button" value="삭제하기" onclick="deleteAnswer(' + item['num'] + ');" style="float: right;" id="delete">'
+							+ '<input type="button" value="수정하기" onclick="updateBoard(' + item['num'] + ');" style="float: right;" id="update">';
 		        		getQnaReplyView(item['num']);
 		        		string += '<br><br><br><br><div class="replies"><table id="replylist' + item['num'] + '"></table>'
-		        		string += '<br><br><br><table><tr><td>${nickname}님</td><td>&nbsp&nbsp<textarea id="reply' + item['num'] + '"></textarea>&nbsp&nbsp</td><td><input type="button" value="댓글 작성" onclick="writeReply(' + item['num'] + ');"></td><tr></table>';
+		        		string += '<br><br><br><table><tr><td>${nickname}님</td><td>&nbsp&nbsp<textarea id="reply' + item['num'] + '"></textarea>&nbsp&nbsp</td><td><input type="button" value="댓글 작성" onclick="writeReply(' + item['num'] + ');" id="rwrite"></td><tr></table>';
 	        		}
 				$('.answerlist').html(string);
 				$('.answer').show();
