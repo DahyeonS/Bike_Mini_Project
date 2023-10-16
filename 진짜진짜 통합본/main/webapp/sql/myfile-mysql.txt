@@ -1,0 +1,10 @@
+drop table myfile;
+create table myfile (
+    idx int primary key auto_increment,
+    name varchar(50) not null,
+    title varchar(200) not null,
+    cate varchar(100),
+    ofile varchar(100) not null,
+    sfile varchar(30) not null,
+    postdate datetime default current_timestamp not null
+);
