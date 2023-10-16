@@ -1,0 +1,24 @@
+@charset "UTF-8";
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+table{width: 100%;}
+.th_span{font-weight: bold;}
+.board_box {
+    /* border: 1px solid black; */
+    display: inline-block;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.board_box  > div {
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    box-sizing: border-box;
+}
+.board_box  > div:last-child {text-align: right !important;}
+.th_num {padding:  0 10px;}
+.upload {text-align: left;}
