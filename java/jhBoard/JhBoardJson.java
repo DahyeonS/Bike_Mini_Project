@@ -35,6 +35,7 @@ public class JhBoardJson {
 				List<JhBoardDTO> jhBoardList = jhDAO.searchBoard(searchWord, searchField, listNum, pageNum);
 						
 				String gson = new Gson().toJson(jhBoardList);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);
 			}	
 			else if(action.equals("/QSearch.json")) {
@@ -47,6 +48,7 @@ public class JhBoardJson {
 				List<JhBoardDTO> jhBoardList = jhDAO.QsearchBoard(searchWord, searchField, listNum, pageNum);
 						
 				String gson = new Gson().toJson(jhBoardList);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);
 			
 			}	
@@ -75,6 +77,7 @@ public class JhBoardJson {
 				List<JhBoardDTO> jhList = jhDAO.boardList(pageNum, listNum);
 				
 				String gson = new Gson().toJson(jhList);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);		
 				
 			}
@@ -90,12 +93,14 @@ public class JhBoardJson {
 				System.out.println(jhList);
 				
 				String gson = new Gson().toJson(jhList);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);
 			}
 			else if(action.equals("/AViewBoard.json")) {
 				int qNum = Integer.parseInt(request.getParameter("num"));
 				List<JhBoardDTO> jhList = jhDAO.ABoardList(qNum);
 				String gson = new Gson().toJson(jhList);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);		
 			}
 			else if(action.equals("/insertWrite.json")) {
@@ -149,6 +154,7 @@ public class JhBoardJson {
 				JhBoardDTO dto = jhDAO.selectView(num);
 				
 				String gson = new Gson().toJson(dto);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);		
 			}
 			else if(action.equals("/QViewBoard.json")) {
@@ -156,6 +162,7 @@ public class JhBoardJson {
 				JhBoardDTO dto = jhDAO.selectView(num);
 				
 				String gson = new Gson().toJson(dto);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);		
 			}
 			else if(action.equals("/QEditBoard.json")) {
@@ -203,6 +210,7 @@ public class JhBoardJson {
 				JhBoardDTO dto = jhDAO.qGetBoard(num);
 
 				String gson = new Gson().toJson(dto);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);
 			}
 			else if(action.equals("/beforeBoard.json")) {
@@ -249,6 +257,7 @@ public class JhBoardJson {
 				paging.setPaging();	
 				
 				String gson = new Gson().toJson(paging);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);
 							
 			}
@@ -264,6 +273,7 @@ public class JhBoardJson {
 				PagingDTO paging = new PagingDTO(totalCount, pageNum, listNum, blockNum);
 				paging.setPaging();	
 				String gson = new Gson().toJson(paging);
+				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().write(gson);							
 			}
 			else if(action.equals("/visitCount.json")) {				

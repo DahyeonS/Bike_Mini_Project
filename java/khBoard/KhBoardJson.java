@@ -70,6 +70,7 @@ public class KhBoardJson {
 			System.out.println(list);
 
 			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/qBoardList.json")) {
@@ -79,6 +80,7 @@ public class KhBoardJson {
 			list = dao.qBoardList();
 
 			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/aBoardList.json")) {
@@ -89,6 +91,7 @@ public class KhBoardJson {
 			list = dao.aBoardList(qNum);
 
 			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/searchList.json")) {
@@ -104,6 +107,7 @@ public class KhBoardJson {
 			System.out.println(list);
 			
 			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/qSearchList.json")) {
@@ -117,6 +121,7 @@ public class KhBoardJson {
 			list = dao.qSearchList(searchWord, searchField, listNum, pageNum);
 			
 			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/iSearchList.json")) {
@@ -129,6 +134,7 @@ public class KhBoardJson {
 			list = dao.iSearchList(searchWord, searchField, 8, pageNum);
 			
 			String gson = new Gson().toJson(list);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/insertWrite.json")) {
@@ -186,6 +192,7 @@ public class KhBoardJson {
 			KhBoardDTO dto = dao.getBoard(num);
 
 			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/qGetBoard.json")) {
@@ -195,6 +202,7 @@ public class KhBoardJson {
 			KhBoardDTO dto = dao.qGetBoard(num);
 
 			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/iGetBoard.json")) {
@@ -204,6 +212,7 @@ public class KhBoardJson {
 			KhBoardDTO dto = dao.iGetBoard(num);
 
 			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/updateBoard.json")) {
@@ -319,6 +328,7 @@ public class KhBoardJson {
 			dto.setPaging();
 			
 			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/qPagingBtns.json")) {
@@ -336,6 +346,7 @@ public class KhBoardJson {
 			dto.setPaging();
 			
 			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/iPagingBtns.json")) {
@@ -353,6 +364,7 @@ public class KhBoardJson {
 			dto.setPaging();
 			
 			String gson = new Gson().toJson(dto);
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().write(gson);
 		}
 		else if(action.equals("/uploadImage.json")) {
