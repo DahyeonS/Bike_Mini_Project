@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qnaxml">
+        
+    <select id="getBoardPrev" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문' AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
+        ]]>
+    </select>
+    
+    <select id="getBoardNext" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문' AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
+        ]]>
+    </select>
+    
+    <select id="getBoardPrevTitle" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문'
+        ]]>
+        <if test="title != null"> 
+            AND title LIKE CONCAT('%',#{title},'%')
+        </if>
+        <![CDATA[
+         AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
+        ]]>
+    </select>
+    
+    <select id="getBoardPrevContext" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문'
+        ]]>
+        <if test="context != null"> 
+            AND context LIKE CONCAT('%',#{context},'%')
+        </if>
+        <![CDATA[
+         AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
+        ]]>
+    </select>
+    
+    <select id="getBoardPrevNickname" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문'
+        ]]>
+        <if test="nickname != null"> 
+            AND nickname LIKE CONCAT('%',#{nickname},'%')
+        </if>
+        <![CDATA[
+         AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
+        ]]>
+    </select>
+    
+    <select id="getBoardNextTitle" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문'
+        ]]>
+        <if test="title != null"> 
+            AND title LIKE CONCAT('%',#{title},'%')
+        </if>
+        <![CDATA[
+         AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
+        ]]>
+    </select>
+    
+    <select id="getBoardNextContext" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문' AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
+        ]]>
+    </select>
+    
+    <select id="getBoardNextNickname" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT num FROM (SELECT * FROM post WHERE category = '질문' AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
+        ]]>
+    </select>
+</mapper>
