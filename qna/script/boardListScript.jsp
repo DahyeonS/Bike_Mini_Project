@@ -58,8 +58,11 @@ function getQnaBoard(page) {
 	        	}
             	$('#board').show();
                 const {num, title, nickname, visitCount, postdate} = item;
-                tr += '<tr style="text-align: center;"><td class="num">' + num + '</td><td class="title"><a href="../qna/qnaBoardView.do?num=' + num + '" onclick="loginCheck();">'
-                	+ title + '</a></td><td class="nickname">' + nickname + '</td><td class="count">' + visitCount + '</td><td class="date">' + postdate + '</td>'
+                tr += '<tr style="text-align: center;"><td class="num">' + num + '</td><td class="title"><a href="../qna/qnaBoardView.do?num=' + num;
+                if (param['title'] !== '' && param['title'] !== undefined) tr += '&title=' + param['title'];
+                else if (param['context'] !== undefined) tr += '&context=' + param['context'];
+                else if (param['nickname'] !== undefined) tr += '&nickname=' + param['nickname'];
+                tr += '" onclick="loginCheck();">' + title + '</a></td><td class="nickname">' + nickname + '</td><td class="count">' + visitCount + '</td><td class="date">' + postdate + '</td>'
                 if ((id !== 'null' && grade !== 'GENERAL' && item['nickname'] !== '관리자') || grade === 'MANAGER') tr += '<td class="control"><a href="#" onclick="deleteBoard(' + num + ');" id="delete">삭제</td></tr>';
                 else if (id !== 'null' && grade !== 'GENERAL') tr += '<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td></tr>';
 	            else tr += '</tr>';

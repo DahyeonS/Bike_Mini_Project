@@ -33,7 +33,8 @@ textarea {
     font-size: 12pt;
     text-align: right;
 }
-#delete, #update, #list, #write, #answer, #rwrite {
+#delete, #update, #list, #write,
+#answer, #rwrite, #prev, #next {
     font-weight: bold;
     color: rgb(66, 66, 66);
     text-align: center;
@@ -43,7 +44,8 @@ textarea {
     border-radius: 10%;
     border: 1px solid rgb(235, 235, 235);
 }
-#delete:hover, #update:hover, #list:hover,
-#write:hover, #answer:hover, #rwrite:hover {background-color: rgb(235, 235, 235)}
+#prev, #next {float: right;}
+#delete:hover, #update:hover, #list:hover, #write:hover,
+#answer:hover, #rwrite:hover, #prev:hover, #next:hover {background-color: rgb(235, 235, 235)}
 #rdelete > a {color: red;}
 #rdelete > a:hover {color: blue;}

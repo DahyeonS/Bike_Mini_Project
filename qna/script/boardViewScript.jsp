@@ -196,6 +196,11 @@ function deleteReply(num) {
 };
 
 $(function() {
+	if ('${param.num}' === '0') {
+		alert('더 이상 게시글이 존재하지 않습니다.');
+		history.back();
+	}
+	
 	$('.answer').hide();
 	getQnaBoardView();
 	getQnaAnswerView();
@@ -212,6 +217,18 @@ $(function() {
 	});
 	$('#answer').click(function() {
 		location.href = '../qna/qnaWrite.do?num=<%=request.getParameter("num")%>';
+	});
+	$('#prev').click(function() {
+		if ('${param.title}' !== '') location.href = '../qna/boardPrev.mx?num=' + num + '&title=' + '${param.title}';
+		else if ('${param.context}' !== '') location.href = '../qna/boardPrev.mx?num=' + num + '&context=' + '${param.context}';
+		else if ('${param.nickname}' !== '') location.href = '../qna/boardPrev.mx?num=' + num + '&nickname=' + '${param.nickname}';
+		else location.href = '../qna/boardPrev.mx?num=' + num;
+	});
+	$('#next').click(function() {
+		if ('${param.title}' !== '') location.href = '../qna/boardNext.mx?num=' + num + '&title=' + '${param.title}';
+		else if ('${param.context}' !== '') location.href = '../qna/boardNext.mx?num=' + num + '&context=' + '${param.context}';
+		else if ('${param.nickname}' !== '') location.href = '../qna/boardNext.mx?num=' + num + '&nickname=' + '${param.nickname}';
+		else location.href = '../qna/boardNext.mx?num=' + num;
 	});
 });
 </script>

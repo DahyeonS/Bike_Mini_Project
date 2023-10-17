@@ -9,15 +9,15 @@
     margin-left: 130px;
     margin-right: 130px;
 }
-#joinForm > table, #joinForm > table > th,
-#joinForm > table > td, #joinForm > table > td > input {
+#joinForm table, #joinForm table th,
+#joinForm table td, #joinForm table td input {
     margin: 0 auto;
     border-collapse: collapse;
     font-size: 14pt;
     font-family: 'Gothic A1', sans-serif;
 }
 .join {height: 100px;}
-.join > th {width: 200px;}
+.join th {width: 200px;}
 #success, #fail {margin-left: 10%;}
 #join {text-align: right;}
 #check, #nickcheck, #submit {

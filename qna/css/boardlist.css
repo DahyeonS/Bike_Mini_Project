@@ -64,13 +64,10 @@ td:nth-child(2n+1) {background-color: rgb(240, 255, 250)}
     border: 2px solid rgb(100, 100, 100);
     background-color: rgb(245, 245, 245);
 }
-.num > a, .count > a, .control > a, .category > a,
-.date > a, .nickname > a, .title > a, .paging > a {
+.title a, .paging a {
 	color: rgb(1, 175, 255);
 }
-.num > a:visited, .count > a:visited, .control > a:visited,
-.category > a:visited, .date > a:visited, .nickname > a:visited,
-.title > a:visited, .paging > a:visited {
+.title a:visited, .paging a:visited {
 	color: rgb(199, 163, 255);
 }
 #delete {color: rgb(98, 171, 253);}

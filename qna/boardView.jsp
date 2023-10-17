@@ -53,5 +53,7 @@
 <br><br><br><br>
 <input type="button" value="목록보기" id="list">
 <input type="button" value="글쓰기" id="write">
+<input type="button" value="이전 글" id="prev">
+<input type="button" value="다음 글" id="next">
 </body>
 </html>
