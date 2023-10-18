@@ -1,79 +1,91 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="EUC-KR"?>
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="qnaxml">
         
-    <select id="getBoardPrev" parameterType="int" resultType="String">
+    <select id="getBoardPrev" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸' AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®' AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
         ]]>
     </select>
     
-    <select id="getBoardNext" parameterType="int" resultType="String">
+    <select id="getBoardNext" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸' AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®' AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
         ]]>
     </select>
     
-    <select id="getBoardPrevTitle" parameterType="int" resultType="String">
+    <select id="getBoardPrevTitle" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸'
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®'
         ]]>
         <if test="title != null"> 
-            AND title LIKE CONCAT('%',#{title},'%')
+            AND title LIKE '%' || #{title} || '%'
         </if>
         <![CDATA[
          AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
         ]]>
     </select>
     
-    <select id="getBoardPrevContext" parameterType="int" resultType="String">
+    <select id="getBoardPrevContext" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸'
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®'
         ]]>
         <if test="context != null"> 
-            AND context LIKE CONCAT('%',#{context},'%')
+            AND context LIKE '%' || #{context} || '%'
         </if>
         <![CDATA[
          AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
         ]]>
     </select>
     
-    <select id="getBoardPrevNickname" parameterType="int" resultType="String">
+    <select id="getBoardPrevNickname" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸'
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®'
         ]]>
         <if test="nickname != null"> 
-            AND nickname LIKE CONCAT('%',#{nickname},'%')
+            AND nickname LIKE '%' || #{nickname} || '%'
         </if>
         <![CDATA[
          AND num < #{num} ORDER BY num DESC) WHERE ROWNUM <= 1   
         ]]>
     </select>
     
-    <select id="getBoardNextTitle" parameterType="int" resultType="String">
+    <select id="getBoardNextTitle" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸'
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®'
         ]]>
         <if test="title != null"> 
-            AND title LIKE CONCAT('%',#{title},'%')
+            AND title LIKE '%' || #{title} || '%'
         </if>
         <![CDATA[
          AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
         ]]>
     </select>
     
-    <select id="getBoardNextContext" parameterType="int" resultType="String">
+    <select id="getBoardNextContext" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸' AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®'
+        ]]>
+        <if test="context != null"> 
+            AND context '%' || #{context} || '%'
+        </if>
+        <![CDATA[
+         AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
         ]]>
     </select>
     
-    <select id="getBoardNextNickname" parameterType="int" resultType="String">
+    <select id="getBoardNextNickname" parameterType="qna.QnaDTO" resultType="String">
         <![CDATA[
-        SELECT num FROM (SELECT * FROM post WHERE category = 'ì§ˆë¬¸' AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
+        SELECT num FROM (SELECT * FROM post WHERE category = 'Áú¹®'
+        ]]>
+        <if test="nickname != null"> 
+            AND nickname LIKE '%' || #{nickname} || '%'
+        </if>
+        <![CDATA[
+         AND num > #{num} ORDER BY num) WHERE ROWNUM <= 1     
         ]]>
     </select>
 </mapper>

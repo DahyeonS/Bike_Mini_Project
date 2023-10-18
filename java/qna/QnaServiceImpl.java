@@ -4,43 +4,43 @@ public class QnaServiceImpl implements QnaService {
 	QnaDAOXml dao = new QnaDAOXmlImpl();
 	
 	@Override
-	public int getBoardPrev(int num) {
-		return dao.getBoardPrev(num);
+	public int getBoardPrev(QnaDTO dto) {
+		return dao.getBoardPrev(dto);
 	}
 
 	@Override
-	public int getBoardNext(int num) {
-		return dao.getBoardNext(num);
+	public int getBoardNext(QnaDTO dto) {
+		return dao.getBoardNext(dto);
 	}
 
 	@Override
-	public int getBoardPrevTitle(int num, String title) {
-		return dao.getBoardPrevTitle(num, title);
+	public int getBoardPrevTitle(QnaDTO dto) {
+		return dao.getBoardPrevTitle(dto);
 	}
 
 	@Override
-	public int getBoardPrevContext(int num, String context) {
-		return dao.getBoardPrevContext(num, context);
+	public int getBoardPrevContext(QnaDTO dto) {
+		return dao.getBoardPrevContext(dto);
 	}
 
 	@Override
-	public int getBoardPrevNickname(int num, String nickname) {
-		return dao.getBoardPrevNickname(num, nickname);
+	public int getBoardPrevNickname(QnaDTO dto) {
+		return dao.getBoardPrevNickname(dto);
 	}
 
 	@Override
-	public int getBoardNextTitle(int num, String title) {
-		return dao.getBoardNextTitle(num, title);
+	public int getBoardNextTitle(QnaDTO dto) {
+		return dao.getBoardNextTitle(dto);
 	}
 
 	@Override
-	public int getBoardNextContext(int num, String context) {
-		return dao.getBoardNextContext(num, context);
+	public int getBoardNextContext(QnaDTO dto) {
+		return dao.getBoardNextContext(dto);
 	}
 
 	@Override
-	public int getBoardNextNickname(int num, String nickname) {
-		return dao.getBoardNextNickname(num, nickname);
+	public int getBoardNextNickname(QnaDTO dto) {
+		return dao.getBoardNextNickname(dto);
 	}
 
 }

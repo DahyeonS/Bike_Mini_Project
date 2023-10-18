@@ -1,13 +1,12 @@
 package qna;
 
 import java.io.IOException;
-import java.util.List;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class QnaControllerXml{
 		
@@ -22,38 +21,70 @@ public class QnaControllerXml{
 			String title = request.getParameter("title");
 			String context = request.getParameter("context");
 			String nickname = request.getParameter("nickname");
+			QnaDTO dto = new QnaDTO();
 			
 			int num = 0;
 			String sNum = request.getParameter("num");
 			if (sNum != null) num = Integer.parseInt(sNum);
+			dto.setNum(num);
 			
 			int result = 0;
-			if (title != null) result = service.getBoardPrevTitle(num, title);
-			else if (context != null) result = service.getBoardPrevContext(num, context);
-			else if (nickname != null) result = service.getBoardPrevNickname(num, nickname);
-			else result = service.getBoardPrev(num);
+			if (title != null) {
+				dto.setTitle(URLEncoder.encode(title, "UTF-8"));
+				result = service.getBoardPrevTitle(dto);
+				view = "boardView.jsp?num=" + result + "&title=" + title;
+			}
+			else if (context != null) {
+				dto.setContext(URLEncoder.encode(context, "UTF-8"));
+				result = service.getBoardPrevContext(dto);
+				view = "boardView.jsp?num=" + result + "&context=" + context;
+			}
+			else if (nickname != null) {
+				dto.setNickname(URLEncoder.encode(nickname, "UTF-8"));
+				result = service.getBoardPrevNickname(dto);
+				view = "boardView.jsp?num=" + result + "&nickname=" + nickname;
+			}
+			else {
+				result = service.getBoardPrev(dto);
+				view = "boardView.jsp?num=" + result;
+			}
 			request.setAttribute("num", result);
 			
-			view = "boardView.jsp?num=" + result;
 			viewResolver(view, request, response);
 		} else if(action.equals("/boardNext.mx")) {
 			System.out.println("/boardNext.mx");
 			String title = request.getParameter("title");
 			String context = request.getParameter("context");
 			String nickname = request.getParameter("nickname");
+			QnaDTO dto = new QnaDTO();
 			
 			int num = 0;
 			String sNum = request.getParameter("num");
 			if (sNum != null) num = Integer.parseInt(sNum);
+			dto.setNum(num);
 			
 			int result = 0;
-			if (title != null) result = service.getBoardNextTitle(num, title);
-			else if (context != null) result = service.getBoardNextContext(num, context);
-			else if (nickname != null) result = service.getBoardNextNickname(num, nickname);
-			else result = service.getBoardNext(num);
+			if (title != null) {
+				dto.setTitle(URLEncoder.encode(title, "UTF-8"));
+				result = service.getBoardNextTitle(dto);
+				view = "boardView.jsp?num=" + result + "&title=" + title;
+			}
+			else if (context != null) {
+				dto.setContext(URLEncoder.encode(context, "UTF-8"));
+				result = service.getBoardNextContext(dto);
+				view = "boardView.jsp?num=" + result + "&context=" + context;
+			}
+			else if (nickname != null) {
+				dto.setNickname(URLEncoder.encode(nickname, "UTF-8"));
+				result = service.getBoardNextNickname(dto);
+				view = "boardView.jsp?num=" + result + "&nickname=" + nickname;
+			}
+			else {
+				result = service.getBoardNext(dto);
+				view = "boardView.jsp?num=" + result;
+			}
 			request.setAttribute("num", result);
 			
-			view = "boardView.jsp?num=" + result;
 			viewResolver(view, request, response);
 		}
 	}

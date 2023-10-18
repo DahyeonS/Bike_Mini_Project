@@ -2,6 +2,7 @@ package qna;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.Charset;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,9 +14,10 @@ public class SqlSessionManager {
     
     static {
     	String config = "qna/mybatis/mybatis-config.xml";
-    	
         Reader reader = null;
         
+        Charset charset = Charset.forName("UTF-8");
+        Resources.setCharset(charset);
         try {
             reader = Resources.getResourceAsReader(config);
             sqlSession = new SqlSessionFactoryBuilder().build(reader);

@@ -1,12 +1,12 @@
 package qna;
 
 public interface QnaDAOXml {
-	int getBoardPrev(int num);
-	int getBoardNext(int num);
-	int getBoardPrevTitle(int num, String title);
-	int getBoardPrevContext(int num, String context);
-	int getBoardPrevNickname(int num, String nickname);
-	int getBoardNextTitle(int num, String title);
-	int getBoardNextContext(int num, String context);
-	int getBoardNextNickname(int num, String nickname);
+	int getBoardPrev(QnaDTO dto);
+	int getBoardNext(QnaDTO dto);
+	int getBoardPrevTitle(QnaDTO dto);
+	int getBoardPrevContext(QnaDTO dto);
+	int getBoardPrevNickname(QnaDTO dto);
+	int getBoardNextTitle(QnaDTO dto);
+	int getBoardNextContext(QnaDTO dto);
+	int getBoardNextNickname(QnaDTO dto);
 }
