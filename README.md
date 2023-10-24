@@ -28,13 +28,21 @@ Q&A 게시판
 *담당자: 황영선*
 
 ## [jhBoard](jhBoard)
-게시판
+Q&A 및 일반 게시판
+
+*담당자: 권지현*
 
 ## [jmsBoard](jmsBoard)
-게시판
+파일 게시판
+
+*담당자: 정민석*
 
 ## [khBoard](khBoard)
-게시판
+일반, Q&A 및 사진 게시판
+
+*담당자: 고훈*
 
 ## [pcgpkg](pcgpkg)
-게시판
+게시글 관리
+
+*담당자: 박철규*
